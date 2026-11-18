@@ -147,6 +147,36 @@ public class PlayerMovement : NetworkBehaviour
     [Networked, Capacity(3)]
     public NetworkArray<int> ItemMaxUses { get; }
 
+    private void SetCurrentVelocityY(float y)
+    {
+        Vector3 velocity = CurrentVelocity;
+        velocity.y = y;
+        CurrentVelocity = velocity;
+    }
+
+    private void SetCurrentVelocityXZ(float x, float z)
+    {
+        Vector3 velocity = CurrentVelocity;
+        velocity.x = x;
+        velocity.z = z;
+        CurrentVelocity = velocity;
+    }
+
+    private void SetKnockbackVelocityY(float y)
+    {
+        Vector3 velocity = KnockbackVelocity;
+        velocity.y = y;
+        KnockbackVelocity = velocity;
+    }
+
+    private void SetKnockbackVelocityXZ(float x, float z)
+    {
+        Vector3 velocity = KnockbackVelocity;
+        velocity.x = x;
+        velocity.z = z;
+        KnockbackVelocity = velocity;
+    }
+
     private void Awake()
     {
         if (animator == null) animator = GetComponentInChildren<Animator>();
@@ -168,7 +198,7 @@ public class PlayerMovement : NetworkBehaviour
         var cc = GetComponent<CharacterController>();
         if (cc != null && cc.isGrounded)
         {
-            CurrentVelocity.y = jumpPower;
+            SetCurrentVelocityY(jumpPower);
             CanJump = false;
         }
     }
@@ -401,7 +431,7 @@ public class PlayerMovement : NetworkBehaviour
                 {
                     if (!cc.isGrounded)
                     {
-                        KnockbackVelocity.y += Physics.gravity.y * 2f * Runner.DeltaTime;
+                        SetKnockbackVelocityY(KnockbackVelocity.y + Physics.gravity.y * 2f * Runner.DeltaTime);
                     }
 
                     cc.Move(KnockbackVelocity * Runner.DeltaTime);
@@ -409,8 +439,7 @@ public class PlayerMovement : NetworkBehaviour
                     Vector3 horizontalVelocity = new Vector3(KnockbackVelocity.x, 0, KnockbackVelocity.z);
                     horizontalVelocity = Vector3.MoveTowards(horizontalVelocity, Vector3.zero, 15f * Runner.DeltaTime);
                     
-                    KnockbackVelocity.x = horizontalVelocity.x;
-                    KnockbackVelocity.z = horizontalVelocity.z;
+                    SetKnockbackVelocityXZ(horizontalVelocity.x, horizontalVelocity.z);
                 }
             }
             return;
@@ -571,8 +600,7 @@ public class PlayerMovement : NetworkBehaviour
                 // 地上で移動キーを離した瞬間は慣性を残さずピタッと止める
                 if (!hasMoveInput && cc != null && cc.isGrounded)
                 {
-                    CurrentVelocity.x = 0f;
-                    CurrentVelocity.z = 0f;
+                    SetCurrentVelocityXZ(0f, 0f);
                 }
                 else
                 {
@@ -583,24 +611,23 @@ public class PlayerMovement : NetworkBehaviour
                     );
                 }
                 
-                CurrentVelocity.y = currentY;
+                SetCurrentVelocityY(currentY);
 
                 if (cc != null)
                 {
                     if (cc.isGrounded && CurrentVelocity.y <= 0f)
                     {
                         CanJump = true;
-                        CurrentVelocity.y = -2f;
+                        SetCurrentVelocityY(-2f);
                     }
                     else
                     {
-                        CurrentVelocity.y += Physics.gravity.y * 2f * Runner.DeltaTime;
-                        CurrentVelocity.y = Mathf.Max(CurrentVelocity.y, -30f);
+                        SetCurrentVelocityY(Mathf.Max(CurrentVelocity.y + Physics.gravity.y * 2f * Runner.DeltaTime, -30f));
                     }
 
                     if (data.isJumpPressed && !PrevJumpPressed && CanJump)
                     {
-                        CurrentVelocity.y = jumpForce;
+                        SetCurrentVelocityY(jumpForce);
                         CanJump = false;
                     }
                     cc.Move(CurrentVelocity * Runner.DeltaTime);
@@ -632,20 +659,18 @@ public class PlayerMovement : NetworkBehaviour
             {
                 // ボールを持っているとき水平移動はゼロにするが重力は適用する
                 IsMovingInput = false;
-                CurrentVelocity.x = 0f;
-                CurrentVelocity.z = 0f;
+                SetCurrentVelocityXZ(0f, 0f);
 
                 var cc = GetComponent<CharacterController>();
                 if (cc != null)
                 {
                     if (cc.isGrounded && CurrentVelocity.y <= 0f)
                     {
-                        CurrentVelocity.y = -2f;
+                        SetCurrentVelocityY(-2f);
                     }
                     else
                     {
-                        CurrentVelocity.y += Physics.gravity.y * 2f * Runner.DeltaTime;
-                        CurrentVelocity.y = Mathf.Max(CurrentVelocity.y, -30f);
+                        SetCurrentVelocityY(Mathf.Max(CurrentVelocity.y + Physics.gravity.y * 2f * Runner.DeltaTime, -30f));
                     }
                     
                     cc.Move(CurrentVelocity * Runner.DeltaTime);
