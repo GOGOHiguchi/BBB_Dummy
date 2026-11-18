@@ -416,6 +416,11 @@ public class PlayerMovement : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
+        // State Authority と Input Authority 以外のプロキシでは
+        // CharacterController を動かさない。ネットワーク補間とローカル移動の競合を防ぐ。
+        if (!HasStateAuthority && !HasInputAuthority)
+            return;
+
         bool isCountdown = GameManager.Instance != null && GameManager.Instance.CurrentState == GameManager.GameState.Countdown;
         bool isStunned = !StunTimer.ExpiredOrNotRunning(Runner);
 

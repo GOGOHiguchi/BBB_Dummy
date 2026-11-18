@@ -9,7 +9,7 @@ public class RocketProjectileController : NetworkBehaviour
 
     [Header("参照アセット")]
     [Tooltip("アセット付属の RocketExplosion プレハブをそのまま入れられます")]
-    public GameObject rocketExplosionPrefab; 
+    public GameObject rocketExplosionPrefab;
     public MeshRenderer projectileMesh;
     public AudioSource inFlightAudioSource;
     public ParticleSystem disableOnHit;
@@ -19,67 +19,75 @@ public class RocketProjectileController : NetworkBehaviour
 
     public override void Spawned()
     {
-        // 指定時間後に自動削除するためのタイマー設定
-        lifeTimer = TickTimer.CreateFromSeconds(Runner, lifeTime);
+        if (HasStateAuthority)
+        {
+            lifeTimer = TickTimer.CreateFromSeconds(Runner, lifeTime);
+        }
     }
 
     public override void FixedUpdateNetwork()
     {
-        if (targetHit) return;
+        // 弾の位置・寿命は State Authority のみが管理する。
+        // クライアント側は NetworkTransform の補間結果を表示する。
+        if (!HasStateAuthority || targetHit)
+            return;
 
-        // 前方に移動
         transform.position += transform.forward * (speed * Runner.DeltaTime);
 
-        // 寿命（lifeTime）が来たらサーバー側でDespawn
         if (lifeTimer.Expired(Runner))
         {
-            if (HasStateAuthority) Runner.Despawn(Object);
+            Runner.Despawn(Object);
         }
     }
 
-    // 通常の物理衝突（Collider）の場合
     private void OnCollisionEnter(Collision collision)
     {
         ProcessHit(collision.gameObject);
     }
 
-    // トリガー接触（Is Trigger がONのコライダー / 車など）の場合
     private void OnTriggerEnter(Collider other)
     {
         ProcessHit(other.gameObject);
     }
 
-    // 着弾・爆発共通処理
     private void ProcessHit(GameObject hitObject)
     {
-        if (targetHit) return;
+        // 衝突結果の確定は State Authority に一本化する。
+        if (!HasStateAuthority || targetHit)
+            return;
 
-        // 撃ったプレイヤー自身のコライダーと接触した場合は無視する（即時爆発の回避）
-        var player = hitObject.GetComponentInParent<PlayerMovement>();
-        if (player == null) player = hitObject.GetComponent<PlayerMovement>();
-
-        if (player != null && player.Object != null && player.Object.InputAuthority == Object.InputAuthority)
+        // 発射者自身との接触は無視する。
+        PlayerMovement player = hitObject.GetComponentInParent<PlayerMovement>();
+        if (player != null &&
+            player.Object != null &&
+            player.Object.InputAuthority == Object.InputAuthority)
         {
             return;
         }
 
         targetHit = true;
-        
-        // 描画・サウンド・パーティクルの停止処理
-        if (projectileMesh != null) projectileMesh.enabled = false;
-        if (inFlightAudioSource != null) inFlightAudioSource.Stop();
-        if (disableOnHit != null) disableOnHit.Stop();
 
-        // 爆発エフェクトの生成
+        // 爆発演出は全クライアントで一度だけ再生する。
+        Rpc_PlayImpactEffect(transform.position);
+
+        Runner.Despawn(Object);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void Rpc_PlayImpactEffect(Vector3 impactPosition)
+    {
+        if (projectileMesh != null)
+            projectileMesh.enabled = false;
+
+        if (inFlightAudioSource != null)
+            inFlightAudioSource.Stop();
+
+        if (disableOnHit != null)
+            disableOnHit.Stop();
+
         if (rocketExplosionPrefab != null)
         {
-            Instantiate(rocketExplosionPrefab, transform.position, Quaternion.identity);
-        }
-
-        // ネットワークオブジェクトの破棄（サーバー権限）
-        if (HasStateAuthority)
-        {
-            Runner.Despawn(Object);
+            Instantiate(rocketExplosionPrefab, impactPosition, Quaternion.identity);
         }
     }
 }
