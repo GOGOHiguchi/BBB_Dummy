@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dfa0fad0f866b4d418d284dd9256a88f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 74691
+  packageName: Bowling Alley
+  packageVersion: 4.0
+  assetPath: Assets/Bowling/DemoScene/Materials/Sky_HDRI.mat
+  uploadId: 832004

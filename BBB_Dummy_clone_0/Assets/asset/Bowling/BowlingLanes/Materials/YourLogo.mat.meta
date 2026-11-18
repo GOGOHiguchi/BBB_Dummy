@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b21edceaeb7d0b746b98428ffcbf213e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 74691
+  packageName: Bowling Alley
+  packageVersion: 4.0
+  assetPath: Assets/Bowling/BowlingLanes/Materials/YourLogo.mat
+  uploadId: 832004

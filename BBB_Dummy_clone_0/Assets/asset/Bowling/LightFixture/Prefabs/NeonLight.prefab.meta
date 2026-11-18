@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e47430b5a2bd509438e9c457d09e0dae
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 74691
+  packageName: Bowling Alley
+  packageVersion: 4.0
+  assetPath: Assets/Bowling/LightFixture/Prefabs/NeonLight.prefab
+  uploadId: 832004

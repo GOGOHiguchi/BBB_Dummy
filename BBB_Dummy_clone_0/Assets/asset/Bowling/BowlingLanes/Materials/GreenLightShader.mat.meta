@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3c1e72ab11eef8a46872d4e624207e7d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 74691
+  packageName: Bowling Alley
+  packageVersion: 4.0
+  assetPath: Assets/Bowling/BowlingLanes/Materials/GreenLightShader.mat
+  uploadId: 832004

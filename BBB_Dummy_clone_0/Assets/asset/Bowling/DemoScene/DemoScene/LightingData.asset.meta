@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fd5bc79a29eb1584ba603729f7a17455
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 112000000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 74691
+  packageName: Bowling Alley
+  packageVersion: 4.0
+  assetPath: Assets/Bowling/DemoScene/DemoScene/LightingData.asset
+  uploadId: 832004

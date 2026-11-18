@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6408b30e02b298340a457e44dc85b2f0
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 74691
+  packageName: Bowling Alley
+  packageVersion: 4.0
+  assetPath: Assets/Bowling/BowlingLanes/Prefabs/LaneB.prefab
+  uploadId: 832004

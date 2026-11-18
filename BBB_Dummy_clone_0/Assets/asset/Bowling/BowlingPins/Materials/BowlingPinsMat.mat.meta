@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: adcee2495de95274eacea6ccbb95f53b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 74691
+  packageName: Bowling Alley
+  packageVersion: 4.0
+  assetPath: Assets/Bowling/BowlingPins/Materials/BowlingPinsMat.mat
+  uploadId: 832004
