@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3918f79f31cfcb1429cd5223e516197c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 74691
+  packageName: Bowling Alley
+  packageVersion: 4.0
+  assetPath: Assets/Bowling/BowlingBall/Materials/BowlingBallRedMat.mat
+  uploadId: 832004

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:BBB/Assets/Plugins/ParrelSync/ScriptableObjects/ParrelSyncProjectSettings.asset.meta
+guid: 70cfe5ef9facd8a408538affa8d90b07
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+========
+guid: 1bfab8a0d12584e4f99aacaffebaf52c
+PrefabImporter:
+  externalObjects: {}
+>>>>>>>> Ore:BBB/Assets/Prefab/S_PList.prefab.meta
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

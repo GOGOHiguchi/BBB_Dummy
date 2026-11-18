@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c54797d169dd8419f99d3777ed1bb2, type: 3}
+  m_Name: 3_Map_1_Render_2x2
+  m_EditorClassIdentifier: Assembly-CSharp::Lovatto.MiniMap.bl_MapRender
+  renderDivisions: 2
+  snapshots:
+  - {fileID: 2800000, guid: 9fea79c9d307b20498147ca466bd097e, type: 3}
+  - {fileID: 2800000, guid: c815af6233bc7e54585311e3b9f3615c, type: 3}
+  - {fileID: 2800000, guid: 8f7676991a492a94780dc8a0e7d7f070, type: 3}
+  - {fileID: 2800000, guid: 59b3f07d61bef954085eef01cdd34b9a, type: 3}
