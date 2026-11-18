@@ -1,3 +1,4 @@
+using Fusion;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -71,8 +72,13 @@ public class MovingCar : MonoBehaviour
 
             if (ballRb != null)
             {
-                Vector3 ballKnockback = ((Vector3.forward * knockbackBackSpeed) + (Vector3.up * knockbackUpSpeed)) * ballKnockbackMultiplier;
-                ballRb.AddForce(ballKnockback, ForceMode.Impulse);
+                // Networked Rigidbody は State Authority だけが変更する。
+                NetworkObject ballObject = hitObject.GetComponentInParent<NetworkObject>();
+                if (ballObject != null && ballObject.HasStateAuthority)
+                {
+                    Vector3 ballKnockback = ((Vector3.forward * knockbackBackSpeed) + (Vector3.up * knockbackUpSpeed)) * ballKnockbackMultiplier;
+                    ballRb.AddForce(ballKnockback, ForceMode.Impulse);
+                }
             }
             return; // エフェクトを出さずに終了
         }
