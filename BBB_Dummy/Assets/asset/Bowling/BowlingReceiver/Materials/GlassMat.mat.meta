@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0dde37ddc47bd624f872f200ba67ea9a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 74691
+  packageName: Bowling Alley
+  packageVersion: 4.0
+  assetPath: Assets/Bowling/BowlingReceiver/Materials/GlassMat.mat
+  uploadId: 832004

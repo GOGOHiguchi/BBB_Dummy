@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0a78e18274ab69b428f57b22d003ad40
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 74691
+  packageName: Bowling Alley
+  packageVersion: 4.0
+  assetPath: Assets/Bowling/BowlingBall/Prefabs/BowlingBallPink.prefab
+  uploadId: 832004

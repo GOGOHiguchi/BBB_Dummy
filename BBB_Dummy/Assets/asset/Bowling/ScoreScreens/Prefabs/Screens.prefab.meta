@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a11fc1413b30506468c0dae278a410d3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 74691
+  packageName: Bowling Alley
+  packageVersion: 4.0
+  assetPath: Assets/Bowling/ScoreScreens/Prefabs/Screens.prefab
+  uploadId: 832004
