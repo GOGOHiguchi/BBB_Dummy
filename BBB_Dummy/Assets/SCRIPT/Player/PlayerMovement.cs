@@ -418,6 +418,12 @@ public class PlayerMovement : NetworkBehaviour
 
         if (GetInput(out NetworkInputData data))
         {
+            if (IsAimingRocket && data.selectedSlot != AimingSlotIndex)
+            {
+                IsAimingRocket = false;
+                AimingSlotIndex = -1;
+                Debug.Log("ロケットランチャーの構えを解除しました。");
+            }
             if (!IsReadyingSatelliteLaser)
             {
                 if (IsAimingRocket && ((data.isFirePressed && !PrevFirePressed) || (data.useItem && !PrevUseItem)))
@@ -862,17 +868,6 @@ public class PlayerMovement : NetworkBehaviour
                 {
                     LocalSelectedSlot++;
                     if (LocalSelectedSlot > 2) LocalSelectedSlot = 0;
-                }
-            }
-
-            // スロットが切り替わったときの処理
-            if (LocalSelectedSlot != previousSlot)
-            {
-                // ロケットランチャーを構えていたらキャンセルする
-                if (IsAimingRocket)
-                {
-                    IsAimingRocket = false;
-                    AimingSlotIndex = -1;
                 }
             }
         }
