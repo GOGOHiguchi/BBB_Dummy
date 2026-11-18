@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ee4ba76086e2d4e45b09f796a0385d71
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 74691
+  packageName: Bowling Alley
+  packageVersion: 4.0
+  assetPath: Assets/Bowling/BowlingLanes/Materials/RedLightShader.mat
+  uploadId: 832004

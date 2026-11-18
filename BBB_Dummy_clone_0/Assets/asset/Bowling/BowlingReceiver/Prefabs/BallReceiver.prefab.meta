@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 29cd33680e87b9c4c8a5f3143a975ece
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 74691
+  packageName: Bowling Alley
+  packageVersion: 4.0
+  assetPath: Assets/Bowling/BowlingReceiver/Prefabs/BallReceiver.prefab
+  uploadId: 832004

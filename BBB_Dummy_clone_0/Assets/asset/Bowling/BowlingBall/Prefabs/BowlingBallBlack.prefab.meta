@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 190a9362032290c40bb0e098a54dcec8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 74691
+  packageName: Bowling Alley
+  packageVersion: 4.0
+  assetPath: Assets/Bowling/BowlingBall/Prefabs/BowlingBallBlack.prefab
+  uploadId: 832004
