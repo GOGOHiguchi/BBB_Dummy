@@ -128,6 +128,10 @@ public class PlayerMovement : NetworkBehaviour
     [Networked]
     public NetworkBool IsReady { get; set; }
 
+    // ピン撃破後、次のホール/試合シーンへ移るまで操作を禁止する。
+    [Networked]
+    public NetworkBool IsPinFinished { get; set; }
+
     [Networked] public NetworkPlayerData PlayerData { get; set; }
 
     // --- ボール関連の同期変数 ---
@@ -209,6 +213,8 @@ public class PlayerMovement : NetworkBehaviour
     // エモート（バク宙など）用のジャンプ実行メソッド
     public void TriggerEmoteJump(float jumpPower)
     {
+        if (IsPinFinished) return;
+
         var cc = GetComponent<CharacterController>();
         if (cc != null && cc.isGrounded)
         {
@@ -219,8 +225,8 @@ public class PlayerMovement : NetworkBehaviour
 
     public bool ApplyKnockback(Vector3 forceDirection, float stunTime)
     {
-        // 攻撃判定とノックバックの確定はState Authorityだけで行う
-        if (!HasStateAuthority) return false;
+        // ピン撃破後は追加の攻撃・ノックバックを受け付けない
+        if (!HasStateAuthority || IsPinFinished) return false;
 
         // 無敵状態・シールド状態なら攻撃を無効化
         if (IsInvincible) return false;
@@ -254,9 +260,59 @@ public class PlayerMovement : NetworkBehaviour
         return true;
     }
 
+    /// <summary>
+    /// ボールがピンに命中したプレイヤーを、そのホールの終了まで操作不能にする。
+    /// ノックバックの確定とエモート開始はState Authorityだけで行う。
+    /// </summary>
+    public void BeginPinFinish(Vector3 knockbackVelocity, float knockbackDuration)
+    {
+        if (!HasStateAuthority || IsPinFinished)
+            return;
+
+        IsPinFinished = true;
+        StunTimer = TickTimer.CreateFromSeconds(Runner, Mathf.Max(0.1f, knockbackDuration));
+        KnockbackVelocity = knockbackVelocity;
+        CurrentVelocity = Vector3.zero;
+        CurrentCharge = 0f;
+        IsMovingInput = false;
+
+        // 使用中だった照準・アイテム操作も解除する。
+        IsAimingRocket = false;
+        AimingSlotIndex = -1;
+        IsReadyingSatelliteLaser = false;
+        IsInvincible = false;
+
+        // 万一ボール保持中に呼ばれても、手元に固定されたままにならないよう解放する。
+        if (IsHoldingBall && MyBall != null)
+        {
+            IsHoldingBall = false;
+            Rigidbody ballRb = MyBall.GetComponent<Rigidbody>();
+            if (ballRb != null && MyBall.HasStateAuthority)
+            {
+                ballRb.isKinematic = false;
+                ballRb.linearVelocity = Vector3.zero;
+                ballRb.angularVelocity = Vector3.zero;
+                ballRb.AddForce(knockbackVelocity, ForceMode.VelocityChange);
+            }
+            PickupCooldown = TickTimer.CreateFromSeconds(Runner, 999f);
+        }
+
+        EmoteWheelController emoteController = GetComponent<EmoteWheelController>();
+        if (emoteController != null)
+        {
+            emoteController.BeginCelebration();
+        }
+        else
+        {
+            Debug.LogWarning("[PlayerMovement] EmoteWheelControllerが見つからないため、撃破後エモートを開始できません。", this);
+        }
+
+        Debug.Log($"[PlayerMovement] ピン撃破により操作ロック開始: {Object.InputAuthority}");
+    }
+
     public void ApplyDash(float speedMultiplier, float duration)
     {
-        if (!HasStateAuthority) return;
+        if (!HasStateAuthority || IsPinFinished) return;
 
         CurrentDashMultiplier = speedMultiplier;
         DashTimer = TickTimer.CreateFromSeconds(Runner, duration);
@@ -264,7 +320,7 @@ public class PlayerMovement : NetworkBehaviour
 
     public void RequestSatelliteLaser(Vector3 targetPosition)
     {
-        if (!HasInputAuthority) return;
+        if (!HasInputAuthority || IsPinFinished) return;
         if (!IsReadyingSatelliteLaser) return;
 
         if (bl_MiniMap.ActiveMiniMap != null)
@@ -436,6 +492,50 @@ public class PlayerMovement : NetworkBehaviour
         // CharacterController を動かさない。ネットワーク補間とローカル移動の競合を防ぐ。
         if (!HasStateAuthority && !HasInputAuthority)
             return;
+
+        // ピン撃破後は、ノックバック中も終了後も入力処理へ進ませない。
+        // 水平方向の吹き飛びは減衰させ、空中にいる間は重力だけを適用する。
+        if (IsPinFinished)
+        {
+            IsMovingInput = false;
+            CurrentVelocity = Vector3.zero;
+            CurrentCharge = 0f;
+
+            var finishController = GetComponent<CharacterController>();
+            if (finishController != null)
+            {
+                bool knockbackActive = !StunTimer.ExpiredOrNotRunning(Runner);
+
+                if (finishController.isGrounded && KnockbackVelocity.y <= 0f)
+                {
+                    SetKnockbackVelocityY(-2f);
+                }
+                else
+                {
+                    SetKnockbackVelocityY(
+                        Mathf.Max(
+                            KnockbackVelocity.y + Physics.gravity.y * 2f * Runner.DeltaTime,
+                            -30f
+                        )
+                    );
+                }
+
+                if (knockbackActive)
+                {
+                    Vector3 horizontal = new Vector3(KnockbackVelocity.x, 0f, KnockbackVelocity.z);
+                    horizontal = Vector3.MoveTowards(horizontal, Vector3.zero, 15f * Runner.DeltaTime);
+                    SetKnockbackVelocityXZ(horizontal.x, horizontal.z);
+                }
+                else
+                {
+                    SetKnockbackVelocityXZ(0f, 0f);
+                }
+
+                finishController.Move(KnockbackVelocity * Runner.DeltaTime);
+            }
+
+            return;
+        }
 
         bool isCountdown = GameManager.Instance != null && GameManager.Instance.CurrentState == GameManager.GameState.Countdown;
         bool isStunned = !StunTimer.ExpiredOrNotRunning(Runner);
@@ -827,6 +927,8 @@ public class PlayerMovement : NetworkBehaviour
 
     public bool TryPickupItem(int itemType, int maxUses)
     {
+        if (IsPinFinished) return false;
+
         bool pickedUp = false;
         
         for (int i = 0; i < 3; i++)
@@ -890,6 +992,14 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!HasInputAuthority)
             return;
+
+        // ピン撃破後はローカル入力によるスロット変更・カーソル操作なども受け付けない。
+        if (IsPinFinished)
+        {
+            UpdateInteractVisuals();
+            UpdateTrajectory();
+            return;
+        }
 
         // 状態によってアイテムスロット変更をブロックするか判定
         bool canChangeSlot = true;
@@ -1118,7 +1228,7 @@ public class PlayerMovement : NetworkBehaviour
         bool isCountdown = GameManager.Instance != null && GameManager.Instance.CurrentState == GameManager.GameState.Countdown;
         bool isStunned = !StunTimer.ExpiredOrNotRunning(Runner);
 
-        if (!isCountdown && !isStunned &&
+        if (!isCountdown && !isStunned && !IsPinFinished &&
             !IsHoldingBall &&
             MyBall != null &&
             PickupCooldown.ExpiredOrNotRunning(Runner))
@@ -1180,7 +1290,7 @@ public class PlayerMovement : NetworkBehaviour
 
         if (crosshairUI != null)
         {
-            bool shouldShowCrosshair = IsAimingRocket && HasInputAuthority;
+            bool shouldShowCrosshair = IsAimingRocket && HasInputAuthority && !IsPinFinished;
             if (crosshairUI.activeSelf != shouldShowCrosshair)
             {
                 crosshairUI.SetActive(shouldShowCrosshair);
