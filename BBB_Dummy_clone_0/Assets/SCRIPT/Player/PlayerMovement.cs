@@ -84,6 +84,8 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private Transform holdPoint;
     [SerializeField] private float maxThrowForce = 90f;
     [SerializeField] private float chargeRate = 40.5f;
+    // UI側でローカル予測ゲージを描画するための読み取り専用値。
+    public float ChargeRate => chargeRate;
     [Tooltip("短いチャージでもボウリングらしい初速を確保する")]
     [SerializeField] private float minThrowSpeed = 8.5f;
     [Tooltip("最大チャージ時の投球速度（Unity単位/秒）")]
@@ -146,6 +148,10 @@ public class PlayerMovement : NetworkBehaviour
 
     private bool _isSpawned;
     public bool IsPlayerSpawned => _isSpawned;
+
+    // クライアントの取得操作を先行表示するための見た目専用予測。
+    private bool _predictingPickupVisual;
+    private float _pickupPredictionEndTime;
     private LineRenderer _trajectoryLine;
 
     [Header("アイテム効果")]
@@ -1001,6 +1007,8 @@ public class PlayerMovement : NetworkBehaviour
             return;
         }
 
+        UpdateLocalPickupPrediction();
+
         // 状態によってアイテムスロット変更をブロックするか判定
         bool canChangeSlot = true;
 
@@ -1062,6 +1070,45 @@ public class PlayerMovement : NetworkBehaviour
         UpdateCameraTargetOffset();
     }
 
+    /// <summary>
+    /// Eキーを押した瞬間に、ボール取得の見た目だけを先行させる。
+    /// Rigidbodyやネットワーク状態は変更せず、State Authorityの判定結果に従う。
+    /// </summary>
+    private void UpdateLocalPickupPrediction()
+    {
+        if (!HasInputAuthority || HasStateAuthority)
+            return;
+
+        if (IsHoldingBall)
+        {
+            _predictingPickupVisual = false;
+            return;
+        }
+
+        if (_predictingPickupVisual && Time.unscaledTime >= _pickupPredictionEndTime)
+        {
+            _predictingPickupVisual = false;
+        }
+
+        if (Keyboard.current == null || !Keyboard.current.eKey.wasPressedThisFrame)
+            return;
+
+        bool isCountdown = GameManager.Instance != null &&
+                           GameManager.Instance.CurrentState == GameManager.GameState.Countdown;
+        bool isStunned = !StunTimer.ExpiredOrNotRunning(Runner);
+
+        if (isCountdown || isStunned || MyBall == null ||
+            !PickupCooldown.ExpiredOrNotRunning(Runner))
+            return;
+
+        if (Vector3.Distance(transform.position, MyBall.transform.position) <= pickupDistance)
+        {
+            _predictingPickupVisual = true;
+            // サーバー応答が届かなかった場合は予測表示を解除する。
+            _pickupPredictionEndTime = Time.unscaledTime + 1.0f;
+        }
+    }
+
     private void ShowCursor()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -1094,7 +1141,8 @@ public class PlayerMovement : NetworkBehaviour
 
         // 操作中クライアントでは、予測移動中のプレイヤーにボールの見た目を追従させる。
         // ネットワーク上のボール位置や物理状態を書き換える処理ではない。
-        if (HasInputAuthority && !HasStateAuthority && IsHoldingBall && holdPoint != null)
+        if (HasInputAuthority && !HasStateAuthority &&
+            (IsHoldingBall || _predictingPickupVisual) && holdPoint != null)
         {
             MyBall.transform.SetPositionAndRotation(holdPoint.position, holdPoint.rotation);
         }
