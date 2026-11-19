@@ -20,9 +20,9 @@ public class BowlingBall : NetworkBehaviour
     [SerializeField] private float curveMass = 1.8f;
 
     [Header("最高速度制限（飛びすぎ防止）")]
-    [SerializeField] private float speedMaxVelocity = 50f;
-    [SerializeField] private float powerMaxVelocity = 30f;
-    [SerializeField] private float curveMaxVelocity = 35f;
+    [SerializeField] private float speedMaxVelocity = 18f;
+    [SerializeField] private float powerMaxVelocity = 16f;
+    [SerializeField] private float curveMaxVelocity = 17f;
 
     [Header("カーブボール専用パラメータ")]
     [SerializeField] private float curveForce = 12f;
@@ -112,7 +112,8 @@ public class BowlingBall : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        if (rb == null || rb.isKinematic) return;
+        // Rigidbodyの物理制御はState Authorityだけで行う。
+        if (!HasStateAuthority || rb == null || rb.isKinematic) return;
 
         // 1. 各ボールの最高速度を制限
         float maxVel = speedMaxVelocity;
