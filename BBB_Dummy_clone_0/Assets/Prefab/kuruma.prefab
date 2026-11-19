@@ -105,6 +105,8 @@ GameObject:
   - component: {fileID: 7474491555822902497}
   - component: {fileID: 3796454751044415177}
   - component: {fileID: 8900182170118277890}
+  - component: {fileID: -9075901731311791238}
+  - component: {fileID: -4500493070552552866}
   m_Layer: 10
   m_Name: kuruma
   m_TagString: Car
@@ -263,6 +265,66 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 6067448133737796907, guid: 2a72fabd85ec347019ee1968eb503667, type: 3}
+--- !u!114 &-9075901731311791238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3438974039802528380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
+  SortKey: 432000656
+  SendPriority: 1
+  EnableInterpolation: 1
+  Flags: 262402
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: -4500493070552552866}
+  ForceRemoteRenderTimeframe: 0
+--- !u!114 &-4500493070552552866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3438974039802528380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkTransform
+  _stateAuthorityChangeErrorCorrectionDelta: 0
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  ConfigFlags: 0
+  PhysicsSettings:
+    ForecastEnabled: 1
+    DebugPhysics: 0
+    GravityForecast: 2
+    MaxExtrapolationTime: 0.15
+    MinLinearDetectedError: 0.02
+    MinAngularDetectedError: 3
+    MaxLinearError: 0
+    MaxAngularError: 0
+    LowCorrectionProgressThreshold: 0.015
+    HighErrorSimilarityThreshold: 1
+    MaxErrorTotalTime: 0.5
+    MaxRemoteSleepIgnoreTime: 0.5
+    ErrorCorrectionType: 0
+    LinearVelCorrectionMul: 1
+    AngularVelCorrectionMul: 1
+    PositionCorrectionLerp: 0.15
+    RotationCorrectionLerp: 0.15
+    Spring: 75
+    Damper: 2
+    MinImpactfulCollisionAlignment: 0.3
+    ImpactStartCorrectionTime: 0.1
+    ImpactCorrectionTimeComplete: 0.3
 --- !u!1 &4318110906798819445
 GameObject:
   m_ObjectHideFlags: 0
