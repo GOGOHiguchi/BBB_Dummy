@@ -207,7 +207,12 @@ public sealed class CharacterSelectUI : MonoBehaviour
     private void ShowModel(int id)
     {
         if (!database.TryGetEntry(id, out var entry)) return;
-        if (previewModel != null) Destroy(previewModel);
+        if (previewModel != null)
+        {
+            // Destroyはフレーム終端まで残るため、先に非表示にして旧モデルの二重描画を防ぐ。
+            previewModel.SetActive(false);
+            Destroy(previewModel);
+        }
         previewModel = Instantiate(entry.Prefab, stage);
         SetLayer(previewModel, PreviewLayer);
         Frame(previewCamera, previewModel, 2.15f);
