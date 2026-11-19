@@ -5513,6 +5513,7 @@ GameObject:
   - component: {fileID: 191371960}
   - component: {fileID: 191371959}
   - component: {fileID: 191371963}
+  - component: {fileID: 191371964}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -5628,6 +5629,21 @@ MonoBehaviour:
   normalFillImage: {fileID: 310498404}
   overPowerFillImage: {fileID: 470189433}
   maxForce: 90
+--- !u!114 &191371964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191371958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 565200723fb8a5a4fb26cc4ce2ffd0d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectUI
+  database: {fileID: 0}
+  showOnStart: 1
+  panelColor: {r: 0.025, g: 0.12, b: 0.25, a: 0.97}
 --- !u!1 &193144622
 GameObject:
   m_ObjectHideFlags: 0

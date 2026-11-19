@@ -7,14 +7,14 @@ using UnityEngine.InputSystem;
 /// </summary>
 public sealed class CharacterSelectInteractable : MonoBehaviour
 {
-    [SerializeField] private CharacterSelectUI selectionUI;
+    [SerializeField] private characterSelectUI selectionUI;
 
     private PlayerMovement _localPlayerInRange;
 
     private void Awake()
     {
         if (selectionUI == null)
-            selectionUI = FindFirstObjectByType<CharacterSelectUI>();
+            selectionUI = FindFirstObjectByType<characterSelectUI>();
     }
 
     private void OnTriggerEnter(Collider other)
