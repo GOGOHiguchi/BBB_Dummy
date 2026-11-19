@@ -28,6 +28,22 @@ public class PinManager : MonoBehaviour
     }
 
     /// <summary>
+    /// シーン内に、倒れ判定を通過したピンが1本でもあるか確認する。
+    /// スコア集計前の撃破演出開始判定に使用する。
+    /// </summary>
+    public bool HasAnyKnockedDown()
+    {
+        foreach (var pin in allPins)
+        {
+            if (pin != null && pin.IsKnockedDown())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
     /// ★追加: 現在倒れていて、かつ未集計のピンの数をカウントし、集計済みにする
     /// </summary>
     public int CountAndMarkKnockedPins()
