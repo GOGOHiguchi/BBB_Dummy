@@ -1,0 +1,260 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c81e566805bcf35479e8b5d63dc06c9a, type: 3}
+  m_Name: CharacterModelDatabase
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterModelDatabase
+  entries:
+  - id: 0
+    displayName: M_civilian_01
+    isFemale: 0
+    prefab: {fileID: 142586, guid: 06d8904ff01340b4f80eba1b806c4ad4, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 1
+    displayName: M_civilian_02
+    isFemale: 0
+    prefab: {fileID: 190400, guid: 08eee6a0564e17740b78385a51bab9d9, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 2
+    displayName: M_civilian_03
+    isFemale: 0
+    prefab: {fileID: 160066, guid: f08c704964481c84a8c4daa91bd9831b, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 3
+    displayName: M_civilian_04
+    isFemale: 0
+    prefab: {fileID: 199556, guid: b9ed5da3f0537ca46b2a42d4e35c5250, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 4
+    displayName: M_civilian_05
+    isFemale: 0
+    prefab: {fileID: 163164, guid: dc173a947e201bb4a98119ea4cfb83a7, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 5
+    displayName: M_civilian_06
+    isFemale: 0
+    prefab: {fileID: 114382, guid: 42f5d995889cc63489778ac357e5ee77, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 6
+    displayName: M_civilian_07
+    isFemale: 0
+    prefab: {fileID: 189942, guid: e351f83e0c2d50c4e92b803a06acad66, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 7
+    displayName: M_civilian_08
+    isFemale: 0
+    prefab: {fileID: 159172, guid: 7cf3dbd68d9d8b9499e7a4c4e072f343, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 8
+    displayName: M_civilian_09
+    isFemale: 0
+    prefab: {fileID: 104210, guid: 01a29a24750953e409bedb55438d4e02, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 9
+    displayName: M_civilian_10
+    isFemale: 0
+    prefab: {fileID: 134658, guid: 01d1795f0c8d13248a73c92143af967a, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 10
+    displayName: M_civilian_11
+    isFemale: 0
+    prefab: {fileID: 175458, guid: d845724162ec0b94ea802bd327c11784, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 11
+    displayName: M_civilian_12
+    isFemale: 0
+    prefab: {fileID: 166338, guid: 360c71d2c9134c54abc4d18727c535bd, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 12
+    displayName: M_civilian_13
+    isFemale: 0
+    prefab: {fileID: 139182, guid: 22e5c18fed085934bb7341f8f5a9978c, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 13
+    displayName: M_civilian_14
+    isFemale: 0
+    prefab: {fileID: 180238, guid: 231440b219f142546950e8d5b68401e7, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 14
+    displayName: M_civilian_15
+    isFemale: 0
+    prefab: {fileID: 197786, guid: 046792bb57858564fba0132edb802422, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 15
+    displayName: M_doctor
+    isFemale: 0
+    prefab: {fileID: 113534, guid: 3650bc5fe79772544b15444fcf0006c3, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 16
+    displayName: M_farmer_01
+    isFemale: 0
+    prefab: {fileID: 113360, guid: b91c6d81379a35c47bf66d9c31b58975, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 17
+    displayName: M_farmer_02
+    isFemale: 0
+    prefab: {fileID: 140996, guid: 445676f40fbb17840b8fb915d5bf0b9c, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 18
+    displayName: M_farmer_03
+    isFemale: 0
+    prefab: {fileID: 138618, guid: 8e7198429e0a8e54184feff5e4259bf3, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 19
+    displayName: M_police_01
+    isFemale: 0
+    prefab: {fileID: 133092, guid: 99b05bfed9d30b249b8c27aacc2e53de, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 20
+    displayName: M_police_02
+    isFemale: 0
+    prefab: {fileID: 169844, guid: 6a6e1a4297af7c0448b608007b64d48a, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 21
+    displayName: M_police_03
+    isFemale: 0
+    prefab: {fileID: 166508, guid: aebb93c717aba114f9c83f4264418bee, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 22
+    displayName: M_police_04
+    isFemale: 0
+    prefab: {fileID: 121716, guid: bafbe60e099027d4da82aae634cc9433, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 23
+    displayName: M_police_05
+    isFemale: 0
+    prefab: {fileID: 113464, guid: ed3e6550040bcee4f972d22a274eab31, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 24
+    displayName: M_priest
+    isFemale: 0
+    prefab: {fileID: 174878, guid: 7104c66bb16592a4f9326235c64626a6, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 25
+    displayName: M_punk_01
+    isFemale: 0
+    prefab: {fileID: 176778, guid: b9d8779eb4ed74b4e96ff6dfd109b334, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 26
+    displayName: M_punk_02
+    isFemale: 0
+    prefab: {fileID: 175654, guid: a53656e37c8d6ce4caf30fa3e2cb27fb, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 27
+    displayName: M_punk_03
+    isFemale: 0
+    prefab: {fileID: 110594, guid: a00fefc51f7e5ce48acf893f2976eeeb, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 28
+    displayName: M_worker_01
+    isFemale: 0
+    prefab: {fileID: 132472, guid: 46731834ed4f8824abf67214b5ccecb2, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 29
+    displayName: F_civilian_01
+    isFemale: 1
+    prefab: {fileID: 144792, guid: 79e69cceb3e5f93468212a49c9f7848a, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 30
+    displayName: F_civilian_02
+    isFemale: 1
+    prefab: {fileID: 111896, guid: e6b804509967bc749a5a6cc05da021c8, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 31
+    displayName: F_civilian_03
+    isFemale: 1
+    prefab: {fileID: 171844, guid: 426bfa0798cc4d340a0fad95a2d393ae, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 32
+    displayName: F_civilian_04
+    isFemale: 1
+    prefab: {fileID: 161996, guid: 28a7fca50f56f464882d23c4645d9ae6, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 33
+    displayName: F_civilian_05
+    isFemale: 1
+    prefab: {fileID: 193052, guid: c9fb71b121c229c4b9223289aa27fe00, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 34
+    displayName: F_civilian_06
+    isFemale: 1
+    prefab: {fileID: 194340, guid: 5f93fc29a1ff2b141afdefa74fed6618, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 35
+    displayName: F_civilian_07
+    isFemale: 1
+    prefab: {fileID: 198906, guid: eb6038c96f3ff5845a22385fcac71f17, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 36
+    displayName: F_civilian_08
+    isFemale: 1
+    prefab: {fileID: 182008, guid: c99c8db657ed0524e81914c2f0b87535, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 37
+    displayName: F_civilian_09
+    isFemale: 1
+    prefab: {fileID: 158482, guid: 8f1da91dc58b92d4485bedb4db3fdb51, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 38
+    displayName: F_civilian_10
+    isFemale: 1
+    prefab: {fileID: 158726, guid: 987f8c670c90ce04eadaa1d5e8e589c7, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 39
+    displayName: F_civilian_11
+    isFemale: 1
+    prefab: {fileID: 177626, guid: 339ab84d6c16efa48bf22b0675bde9d0, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 40
+    displayName: F_civilian_12
+    isFemale: 1
+    prefab: {fileID: 187984, guid: e00779cd7489ab048a33aaee2859eec6, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 41
+    displayName: F_civilian_13
+    isFemale: 1
+    prefab: {fileID: 164398, guid: 2de7aa712ccebe4499e4399325de3577, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 42
+    displayName: F_civilian_14
+    isFemale: 1
+    prefab: {fileID: 149016, guid: 6b6fae3fa73ec6041912a1631cfcda6a, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 43
+    displayName: F_civilian_15
+    isFemale: 1
+    prefab: {fileID: 141818, guid: 68196a6af6fc7a54d87ba4c36c79ebed, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 44
+    displayName: F_doctor
+    isFemale: 1
+    prefab: {fileID: 183674, guid: 6014d9687ab56c24cbe507b115b45881, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 45
+    displayName: F_nun
+    isFemale: 1
+    prefab: {fileID: 151544, guid: 7b81343ebd645d9429b0f18f7440e5d8, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 46
+    displayName: F_nurse_01
+    isFemale: 1
+    prefab: {fileID: 103792, guid: 7c2dd4461fac810449db2bf4988cf6e4, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 47
+    displayName: F_nurse_02
+    isFemale: 1
+    prefab: {fileID: 162008, guid: 550f83e2f7d94ab4281aab637d4c161a, type: 3}
+    thumbnail: {fileID: 0}
+  - id: 48
+    displayName: F_police
+    isFemale: 1
+    prefab: {fileID: 127138, guid: 2fd227a664ca1764f98918515e9812e1, type: 3}
+    thumbnail: {fileID: 0}
