@@ -120,7 +120,7 @@ public class SatelliteLaserController : NetworkBehaviour
 
             if (hit == null)
                 continue;
-        {
+
             // =========================
             // プレイヤーへの攻撃
             // =========================
