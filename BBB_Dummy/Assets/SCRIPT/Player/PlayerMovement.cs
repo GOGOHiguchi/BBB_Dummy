@@ -1009,6 +1009,13 @@ public class PlayerMovement : NetworkBehaviour
 
         UpdateLocalPickupPrediction();
 
+        // キャラクター選択UI操作中は、ゲーム側のスロット・カーソル操作を止める。
+        if (CharacterSelectUI.IsAnyOpen)
+        {
+            UpdateInteractVisuals();
+            return;
+        }
+
         // 状態によってアイテムスロット変更をブロックするか判定
         bool canChangeSlot = true;
 
