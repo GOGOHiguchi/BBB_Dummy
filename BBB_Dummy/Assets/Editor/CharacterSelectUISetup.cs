@@ -69,9 +69,12 @@ public static class CharacterSelectUISetup
             return;
         }
 
-        if (eventSystem.GetComponent<InputSystemUIInputModule>() == null &&
-            eventSystem.GetComponent<StandaloneInputModule>() == null)
+        if (eventSystem.GetComponent<InputSystemUIInputModule>() == null)
         {
+            StandaloneInputModule legacyModule = eventSystem.GetComponent<StandaloneInputModule>();
+            if (legacyModule != null)
+                Undo.DestroyObjectImmediate(legacyModule);
+
             InputSystemUIInputModule inputModule = Undo.AddComponent<InputSystemUIInputModule>(eventSystem.gameObject);
             inputModule.AssignDefaultActions();
         }
