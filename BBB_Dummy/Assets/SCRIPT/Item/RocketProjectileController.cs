@@ -17,11 +17,30 @@ public class RocketProjectileController : NetworkBehaviour
     private bool targetHit;
     private TickTimer lifeTimer;
 
+    // PrefabにNetworkTransformがないため、弾のTransformをNetworked値で同期する。
+    [Networked] private Vector3 SyncedPosition { get; set; }
+    [Networked] private Quaternion SyncedRotation { get; set; }
+
     public override void Spawned()
     {
         if (HasStateAuthority)
         {
+            SyncedPosition = transform.position;
+            SyncedRotation = transform.rotation;
             lifeTimer = TickTimer.CreateFromSeconds(Runner, lifeTime);
+        }
+        else
+        {
+            transform.SetPositionAndRotation(SyncedPosition, SyncedRotation);
+        }
+    }
+
+    public override void Render()
+    {
+        // State Authority以外は、ネットワークで届いた位置・回転を表示する。
+        if (!HasStateAuthority)
+        {
+            transform.SetPositionAndRotation(SyncedPosition, SyncedRotation);
         }
     }
 
@@ -33,6 +52,8 @@ public class RocketProjectileController : NetworkBehaviour
             return;
 
         transform.position += transform.forward * (speed * Runner.DeltaTime);
+        SyncedPosition = transform.position;
+        SyncedRotation = transform.rotation;
 
         if (lifeTimer.Expired(Runner))
         {
