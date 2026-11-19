@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 6983067496549081809}
   - component: {fileID: 2708170269345464915}
   m_Layer: 3
-  m_Name: player
+  m_Name: player_character_select
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -301,6 +301,11 @@ MonoBehaviour:
   backflipJumpDelay: 0.45
   backflipJumpPower: 7.5
   _CurrentEmoteIndex: 0
+  _IsCelebrating:
+    RawValue: 0
+  celebrationEmoteMinInterval: 2.5
+  celebrationEmoteMaxInterval: 4
+  emoteNetworkDisplayDuration: 0.25
 --- !u!114 &3085305019715580707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
-  SortKey: 4249420385
+  SortKey: 4134994769
   SendPriority: 1
   EnableInterpolation: 1
   Flags: 262402
@@ -436,6 +441,8 @@ MonoBehaviour:
   holdPoint: {fileID: 9120814429362982042}
   maxThrowForce: 90
   chargeRate: 80
+  minThrowSpeed: 8.5
+  maxThrowSpeed: 15
   pickupDistance: 4
   rocketLauncherController: {fileID: 6613635871984479424}
   rocketLauncherObject: {fileID: 3493978722215813852}
@@ -459,6 +466,8 @@ MonoBehaviour:
   interactUI: {fileID: 0}
   crosshairUI: {fileID: 2121714235824309185}
   _IsReady:
+    RawValue: 0
+  _IsPinFinished:
     RawValue: 0
   _MyBall: {fileID: 0}
   _IsHoldingBall:
@@ -2243,7 +2252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2044105691939598056, guid: f26add0b8561051438426890f3bd0f19, type: 3}
       propertyPath: SortKey
-      value: 2956493957
+      value: 2842068341
       objectReference: {fileID: 0}
     - target: {fileID: 2044105691939598056, guid: f26add0b8561051438426890f3bd0f19, type: 3}
       propertyPath: NetworkedBehaviours.Array.size
@@ -2416,7 +2425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6977640304982898814, guid: 7941a5a65b3d26f4d93d5faa548124c2, type: 3}
       propertyPath: SortKey
-      value: 3188364265
+      value: 3073938649
       objectReference: {fileID: 0}
     - target: {fileID: 7097008964804254233, guid: 7941a5a65b3d26f4d93d5faa548124c2, type: 3}
       propertyPath: m_IsActive
