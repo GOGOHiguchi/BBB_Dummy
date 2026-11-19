@@ -96,11 +96,27 @@ public sealed class CharacterSelectUI : MonoBehaviour
         showFemale = female;
         maleTabButton.interactable = female;
         femaleTabButton.interactable = !female;
+
+        int firstId = -1;
+        foreach (var entry in database.Entries)
+        {
+            if (entry == null || entry.Prefab == null || entry.IsFemale != showFemale) continue;
+            if (firstId < 0) firstId = entry.Id;
+        }
+
         foreach (var pair in portraits)
         {
             if (database.TryGetEntry(pair.Key, out var entry))
                 pair.Value.transform.parent.gameObject.SetActive(entry.IsFemale == showFemale);
         }
+
+        if (firstId >= 0 && database.TryGetEntry(selectedId, out var selected) && selected.IsFemale != showFemale)
+        {
+            selectedId = firstId;
+            ShowModel(selectedId);
+            UpdateName();
+        }
+        RefreshSelectionOutline();
     }
 
     private void BuildTiles()
@@ -154,11 +170,14 @@ public sealed class CharacterSelectUI : MonoBehaviour
             SetLayer(model, PreviewLayer);
             RenderTexture rt = new RenderTexture(144,160,16,RenderTextureFormat.ARGB32);
             rt.Create(); thumbnailTextures.Add(rt);
+            bool previewWasActive = previewModel != null && previewModel.activeSelf;
+            if (previewWasActive) previewModel.SetActive(false);
             Frame(thumbnailCamera, model, 2.5f);
             thumbnailCamera.targetTexture = rt;
             thumbnailCamera.Render();
             if (portraits.TryGetValue(entry.Id, out var image)) image.texture = rt;
             Destroy(model);
+            if (previewWasActive) previewModel.SetActive(true);
             yield return null;
         }
     }
@@ -213,16 +232,21 @@ public sealed class CharacterSelectUI : MonoBehaviour
     private void Select(int id)
     {
         if (!database.IsValidId(id)) return;
-        selectedId=id; ShowModel(id); UpdateName();
+        selectedId=id;
+        ShowModel(id);
+        UpdateName();
+        RefreshSelectionOutline();
+    }
+
+    private void RefreshSelectionOutline()
+    {
         foreach (var entry in database.Entries)
         {
             if (entry == null) continue;
-            var tile = modelListRoot.Find("Character_"+entry.Id);
-            if (tile != null)
-            {
-                var outline=tile.GetComponent<Outline>();
-                if (outline != null) outline.enabled=entry.Id==selectedId;
-            }
+            var tile = modelListRoot.Find("Character_" + entry.Id);
+            if (tile == null) continue;
+            var outline = tile.GetComponent<Outline>();
+            if (outline != null) outline.enabled = entry.Id == selectedId;
         }
     }
 
