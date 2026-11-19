@@ -1115,6 +1115,10 @@ public class PlayerMovement : NetworkBehaviour
         animator = value;
     }
 
+    // CharacterModelSwitcherがモデル差し替え時に外付け武器を退避・再装着するための参照。
+    public GameObject RocketLauncherObject => rocketLauncherObject;
+    public RocketLauncherController RocketLauncherController => rocketLauncherController;
+
 
     private void ShowCursor()
     {

@@ -78,6 +78,36 @@ public class CharacterModelSwitcher : NetworkBehaviour
             return;
         }
 
+        // ロケットランチャーは旧モデルの右手ボーン配下にあるNetworkObject。
+        // モデル本体を破棄する前にプレイヤールートへ退避し、差し替え後の右手へ戻す。
+        GameObject launcherObject = _playerMovement != null
+            ? _playerMovement.RocketLauncherObject
+            : null;
+
+        if (launcherObject == null && _playerMovement != null &&
+            _playerMovement.RocketLauncherController != null)
+        {
+            launcherObject = _playerMovement.RocketLauncherController.gameObject;
+        }
+
+        Transform launcherTransform = launcherObject != null ? launcherObject.transform : null;
+        bool launcherWasInsideVisual = launcherTransform != null &&
+                                        launcherTransform.IsChildOf(characterVisualRoot);
+
+        Vector3 launcherLocalPosition = Vector3.zero;
+        Quaternion launcherLocalRotation = Quaternion.identity;
+        Vector3 launcherLocalScale = Vector3.one;
+
+        if (launcherWasInsideVisual)
+        {
+            launcherLocalPosition = launcherTransform.localPosition;
+            launcherLocalRotation = launcherTransform.localRotation;
+            launcherLocalScale = launcherTransform.localScale;
+
+            // worldPositionStays=trueで一時退避。武器のGameObject/NetworkObjectは破棄しない。
+            launcherTransform.SetParent(transform, true);
+        }
+
         // CurrentModelなど、配置先直下にある旧モデルだけを入れ替える。
         for (int i = characterVisualRoot.childCount - 1; i >= 0; i--)
         {
@@ -91,6 +121,24 @@ public class CharacterModelSwitcher : NetworkBehaviour
         modelInstance.transform.localPosition = Vector3.zero;
         modelInstance.transform.localRotation = Quaternion.identity;
         modelInstance.transform.localScale = Vector3.one;
+
+        if (launcherWasInsideVisual && launcherTransform != null)
+        {
+            Transform rightHand = FindRightHandContainer(modelInstance.transform);
+            if (rightHand != null)
+            {
+                launcherTransform.SetParent(rightHand, false);
+                launcherTransform.localPosition = launcherLocalPosition;
+                launcherTransform.localRotation = launcherLocalRotation;
+                launcherTransform.localScale = launcherLocalScale;
+            }
+            else
+            {
+                // モデル側のボーン名が想定と異なる場合も、武器自体は消さずルートに残す。
+                launcherTransform.SetParent(transform, true);
+                Debug.LogWarning("[CharacterModelSwitcher] 右手の装着先が見つかりません。ロケットランチャーをプレイヤールートに退避しました。", modelInstance);
+            }
+        }
 
         Animator modelAnimator = modelInstance.GetComponentInChildren<Animator>(true);
         if (modelAnimator == null)
@@ -119,6 +167,19 @@ public class CharacterModelSwitcher : NetworkBehaviour
 
         _appliedModelId = modelId;
         Debug.Log($"[CharacterModelSwitcher] モデルを切り替えました: {modelPrefab.name}", this);
+    }
+
+    private static Transform FindRightHandContainer(Transform modelRoot)
+    {
+        foreach (Transform child in modelRoot.GetComponentsInChildren<Transform>(true))
+        {
+            if (child.name == "R_hand_container" ||
+                child.name == "RightHandContainer" ||
+                child.name == "RightHand")
+                return child;
+        }
+
+        return null;
     }
 
     private static Transform FindLeftUpperArm(Transform modelRoot)
