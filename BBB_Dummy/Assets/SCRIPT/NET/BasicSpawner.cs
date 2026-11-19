@@ -290,8 +290,10 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     {
         var data = new NetworkInputData();
         Vector2 moveInput = Vector2.zero;
+        // キャラクター選択中はゲーム操作をネットワーク入力へ送らない。
+        bool blockGameplayInput = CharacterSelectUI.IsAnyOpen || CharacterSelectInteractable.IsLocalPlayerInRange;
 
-        if (Keyboard.current != null)
+        if (!blockGameplayInput && Keyboard.current != null)
         {
             if (Keyboard.current.aKey.isPressed) moveInput.x -= 1f;
             if (Keyboard.current.dKey.isPressed) moveInput.x += 1f;
@@ -312,7 +314,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             }
         }
         
-        if (Mouse.current != null)
+        if (!blockGameplayInput && Mouse.current != null)
         {
             data.isCharging = Mouse.current.leftButton.isPressed;
             data.isAiming = Mouse.current.rightButton.isPressed;
