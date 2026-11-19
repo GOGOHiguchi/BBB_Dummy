@@ -22,6 +22,8 @@ public sealed class CharacterSelectUI : MonoBehaviour
 
     private readonly List<Texture2D> _thumbnailTextures = new List<Texture2D>();
     private readonly List<Sprite> _thumbnailSprites = new List<Sprite>();
+    private readonly Dictionary<int, Sprite> _thumbnailById = new Dictionary<int, Sprite>();
+    private readonly Dictionary<int, TilePortrait> _tilesById = new Dictionary<int, TilePortrait>();
     private readonly List<Button> _maleButtons = new List<Button>();
     private readonly List<Button> _femaleButtons = new List<Button>();
 
@@ -300,10 +302,8 @@ public sealed class CharacterSelectUI : MonoBehaviour
         if (entry.IsFemale) _femaleButtons.Add(button);
         else _maleButtons.Add(button);
 
-        TilePortrait portraitData = tileObject.AddComponent<TilePortrait>();
-        portraitData.Image = portrait;
-        portraitData.Outline = outline;
-        portraitData.Id = entry.Id;
+        TilePortrait portraitData = new TilePortrait { Image = portrait, Outline = outline, Id = entry.Id };
+        _tilesById[entry.Id] = portraitData;
     }
 
     private void SetGender(bool female)
@@ -331,9 +331,6 @@ public sealed class CharacterSelectUI : MonoBehaviour
 
         if (_localSwitcher == null)
             _localSwitcher = FindLocalSwitcher();
-
-        if (_localSwitcher != null)
-            _localSwitcher.PreviewModel(id);
 
         _statusText.text = "選択中: " + GetEntryName(id);
     }
@@ -404,8 +401,7 @@ public sealed class CharacterSelectUI : MonoBehaviour
             CharacterModelDatabase.Entry entry = entries[i];
             if (entry == null || entry.Prefab == null) continue;
 
-            TilePortrait tile = FindTile(entry.Id);
-            if (tile == null || (entry.Thumbnail != null))
+            if (entry.Thumbnail != null || _thumbnailById.ContainsKey(entry.Id))
                 continue;
 
             GameObject capture = Instantiate(entry.Prefab, _previewStage);
@@ -427,9 +423,13 @@ public sealed class CharacterSelectUI : MonoBehaviour
 
             Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),
                 new Vector2(0.5f, 0.5f), 100f);
-            tile.Image.sprite = sprite;
-            tile.Image.color = Color.white;
-            tile.Image.preserveAspect = true;
+            _thumbnailById[entry.Id] = sprite;
+            if (_tilesById.TryGetValue(entry.Id, out TilePortrait tile) && tile.Image != null)
+            {
+                tile.Image.sprite = sprite;
+                tile.Image.color = Color.white;
+                tile.Image.preserveAspect = true;
+            }
             _thumbnailTextures.Add(texture);
             _thumbnailSprites.Add(sprite);
 
@@ -440,13 +440,7 @@ public sealed class CharacterSelectUI : MonoBehaviour
         UpdatePreview(_selectedId);
     }
 
-    private TilePortrait FindTile(int id)
-    {
-        TilePortrait[] tiles = _gridContent.GetComponentsInChildren<TilePortrait>(true);
-        foreach (TilePortrait tile in tiles)
-            if (tile.Id == id) return tile;
-        return null;
-    }
+
 
     private string GetEntryName(int id)
     {
@@ -481,9 +475,6 @@ public sealed class CharacterSelectUI : MonoBehaviour
     {
         if (_localSwitcher == null)
             _localSwitcher = FindLocalSwitcher();
-
-        if (_localSwitcher != null)
-            _localSwitcher.CancelPreview();
 
         _selectedId = _originalId;
         _showFemale = _selectedId >= 29;
@@ -626,7 +617,7 @@ public sealed class CharacterSelectUI : MonoBehaviour
             SetLayerRecursively(child.gameObject, layer);
     }
 
-    private sealed class TilePortrait : MonoBehaviour
+    private sealed class TilePortrait
     {
         public int Id;
         public Image Image;
