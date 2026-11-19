@@ -14,9 +14,10 @@ public class PlayerMovement : NetworkBehaviour
     private Transform cameraTarget;
 
     [Header("カメラエイムオフセット設定")]
-    [SerializeField] private Vector3 normalCameraOffset = new Vector3(0f, 0.9f, 0f); // 通常位置
-    [SerializeField] private Vector3 aimingCameraOffset = new Vector3(1.0f, 1.5f, 0f); // ロケラン構え時の位置（数値を大きくするとより左下に寄る）
+    [SerializeField] private Vector3 aimingCameraOffset = new Vector3(1.0f, 1.5f, 0f); // ロケラン構え時のローカル座標
     [SerializeField] private float cameraTransitionSpeed = 10f; // カメラ移動の滑らかさ
+    private Vector3 _cameraTargetBaseLocalPosition;
+    private bool _cameraTargetBasePositionCached;
 
     [Header("アニメーション設定")]
     [SerializeField] private Animator animator;
@@ -179,6 +180,14 @@ public class PlayerMovement : NetworkBehaviour
 
     private void Awake()
     {
+        // Prefabで設定したCameraTargetの位置を基準位置として保存する。
+        // 通常時にスクリプトがPivot基準の固定座標へ戻してしまうことを防ぐ。
+        if (cameraTarget != null)
+        {
+            _cameraTargetBaseLocalPosition = cameraTarget.localPosition;
+            _cameraTargetBasePositionCached = true;
+        }
+
         if (animator == null) animator = GetComponentInChildren<Animator>();
         if (itemAudioSource == null) itemAudioSource = GetComponent<AudioSource>();
 
@@ -1040,18 +1049,26 @@ public class PlayerMovement : NetworkBehaviour
 
     private void UpdateCameraTargetOffset()
     {
-        if (cameraTarget != null)
+        if (cameraTarget == null)
+            return;
+
+        // 通常時はPrefabで設定した位置をそのまま使用する。
+        // ロケラン構え中のみ、従来の照準用ローカル座標へ滑らかに移動する。
+        if (!_cameraTargetBasePositionCached)
         {
-            // ロケラン構え中かどうかで目標座標を切り替え
-            Vector3 targetPosition = IsAimingRocket ? aimingCameraOffset : normalCameraOffset;
-            
-            // Vector3.Lerpで滑らかに移動させる
-            cameraTarget.localPosition = Vector3.Lerp(
-                cameraTarget.localPosition, 
-                targetPosition, 
-                Time.deltaTime * cameraTransitionSpeed
-            );
+            _cameraTargetBaseLocalPosition = cameraTarget.localPosition;
+            _cameraTargetBasePositionCached = true;
         }
+
+        Vector3 targetPosition = IsAimingRocket
+            ? aimingCameraOffset
+            : _cameraTargetBaseLocalPosition;
+
+        cameraTarget.localPosition = Vector3.Lerp(
+            cameraTarget.localPosition,
+            targetPosition,
+            Time.deltaTime * cameraTransitionSpeed
+        );
     }
 
     private void UpdateInteractVisuals()
