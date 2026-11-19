@@ -1,51 +1,53 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-/// <summary>
-/// ロビーに配置したキャラクター選択オブジェクトへ近づき、Eキーで選択画面を開く。
-/// このコンポーネントを付けたオブジェクトにはIs TriggerのColliderを設定する。
-/// </summary>
+[RequireComponent(typeof(Collider))]
 public sealed class CharacterSelectInteractable : MonoBehaviour
 {
-    [SerializeField] private characterSelectUI selectionUI;
+    [SerializeField] private CharacterSelectUI selectionUI;
+    private PlayerMovement localPlayer;
 
-    private PlayerMovement _localPlayerInRange;
+    public static bool IsLocalPlayerInRange { get; private set; }
 
     private void Awake()
     {
-        if (selectionUI == null)
-            selectionUI = FindFirstObjectByType<characterSelectUI>();
+        GetComponent<Collider>().isTrigger = true;
+        // プレイヤー側にRigidbodyがない構成でもTrigger通知を受け取れるようにする。
+        Rigidbody body = GetComponent<Rigidbody>();
+        if (body == null) body = gameObject.AddComponent<Rigidbody>();
+        body.isKinematic = true;
+        body.useGravity = false;
+        if (selectionUI == null) selectionUI = FindFirstObjectByType<CharacterSelectUI>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerMovement player = other.GetComponentInParent<PlayerMovement>();
-        if (player != null && player.HasInputAuthority)
-            _localPlayerInRange = player;
+        var player = other.GetComponentInParent<PlayerMovement>();
+        if (player == null || !player.HasInputAuthority) return;
+        localPlayer = player;
+        IsLocalPlayerInRange = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        PlayerMovement player = other.GetComponentInParent<PlayerMovement>();
-        if (player != null && player == _localPlayerInRange)
-            _localPlayerInRange = null;
+        var player = other.GetComponentInParent<PlayerMovement>();
+        if (player == null || player != localPlayer) return;
+        localPlayer = null;
+        IsLocalPlayerInRange = false;
     }
 
     private void Update()
     {
-        if (_localPlayerInRange == null || selectionUI == null || selectionUI.IsOpen)
-            return;
+        if (localPlayer == null || selectionUI == null || selectionUI.IsOpen) return;
+        if (Keyboard.current == null || !Keyboard.current.eKey.wasPressedThisFrame) return;
+        var switcher = localPlayer.GetComponent<CharacterModelSwitcher>();
+        if (switcher != null) selectionUI.Open(switcher);
+        else Debug.LogWarning("[CharacterSelectInteractable] PlayerにCharacterModelSwitcherがありません。", localPlayer);
+    }
 
-        if (Keyboard.current == null || !Keyboard.current.eKey.wasPressedThisFrame)
-            return;
-
-        CharacterModelSwitcher switcher = _localPlayerInRange.GetComponent<CharacterModelSwitcher>();
-        if (switcher == null)
-        {
-            Debug.LogWarning("[CharacterSelectInteractable] PlayerにCharacterModelSwitcherがありません。", _localPlayerInRange);
-            return;
-        }
-
-        selectionUI.Open(switcher);
+    private void OnDisable()
+    {
+        if (localPlayer != null) IsLocalPlayerInRange = false;
+        localPlayer = null;
     }
 }
