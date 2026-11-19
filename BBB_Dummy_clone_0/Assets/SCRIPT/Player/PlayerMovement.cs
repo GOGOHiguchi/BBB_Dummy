@@ -1109,6 +1109,13 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
+    /// <summary>差し替え後のモデルAnimatorを操作・アニメーション処理へ反映する。</summary>
+    public void SetCharacterAnimator(Animator value)
+    {
+        animator = value;
+    }
+
+
     private void ShowCursor()
     {
         Cursor.lockState = CursorLockMode.None;

@@ -64,6 +64,18 @@ public class BowlingArmController : NetworkBehaviour
     }
 
     // ★ Animator がポーズを決定した直後にボーンの角度を強制上書きする
+    /// <summary>差し替え後のモデルAnimatorと左腕ボーンを再設定する。</summary>
+    public void SetCharacterAnimator(Animator value, Transform newLeftArmBone)
+    {
+        animator = value;
+        leftArmBone = newLeftArmBone;
+        _originalArmRotation = leftArmBone != null ? leftArmBone.localRotation : Quaternion.identity;
+        _targetArmRotation = _originalArmRotation;
+        _prevChargingState = false;
+        _isChargingCurrent = false;
+    }
+
+
     private void LateUpdate()
     {
         if (leftArmBone != null && _isChargingCurrent)
