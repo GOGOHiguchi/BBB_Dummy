@@ -12,6 +12,11 @@ public sealed class CharacterSelectInteractable : MonoBehaviour
     private void Awake()
     {
         GetComponent<Collider>().isTrigger = true;
+        // プレイヤー側にRigidbodyがない構成でもTrigger通知を受け取れるようにする。
+        Rigidbody body = GetComponent<Rigidbody>();
+        if (body == null) body = gameObject.AddComponent<Rigidbody>();
+        body.isKinematic = true;
+        body.useGravity = false;
         if (selectionUI == null) selectionUI = FindFirstObjectByType<CharacterSelectUI>();
     }
 
