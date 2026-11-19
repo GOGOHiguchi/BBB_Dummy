@@ -264,7 +264,7 @@ public sealed class CharacterSelectUI : MonoBehaviour
 
     private void Cancel()
     {
-        if (target != null) target.CancelPreview();
+        // プレビューは専用ステージ内だけで行っているため、プレイヤー本体は変更しない。
         selectedId=originalId;
         Close();
     }
