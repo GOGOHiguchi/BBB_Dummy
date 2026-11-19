@@ -215,6 +215,16 @@ public sealed class CharacterSelectUI : MonoBehaviour
         }
         previewModel = Instantiate(entry.Prefab, stage);
         SetLayer(previewModel, PreviewLayer);
+
+        // 実プレイヤーと同じAnimator Controllerを使い、プレビューの姿勢を揃える。
+        if (target != null)
+        {
+            Animator sourceAnimator = target.GetComponentInChildren<Animator>(true);
+            Animator previewAnimator = previewModel.GetComponentInChildren<Animator>(true);
+            if (sourceAnimator != null && previewAnimator != null)
+                previewAnimator.runtimeAnimatorController = sourceAnimator.runtimeAnimatorController;
+        }
+
         Frame(previewCamera, previewModel, 2.15f);
         previewCamera.targetTexture = previewTexture;
         previewCamera.Render();
