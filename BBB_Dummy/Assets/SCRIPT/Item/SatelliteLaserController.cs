@@ -119,7 +119,9 @@ public class SatelliteLaserController : NetworkBehaviour
                     direction.normalized * explosionForce +
                     Vector3.up * upwardsModifier;
 
-                player.ApplyKnockback(force, stunDuration);
+                // 無敵・シールドで防がれた場合は命中扱いにしない
+                if (!player.ApplyKnockback(force, stunDuration))
+                    continue;
 
                 hitPlayers.Add(targetRef);
 
@@ -153,6 +155,10 @@ public class SatelliteLaserController : NetworkBehaviour
 
             // 自分のボールを除外
             if (ballObject.InputAuthority == Object.InputAuthority)
+                continue;
+
+            // ボールの物理状態は、そのボールのState Authorityだけが変更する
+            if (!ballObject.HasStateAuthority)
                 continue;
 
             // 攻撃済みボールを除外
