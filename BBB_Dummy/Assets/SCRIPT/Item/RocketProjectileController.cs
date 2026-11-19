@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Fusion;
 
 public class RocketProjectileController : NetworkBehaviour
@@ -16,13 +16,20 @@ public class RocketProjectileController : NetworkBehaviour
 
     private bool targetHit;
     private TickTimer lifeTimer;
+    private TickTimer despawnTimer;
+    private Collider[] projectileColliders;
 
     // PrefabにNetworkTransformがないため、弾のTransformをNetworked値で同期する。
     [Networked] private Vector3 SyncedPosition { get; set; }
     [Networked] private Quaternion SyncedRotation { get; set; }
 
+    // RPCを受信する時間を確保してから、State Authorityが弾をDespawnする。
+    private const float ImpactDespawnDelay = 0.35f;
+
     public override void Spawned()
     {
+        projectileColliders = GetComponentsInChildren<Collider>(true);
+
         if (HasStateAuthority)
         {
             SyncedPosition = transform.position;
@@ -46,10 +53,20 @@ public class RocketProjectileController : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        // 弾の位置・寿命は State Authority のみが管理する。
-        // クライアント側は NetworkTransform の補間結果を表示する。
-        if (!HasStateAuthority || targetHit)
+        // 弾の位置・寿命・着弾後の破棄は State Authority のみが管理する。
+        if (!HasStateAuthority)
             return;
+
+        // 着弾後は移動・追加衝突を行わず、RPCの到達時間を確保してから破棄する。
+        if (targetHit)
+        {
+            if (despawnTimer.Expired(Runner))
+            {
+                Runner.Despawn(Object);
+            }
+
+            return;
+        }
 
         transform.position += transform.forward * (speed * Runner.DeltaTime);
         SyncedPosition = transform.position;
@@ -86,12 +103,13 @@ public class RocketProjectileController : NetworkBehaviour
             return;
         }
 
+        // 同じ弾で複数回着弾処理が走らないよう、先に着弾済みにする。
         targetHit = true;
+        despawnTimer = TickTimer.CreateFromSeconds(Runner, ImpactDespawnDelay);
 
-        // 爆発演出は全クライアントで一度だけ再生する。
+        // 爆発演出を全クライアントへ通知する。
+        // Despawnはここでは行わず、FixedUpdateNetworkで遅延実行する。
         Rpc_PlayImpactEffect(transform.position);
-
-        Runner.Despawn(Object);
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
@@ -106,9 +124,23 @@ public class RocketProjectileController : NetworkBehaviour
         if (disableOnHit != null)
             disableOnHit.Stop();
 
+        // 爆発中に弾のColliderが他の物体へ反応しないようにする。
+        if (projectileColliders != null)
+        {
+            foreach (Collider projectileCollider in projectileColliders)
+            {
+                if (projectileCollider != null)
+                    projectileCollider.enabled = false;
+            }
+        }
+
         if (rocketExplosionPrefab != null)
         {
             Instantiate(rocketExplosionPrefab, impactPosition, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogWarning("[RocketProjectileController] rocketExplosionPrefab が未設定です。");
         }
     }
 }
