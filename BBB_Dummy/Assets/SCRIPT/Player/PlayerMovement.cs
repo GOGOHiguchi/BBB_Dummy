@@ -261,7 +261,7 @@ public class PlayerMovement : NetworkBehaviour
     }
 
     /// <summary>
-    /// ボールがピンに命中したプレイヤーを、そのホールの終了まで操作不能にする。
+    /// ボールがピンに命中したプレイヤーを、試合終了まで操作不能にする。
     /// ノックバックの確定とエモート開始はState Authorityだけで行う。
     /// </summary>
     public void BeginPinFinish(Vector3 knockbackVelocity, float knockbackDuration)
@@ -334,7 +334,7 @@ public class PlayerMovement : NetworkBehaviour
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     private void RpcRequestSatelliteLaser(Vector3 targetPosition)
     {
-        if (!IsReadyingSatelliteLaser) return;
+        if (IsPinFinished || !IsReadyingSatelliteLaser) return;
         if (AimingSlotIndex < 0 || AimingSlotIndex >= 3) return;
         if (ItemRests[AimingSlotIndex] <= 0) return;
 
