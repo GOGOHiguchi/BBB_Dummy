@@ -14,9 +14,13 @@ public class BowlingBallImpact : NetworkBehaviour
 
     [Header("物理演算の最適化")]
     [Tooltip("ピンの物理演算をオンにする半径")]
-    [SerializeField] private float wakeUpRadius = 8f;
-    [Tooltip("ピンのレイヤー（無駄な判定を防ぐためピン専用レイヤーを指定）")]
+    [SerializeField] private float wakeUpRadius = 2.5f;
+    [Tooltip("ピンのレイヤー（Pinレイヤーを指定）")]
     [SerializeField] private LayerMask pinLayer;
+
+    private const int PinOverlapCapacity = 256;
+    private readonly Collider[] pinOverlapBuffer = new Collider[PinOverlapCapacity];
+    private bool pinBufferWarningLogged;
 
     [Networked] public Vector3 ThrowPosition { get; set; }
 
@@ -32,30 +36,58 @@ public class BowlingBallImpact : NetworkBehaviour
         ThrowPosition = pos;
     }
 
-    // 毎フレーム、ボールの周囲のピンを検知して物理演算をオンにする
+    // ボールの少し先にあるピンを事前に起こし、Kinematicなピンが壁のように
+    // ボールを押し返してしまう状況を防ぐ。
     public override void FixedUpdateNetwork()
     {
-        if (HasStateAuthority)
+        if (!HasStateAuthority) return;
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        Vector3 checkPosition = transform.position;
+
+        if (rb != null)
         {
-            Rigidbody rb = GetComponent<Rigidbody>();
-            Vector3 checkPosition = transform.position;
+            // 高速移動時も衝突より前にピンを起こせるよう、数Tick先を確認する。
+            checkPosition += rb.linearVelocity * Runner.DeltaTime * 4f;
+        }
 
-            // ★追加: ボールが高速で動いている場合、少し先の位置を判定基準にする
-            if (rb != null)
+        int effectivePinMask = pinLayer.value != 0
+            ? pinLayer.value
+            : LayerMask.GetMask("Pin");
+
+        if (effectivePinMask == 0)
+        {
+            if (!pinBufferWarningLogged)
             {
-                // 現在の速度 × 数フレーム先の位置を予測して範囲を広げる
-                checkPosition += rb.linearVelocity * Runner.DeltaTime * 3f;
+                Debug.LogWarning("[BowlingBallImpact] Pinレイヤーが見つかりません。BowlingBall.prefabのPin Layer Maskを確認してください。", this);
+                pinBufferWarningLogged = true;
+            }
+            return;
+        }
+
+        int hitCount = Physics.OverlapSphereNonAlloc(
+            checkPosition,
+            wakeUpRadius,
+            pinOverlapBuffer,
+            effectivePinMask,
+            QueryTriggerInteraction.Ignore
+        );
+
+        for (int i = 0; i < hitCount; i++)
+        {
+            BowlingPin pin = pinOverlapBuffer[i].GetComponent<BowlingPin>();
+            if (pin != null)
+            {
+                pin.WakeUp();
             }
 
-            Collider[] colliders = Physics.OverlapSphere(checkPosition, wakeUpRadius, pinLayer);
-            foreach (var col in colliders)
-            {
-                BowlingPin pin = col.GetComponent<BowlingPin>();
-                if (pin != null)
-                {
-                        pin.WakeUp();
-                }
-            }
+            pinOverlapBuffer[i] = null;
+        }
+
+        if (hitCount == PinOverlapCapacity && !pinBufferWarningLogged)
+        {
+            Debug.LogWarning("[BowlingBallImpact] 起床範囲内のColliderがバッファ上限に達しました。必要に応じてPinOverlapCapacityを増やしてください。", this);
+            pinBufferWarningLogged = true;
         }
     }
 
@@ -97,7 +129,6 @@ public class BowlingBallImpact : NetworkBehaviour
     {
         if (Runner.LocalPlayer == targetPlayer)
         {
-            // ★修正: ボールから探すのではなく、ローカルプレイヤーのPlayerMovementを直接無効化する
             if (PlayerMovement.Local != null)
             {
                 PlayerMovement.Local.enabled = false;
@@ -106,13 +137,12 @@ public class BowlingBallImpact : NetworkBehaviour
         }
     }
 
-    // ★追加・修正: 観戦モードへの切り替え処理
     private void SwitchToSpectatorCamera()
     {
         isSpectating = true;
         spectatorCam = FindAnyObjectByType<CinemachineCamera>();
-        
-        CycleSpectatorTarget(1); // 最初の観戦ターゲットへ切り替え
+
+        CycleSpectatorTarget(1);
         Debug.Log("観戦モードに移行しました。スペースキーで視点変更できます。");
     }
 
@@ -120,7 +150,6 @@ public class BowlingBallImpact : NetworkBehaviour
     {
         if (!isSpectating) return;
 
-        // スペースキーが押されたら次のプレイヤーへ視点を切り替える
         if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             CycleSpectatorTarget(1);
@@ -131,30 +160,26 @@ public class BowlingBallImpact : NetworkBehaviour
     {
         if (spectatorCam == null) return;
 
-        // シーン内の全プレイヤーを取得し、リストを更新
         spectatorTargets.Clear();
         var allPlayers = FindObjectsByType<PlayerMovement>();
-        
+
         foreach (var p in allPlayers)
         {
-            // 自分自身は観戦対象から外す（自分も見たい場合は if文を消してください）
             if (p != PlayerMovement.Local)
             {
                 spectatorTargets.Add(p);
             }
         }
 
-        if (spectatorTargets.Count == 0) return; // 誰もいない場合は何もしない
+        if (spectatorTargets.Count == 0) return;
 
         currentSpectateIndex += direction;
 
-        // インデックスが範囲外に出たらループさせる
         if (currentSpectateIndex >= spectatorTargets.Count) currentSpectateIndex = 0;
         if (currentSpectateIndex < 0) currentSpectateIndex = spectatorTargets.Count - 1;
 
         var target = spectatorTargets[currentSpectateIndex];
 
-        // カメラの追従先を変更
         spectatorCam.Target.TrackingTarget = target.transform;
         spectatorCam.Target.LookAtTarget = target.transform;
     }
