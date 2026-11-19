@@ -11,6 +11,9 @@ public class SatelliteLaserController : NetworkBehaviour
     [SerializeField] private float upwardsModifier = 10f;
     [SerializeField] private float stunDuration = 4f;
 
+    [Header("判定負荷設定")]
+    [SerializeField, Min(16)] private int overlapBufferSize = 128;
+
     [Header("エフェクト")]
     [SerializeField] private GameObject laserWarningEffectPrefab;
     [SerializeField] private GameObject laserAttackEffectPrefab;
@@ -28,6 +31,16 @@ public class SatelliteLaserController : NetworkBehaviour
     private HashSet<NetworkId> hitBalls = new HashSet<NetworkId>();
 
     private bool isAttackFinished;
+
+    // OverlapSphereNonAlloc用。ネットワークTickごとの配列生成を防ぐ。
+    private Collider[] overlapResults;
+    private readonly HashSet<PlayerRef> checkedPlayersThisTick = new HashSet<PlayerRef>();
+    private bool hasWarnedOverlapBufferFull;
+
+    private void Awake()
+    {
+        overlapResults = new Collider[Mathf.Max(16, overlapBufferSize)];
+    }
 
     public override void Spawned()
     {
@@ -77,12 +90,36 @@ public class SatelliteLaserController : NetworkBehaviour
 
     private void CheckAttackTargets()
     {
-        Collider[] hits = Physics.OverlapSphere(
+        if (overlapResults == null || overlapResults.Length != Mathf.Max(16, overlapBufferSize))
+        {
+            overlapResults = new Collider[Mathf.Max(16, overlapBufferSize)];
+        }
+
+        int hitCount = Physics.OverlapSphereNonAlloc(
             transform.position,
-            explosionRadius
+            explosionRadius,
+            overlapResults
         );
 
-        foreach (Collider hit in hits)
+        // バッファ上限に達した場合は対象を取りこぼす可能性があるため、一度だけ警告する。
+        if (hitCount == overlapResults.Length && !hasWarnedOverlapBufferFull)
+        {
+            hasWarnedOverlapBufferFull = true;
+            Debug.LogWarning(
+                $"SatelliteLaserController: Overlap buffer is full ({overlapResults.Length}). " +
+                "Increase Overlap Buffer Size if targets may be missed.",
+                this
+            );
+        }
+
+        checkedPlayersThisTick.Clear();
+
+        for (int i = 0; i < hitCount; i++)
+        {
+            Collider hit = overlapResults[i];
+
+            if (hit == null)
+                continue;
         {
             // =========================
             // プレイヤーへの攻撃
@@ -103,8 +140,9 @@ public class SatelliteLaserController : NetworkBehaviour
                 if (targetRef == Object.InputAuthority)
                     continue;
 
-                // 攻撃済みなら除外
-                if (hitPlayers.Contains(targetRef))
+                // 攻撃済み、または同じネットワークTick内で確認済みなら除外。
+                // シールド中の相手への再判定は次のTick以降に行う。
+                if (hitPlayers.Contains(targetRef) || !checkedPlayersThisTick.Add(targetRef))
                     continue;
 
                 Vector3 direction =
