@@ -221,7 +221,7 @@ public sealed class CharacterSelectUI : MonoBehaviour
         grid.spacing = new Vector2(12f, 12f);
         grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         grid.constraintCount = 5;
-        grid.cellSize = new Vector2(150f, 165f);
+        grid.cellSize = new Vector2(205f, 210f);
         grid.startCorner = GridLayoutGroup.Corner.UpperLeft;
         grid.startAxis = GridLayoutGroup.Axis.Horizontal;
         grid.childAlignment = TextAnchor.UpperCenter;
