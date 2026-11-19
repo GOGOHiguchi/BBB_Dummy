@@ -19,7 +19,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private int maxHoles = 3;
     
     // ★ UIアニメーションの「3, 2, 1, GO! (消滅)」の全演出時間(4.2秒)に合わせて設定
-    [SerializeField] private float countdownTime = 4.2f; 
+    [SerializeField] private float countdownTime = 4.5f; 
     
     [SerializeField] private float holeTimeLimit = 120f; // 1ホールの制限時間
     [SerializeField] private float resultTime = 10f; // リザルト画面の表示時間
