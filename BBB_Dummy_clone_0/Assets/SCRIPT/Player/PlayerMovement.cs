@@ -83,6 +83,10 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private Transform holdPoint;
     [SerializeField] private float maxThrowForce = 90f;
     [SerializeField] private float chargeRate = 40.5f;
+    [Tooltip("短いチャージでもボウリングらしい初速を確保する")]
+    [SerializeField] private float minThrowSpeed = 8.5f;
+    [Tooltip("最大チャージ時の投球速度（Unity単位/秒）")]
+    [SerializeField] private float maxThrowSpeed = 15f;
     [SerializeField] private float pickupDistance = 2.5f;
 
     [Header("ロケットランチャー設定")]
@@ -752,7 +756,18 @@ public class PlayerMovement : NetworkBehaviour
                                 throwDir += transform.right * (deviationSign * overpowerRatio * 0.5f);
                             }
 
-                            ballRb.AddForce(throwDir.normalized * CurrentCharge, ForceMode.Impulse);
+                            // チャージ量を投球速度へ変換する。ボールの質量差に左右されないよう
+                            // 速度×質量をImpulseとして与え、Speed/Power/Curveの重量感は維持する。
+                            float chargeRatio = Mathf.Clamp(CurrentCharge / maxThrowForce, 0f, 1.15f);
+                            float launchSpeed = Mathf.LerpUnclamped(minThrowSpeed, maxThrowSpeed, chargeRatio);
+                            BowlingBall ballSettings = MyBall.GetComponent<BowlingBall>();
+                            if (ballSettings != null)
+                            {
+                                if (ballSettings.Type == BallType.Speed) launchSpeed *= 1.08f;
+                                else if (ballSettings.Type == BallType.Curve) launchSpeed *= 1.02f;
+                            }
+                            ballRb.linearVelocity = Vector3.zero;
+                            ballRb.AddForce(throwDir.normalized * (launchSpeed * ballRb.mass), ForceMode.Impulse);
 
                             Vector3 spin = transform.right * 15f;
                             float curveSpin = 30f;
