@@ -291,7 +291,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         var data = new NetworkInputData();
         Vector2 moveInput = Vector2.zero;
         // キャラクター選択中はゲーム操作をネットワーク入力へ送らない。
-        bool blockGameplayInput = CharacterSelectUI.IsAnyOpen || CharacterSelectInteractable.IsLocalPlayerInRange;
+        bool blockGameplayInput = CharacterSelectUI.IsAnyOpen;
 
         if (!blockGameplayInput && Keyboard.current != null)
         {
@@ -307,7 +307,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             data.isJumpPressed = Keyboard.current.spaceKey.isPressed;
 
             data.cancelThrow = Keyboard.current.fKey.isPressed;
-            data.interact = Keyboard.current.eKey.isPressed;
+            data.interact = !CharacterSelectInteractable.IsLocalPlayerInRange && Keyboard.current.eKey.isPressed;
             if (data.interact)
             {
                 Debug.Log("[Input] Eキーが押されています");
