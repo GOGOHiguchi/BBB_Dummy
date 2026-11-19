@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 using Fusion;
 using Fusion.Sockets;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -19,6 +18,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     private NetworkRunner _currentRunner;
     private int _spawnCount = 0;
+    [SerializeField] private float _minimumSpawnDistance = 2.5f;
 
     public static Vector3 LocalAimDirection { get; private set; }
     = Vector3.forward;
@@ -28,45 +28,10 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         CheckAndRegisterRunner();
     }
 
-    private IEnumerator Start()
-    {
-        NetworkRunner runner = null;
-
-        while (runner == null || !runner.IsRunning)
-        {
-            foreach (var instance in NetworkRunner.Instances)
-            {
-                if (instance != null && instance.IsRunning)
-                {
-                    runner = instance;
-                    break;
-                }
-            }
-            yield return null;
-        }
-
-        Debug.Log(
-            $"BasicSpawner: Runner準備完了 " +
-            $"Object={runner.gameObject.name}, " +
-            $"IsRunning={runner.IsRunning}, " +
-            $"IsServer={runner.IsServer}"
-        );
-
-        runner.AddCallbacks(this);
-
-        if (runner.IsServer)
-        {
-            foreach (var player in runner.ActivePlayers)
-            {
-                Debug.Log($"BasicSpawner: 既存PlayerをSpawn = {player}");
-                SpawnPlayer(runner, player);
-            }
-        }
-    }
-
     private void CheckAndRegisterRunner()
     {
         NetworkRunner activeRunner = null;
+
         foreach (var instance in NetworkRunner.Instances)
         {
             if (instance != null && instance.IsRunning)
@@ -76,27 +41,34 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             }
         }
 
-        if (activeRunner != _currentRunner)
+        if (activeRunner == _currentRunner)
+            return;
+
+        if (_currentRunner != null)
         {
-            if (_currentRunner != null)
-            {
-                _currentRunner.RemoveCallbacks(this);
-            }
+            _currentRunner.RemoveCallbacks(this);
+        }
 
-            _currentRunner = activeRunner;
+        _currentRunner = activeRunner;
 
-            if (_currentRunner != null)
+        if (_currentRunner == null)
+            return;
+
+        // Runnerへの登録箇所をここに一本化し、二重登録を防ぐ。
+        _currentRunner.AddCallbacks(this);
+
+        Debug.Log(
+            $"BasicSpawner: Runner ({_currentRunner.gameObject.name}) にコールバックを登録しました。 " +
+            $"(IsServer={_currentRunner.IsServer})"
+        );
+
+        // BasicSpawnerの有効化がOnPlayerJoinedより後になった場合も、
+        // 既に参加しているプレイヤーを取りこぼさない。
+        if (_currentRunner.IsServer)
+        {
+            foreach (var player in _currentRunner.ActivePlayers)
             {
-                _currentRunner.AddCallbacks(this);
-                Debug.Log($"BasicSpawner: Runner ({_currentRunner.gameObject.name}) にコールバックを登録しました。 (IsServer={_currentRunner.IsServer})");
-                // ホスト側で未処理のプレイヤーがいればSpawn
-                // if (_currentRunner.IsServer)
-                // {
-                //     foreach (var player in _currentRunner.ActivePlayers)
-                //     {
-                //         SpawnPlayer(_currentRunner, player);
-                //     }
-                // }
+                SpawnPlayer(_currentRunner, player);
             }
         }
     }
@@ -147,6 +119,9 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     private void SpawnPlayer(NetworkRunner runner, PlayerRef player)
     {
+        if (!runner.IsServer)
+            return;
+
         if (runner.GetPlayerObject(player) != null)
         {
             Debug.Log($"Player {player} は既にSpawn済み");
@@ -155,52 +130,143 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
         Debug.Log($"Player {player} をSpawnします");
 
-        // --- スポーン位置の決定処理 ---
-        Vector3 spawnPosition = Vector3.zero;
-        Quaternion spawnRotation = Quaternion.identity;
+        Vector3 spawnPosition;
+        Quaternion spawnRotation;
 
         if (_spawnPoints != null && _spawnPoints.Count > 0)
         {
-            // リストの上から順番に割り当てる
-            int pointIndex = _spawnCount % _spawnPoints.Count;
-            Transform selectedPoint = _spawnPoints[pointIndex];
-
-            if (selectedPoint != null)
+            if (!TrySelectSpawnPoint(
+                    runner,
+                    player,
+                    out Transform selectedPoint,
+                    out int pointIndex,
+                    out float nearestPlayerDistance))
             {
-                spawnPosition = selectedPoint.position;
-                spawnRotation = selectedPoint.rotation;
+                Debug.LogError("BasicSpawner: 有効なスポーンポイントがありません。各要素のTransform設定を確認してください。");
+                return;
+            }
 
-                Debug.Log(
-                    $"Player {player} は スポーンポイント[{pointIndex}] " +
-                    $"({selectedPoint.name}) に配置されます。"
+            spawnPosition = selectedPoint.position;
+            spawnRotation = selectedPoint.rotation;
+
+            if (nearestPlayerDistance < _minimumSpawnDistance)
+            {
+                Debug.LogWarning(
+                    $"BasicSpawner: 全スポーンポイントが使用中です。最も距離を確保できる " +
+                    $"[{pointIndex}] ({selectedPoint.name}) を使用します。 " +
+                    $"最寄りプレイヤーとの距離={nearestPlayerDistance:F2}"
                 );
-
-                // スポーン位置の割り当て番号を進める
-                _spawnCount++;
             }
             else
             {
-                Debug.LogError($"スポーンポイント[{pointIndex}]が未設定です。");
-                return;
+                Debug.Log(
+                    $"Player {player} はスポーンポイント[{pointIndex}] " +
+                    $"({selectedPoint.name}) に配置されます。"
+                );
             }
         }
         else
         {
             Debug.LogWarning("BasicSpawner: スポーンポイントが設定されていません。");
             spawnPosition = new Vector3(0, 5, 0);
+            spawnRotation = Quaternion.identity;
         }
 
-        NetworkObject networkPlayerObject =
-            runner.Spawn(
-                _playerPrefab,
-                spawnPosition,
-                spawnRotation,
-                player
-            );
+        NetworkObject networkPlayerObject = runner.Spawn(
+            _playerPrefab,
+            spawnPosition,
+            spawnRotation,
+            player
+        );
+
+        if (networkPlayerObject == null)
+        {
+            Debug.LogError($"BasicSpawner: Player {player} のSpawnに失敗しました。");
+            return;
+        }
 
         runner.SetPlayerObject(player, networkPlayerObject);
+        _spawnCount++;
 
         Debug.Log($"Player {player} のSpawn完了");
+    }
+
+    /// <summary>
+    /// リスト上位から順に空いているスポーンポイントを選ぶ。
+    /// 既存プレイヤーの現在位置も確認し、同じ地点への重複スポーンを避ける。
+    /// </summary>
+    private bool TrySelectSpawnPoint(
+        NetworkRunner runner,
+        PlayerRef joiningPlayer,
+        out Transform selectedPoint,
+        out int selectedIndex,
+        out float nearestPlayerDistance)
+    {
+        selectedPoint = null;
+        selectedIndex = -1;
+        nearestPlayerDistance = -1f;
+
+        if (_spawnPoints == null || _spawnPoints.Count == 0)
+            return false;
+
+        int startIndex = _spawnCount % _spawnPoints.Count;
+        float bestDistance = float.NegativeInfinity;
+        Transform bestPoint = null;
+        int bestIndex = -1;
+
+        for (int offset = 0; offset < _spawnPoints.Count; offset++)
+        {
+            int index = (startIndex + offset) % _spawnPoints.Count;
+            Transform candidate = _spawnPoints[index];
+
+            if (candidate == null)
+                continue;
+
+            float nearestDistance = float.PositiveInfinity;
+
+            foreach (PlayerRef existingPlayer in runner.ActivePlayers)
+            {
+                if (existingPlayer == joiningPlayer)
+                    continue;
+
+                NetworkObject existingObject = runner.GetPlayerObject(existingPlayer);
+                if (existingObject == null)
+                    continue;
+
+                float distance = Vector3.Distance(
+                    candidate.position,
+                    existingObject.transform.position
+                );
+
+                if (distance < nearestDistance)
+                    nearestDistance = distance;
+            }
+
+            // 十分に離れた地点が見つかったら、リスト順を優先して採用する。
+            if (nearestDistance >= _minimumSpawnDistance)
+            {
+                selectedPoint = candidate;
+                selectedIndex = index;
+                nearestPlayerDistance = nearestDistance;
+                return true;
+            }
+
+            // 全地点が近い場合は、最も距離を確保できる地点を記録する。
+            if (nearestDistance > bestDistance)
+            {
+                bestDistance = nearestDistance;
+                bestPoint = candidate;
+                bestIndex = index;
+            }
+        }
+
+        if (bestPoint == null)
+            return false;
+
+        selectedPoint = bestPoint;
+        selectedIndex = bestIndex;
+        nearestPlayerDistance = bestDistance;
+        return true;
     }
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player) 
