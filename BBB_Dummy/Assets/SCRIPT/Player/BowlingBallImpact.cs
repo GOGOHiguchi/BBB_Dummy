@@ -109,15 +109,48 @@ public class BowlingBallImpact : NetworkBehaviour
             hasCollidedWithPin = true;
             hitPosition = transform.position;
 
-            // 最初のピン衝突時点でプレイヤーを吹き飛ばし、操作と再投球をロックする。
-            BeginOwnerPinFinish(collision);
+            // 接触しただけでは撃破扱いにせず、ピンの倒れ判定が成立するまで待つ。
+            Vector3 contactPoint = collision.contactCount > 0
+                ? collision.GetContact(0).point
+                : transform.position;
+            StartCoroutine(WaitForKnockdownThenFinishRoutine(contactPoint));
 
-            // ピンの転倒とスコア集計が終わるまで、プレイヤー視点を維持する。
+            // スコア集計・観戦移行のタイミングは従来どおり維持する。
             StartCoroutine(CalculateScoreAndRegisterRoutine());
         }
     }
 
-    private void BeginOwnerPinFinish(Collision collision)
+    private IEnumerator WaitForKnockdownThenFinishRoutine(Vector3 contactPoint)
+    {
+        // ピンが倒れるまで監視する。スコア集計待ち時間を上限にして、
+        // ピンが倒れなかった場合は撃破演出を開始しない。
+        float elapsed = 0f;
+        float timeout = Mathf.Max(0f, scoreCalculationDelay);
+
+        while (elapsed < timeout)
+        {
+            if (PinManager.Instance != null && PinManager.Instance.HasAnyKnockedDown())
+            {
+                BeginOwnerPinFinish(contactPoint);
+                yield break;
+            }
+
+            yield return new WaitForSeconds(0.05f);
+            elapsed += 0.05f;
+        }
+
+        // 最後の待機区間で倒れたケースも拾う。
+        if (PinManager.Instance != null && PinManager.Instance.HasAnyKnockedDown())
+        {
+            BeginOwnerPinFinish(contactPoint);
+        }
+        else
+        {
+            Debug.LogWarning("[BowlingBallImpact] ピンの倒れ判定が成立しなかったため、撃破演出を開始しませんでした。", this);
+        }
+    }
+
+    private void BeginOwnerPinFinish(Vector3 contactPoint)
     {
         if (Object.InputAuthority == PlayerRef.None)
         {
@@ -138,10 +171,6 @@ public class BowlingBallImpact : NetworkBehaviour
             Debug.LogWarning("[BowlingBallImpact] PlayerMovementが見つかりません。", playerObject);
             return;
         }
-
-        Vector3 contactPoint = collision.contactCount > 0
-            ? collision.GetContact(0).point
-            : transform.position;
 
         // ピンの衝突地点からプレイヤーがいる方向へ押し戻し、ピンの近くに残らないようにする。
         Vector3 awayDirection = player.transform.position - contactPoint;
