@@ -82,6 +82,8 @@ public sealed class CharacterSelectUI : MonoBehaviour
         UpdatePreview(_selectedId);
         SetVisible(showOnStart);
 
+        if (_previewModel != null)
+            _previewModel.SetActive(false);
         StartCoroutine(GenerateAllThumbnails());
     }
 
@@ -292,6 +294,8 @@ public sealed class CharacterSelectUI : MonoBehaviour
         portrait.preserveAspect = true;
         if (entry.Thumbnail != null)
             portrait.sprite = entry.Thumbnail;
+        else if (_thumbnailById.TryGetValue(entry.Id, out Sprite cachedSprite))
+            portrait.sprite = cachedSprite;
 
         Text placeholder = CreateText(tileObject.transform, entry.DisplayName, 14, FontStyle.Bold,
             Color.white, new Vector2(0.04f, 0.015f), new Vector2(0.96f, 0.22f), TextAnchor.MiddleCenter);
@@ -439,8 +443,6 @@ public sealed class CharacterSelectUI : MonoBehaviour
 
         UpdatePreview(_selectedId);
     }
-
-
 
     private string GetEntryName(int id)
     {
