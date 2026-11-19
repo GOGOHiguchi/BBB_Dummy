@@ -145,7 +145,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &4642252111663225320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,10 +234,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingBallImpact
   scoreCalculationDelay: 2.5
-  wakeUpRadius: 5
+  wakeUpRadius: 2.5
   pinLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   _ThrowPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &8831546197364213997
 MonoBehaviour:
