@@ -20,6 +20,8 @@ public class SatelliteLaserController : NetworkBehaviour
     [SerializeField] private GameObject explosionEffectPrefab;
 
     [Networked] private TickTimer AttackTimer { get; set; }
+    [Networked] private Vector3 SyncedPosition { get; set; }
+    [Networked] private Quaternion SyncedRotation { get; set; }
 
     private GameObject spawnedWarningEffect;
     private GameObject spawnedAttackEffect;
@@ -46,12 +48,33 @@ public class SatelliteLaserController : NetworkBehaviour
     {
         if (HasStateAuthority)
         {
-            AttackTimer =
-                TickTimer.CreateFromSeconds(Runner, attackDuration);
+            SyncedPosition = transform.position;
+            SyncedRotation = transform.rotation;
+            AttackTimer = TickTimer.CreateFromSeconds(Runner, attackDuration);
+        }
+        else
+        {
+            // このPrefabにはNetworkTransformがないため、Networked値から初期位置を復元する。
+            transform.SetPositionAndRotation(SyncedPosition, SyncedRotation);
         }
 
-        // 警告範囲を生成
-        if (laserWarningEffectPrefab != null)
+        Debug.Log("サテライトレーザー照射開始！");
+    }
+
+    public override void Render()
+    {
+        // NetworkTransformを追加できないPrefabでも、照射位置を全クライアントで一致させる。
+        if (!HasStateAuthority)
+        {
+            transform.SetPositionAndRotation(SyncedPosition, SyncedRotation);
+        }
+
+        EnsureEffectsSpawned();
+    }
+
+    private void EnsureEffectsSpawned()
+    {
+        if (spawnedWarningEffect == null && laserWarningEffectPrefab != null)
         {
             spawnedWarningEffect = Instantiate(
                 laserWarningEffectPrefab,
@@ -60,8 +83,7 @@ public class SatelliteLaserController : NetworkBehaviour
             );
         }
 
-        // 攻撃用レーザーを同時に生成
-        if (laserAttackEffectPrefab != null)
+        if (spawnedAttackEffect == null && laserAttackEffectPrefab != null)
         {
             spawnedAttackEffect = Instantiate(
                 laserAttackEffectPrefab,
@@ -69,8 +91,6 @@ public class SatelliteLaserController : NetworkBehaviour
                 Quaternion.identity
             );
         }
-
-        Debug.Log("サテライトレーザー照射開始！");
     }
 
     public override void FixedUpdateNetwork()
