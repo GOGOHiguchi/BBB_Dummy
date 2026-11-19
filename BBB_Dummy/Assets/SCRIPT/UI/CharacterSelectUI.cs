@@ -53,6 +53,7 @@ public sealed class CharacterSelectUI : MonoBehaviour
     private bool _closed;
 
     private Font _font;
+    private RuntimeAnimatorController _sharedAnimatorController;
 
     private void Start()
     {
@@ -66,6 +67,15 @@ public sealed class CharacterSelectUI : MonoBehaviour
         }
 
         _localSwitcher = FindLocalSwitcher();
+        PlayerMovement localMovement = _localSwitcher != null
+            ? _localSwitcher.GetComponent<PlayerMovement>()
+            : FindFirstObjectByType<PlayerMovement>();
+        Animator sourceAnimator = localMovement != null
+            ? localMovement.GetComponentInChildren<Animator>(true)
+            : null;
+        if (sourceAnimator != null)
+            _sharedAnimatorController = sourceAnimator.runtimeAnimatorController;
+
         _originalId = _localSwitcher != null
             ? _localSwitcher.SavedModelId
             : PlayerPrefs.GetInt(CharacterModelSwitcher.PreferenceKey, 0);
@@ -356,18 +366,8 @@ public sealed class CharacterSelectUI : MonoBehaviour
         Animator previewAnimator = _previewModel.GetComponentInChildren<Animator>(true);
         if (previewAnimator != null)
         {
-            if (_localSwitcher == null)
-                _localSwitcher = FindLocalSwitcher();
-
-            if (_localSwitcher != null)
-            {
-                PlayerMovement localMovement = _localSwitcher.GetComponent<PlayerMovement>();
-                Animator sourceAnimator = localMovement != null
-                    ? localMovement.GetComponentInChildren<Animator>(true)
-                    : null;
-                if (sourceAnimator != null)
-                    previewAnimator.runtimeAnimatorController = sourceAnimator.runtimeAnimatorController;
-            }
+            if (_sharedAnimatorController != null)
+                previewAnimator.runtimeAnimatorController = _sharedAnimatorController;
             previewAnimator.applyRootMotion = false;
         }
 
@@ -413,8 +413,16 @@ public sealed class CharacterSelectUI : MonoBehaviour
             capture.transform.localPosition = Vector3.zero;
             capture.transform.localRotation = Quaternion.identity;
             SetLayerRecursively(capture, PreviewLayer);
+            Animator captureAnimator = capture.GetComponentInChildren<Animator>(true);
+            if (captureAnimator != null)
+            {
+                if (_sharedAnimatorController != null)
+                    captureAnimator.runtimeAnimatorController = _sharedAnimatorController;
+                captureAnimator.applyRootMotion = false;
+            }
             FitPreviewCamera(capture);
 
+            yield return null;
             yield return new WaitForEndOfFrame();
             _previewCamera.Render();
 
