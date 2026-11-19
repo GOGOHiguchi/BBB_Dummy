@@ -88,6 +88,9 @@ public static class CharacterSelectUISetup
         var trigger = point.AddComponent<SphereCollider>();
         trigger.isTrigger = true;
         trigger.radius = 3f;
+        var body = point.AddComponent<Rigidbody>();
+        body.isKinematic = true;
+        body.useGravity = false;
         Undo.AddComponent<CharacterSelectInteractable>(point);
         Debug.LogWarning("[CharacterSelectUISetup] CharacterSelectPointを原点に作成しました。Sceneビューでロビーのキャラクター選択場所へ移動してください。");
     }
