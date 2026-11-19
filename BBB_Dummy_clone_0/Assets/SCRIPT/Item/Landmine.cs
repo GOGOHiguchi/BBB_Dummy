@@ -11,8 +11,14 @@ public class Landmine : NetworkBehaviour
     [Header("エフェクト (任意)")]
     [SerializeField] private GameObject explosionEffectPrefab;
 
+    // 複数Colliderが同じフレームに接触しても、爆発処理を一度だけ行う
+    private bool hasTriggered;
+
     private void OnTriggerEnter(Collider other)
     {
+        if (hasTriggered)
+            return;
+
         Debug.Log(
         $"[Landmine] Trigger検知: {other.name}, " +
         $"Tag={other.tag}, " +
@@ -45,6 +51,8 @@ public class Landmine : NetworkBehaviour
 
             if (targetPlayer.Object.InputAuthority != Object.InputAuthority)
             {
+                hasTriggered = true;
+
                 Vector3 knockbackDir =
                     targetPlayer.transform.position - transform.position;
 
@@ -57,9 +65,10 @@ public class Landmine : NetworkBehaviour
                     knockbackDir.normalized * explosionForce
                     + Vector3.up * upwardsModifier;
 
-                targetPlayer.ApplyKnockback(force, stunDuration);
+                bool knockedBack = targetPlayer.ApplyKnockback(force, stunDuration);
 
-                if (GameManager.Instance != null)
+                // シールド等で防がれた場合は妨害成功として記録しない
+                if (knockedBack && GameManager.Instance != null)
                 {
                     GameManager.Instance.RecordInterference(Object.InputAuthority);
                 }
@@ -75,12 +84,19 @@ public class Landmine : NetworkBehaviour
         {
             var networkObject = other.GetComponentInParent<NetworkObject>();
             
-            if (networkObject != null && networkObject.InputAuthority != Object.InputAuthority)
+            if (networkObject != null &&
+                networkObject.InputAuthority != Object.InputAuthority &&
+                networkObject.HasStateAuthority)
             {
+                hasTriggered = true;
+
                 var rb = other.GetComponentInParent<Rigidbody>();
                 if (rb != null && !rb.isKinematic)
                 {
                     Vector3 forceDir = (other.transform.position - transform.position).normalized;
+                    if (forceDir.sqrMagnitude < 0.001f)
+                        forceDir = Vector3.forward;
+
                     rb.AddForce((forceDir * explosionForce * 1.5f) + (Vector3.up * upwardsModifier), ForceMode.Impulse);
                 }
                 if (GameManager.Instance != null)

@@ -203,18 +203,18 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    public void ApplyKnockback(Vector3 forceDirection, float stunTime)
+    public bool ApplyKnockback(Vector3 forceDirection, float stunTime)
     {
-        // ホスト以外では攻撃判定を処理しない
-        if (!HasStateAuthority) return;
+        // 攻撃判定とノックバックの確定はState Authorityだけで行う
+        if (!HasStateAuthority) return false;
 
-        // サテライトレーザー照準中など、無敵状態なら吹き飛ばされない
-        if (IsInvincible) return;
+        // 無敵状態・シールド状態なら攻撃を無効化
+        if (IsInvincible) return false;
 
         if (!ShieldTimer.ExpiredOrNotRunning(Runner))
         {
             Debug.Log("電磁石シールドで攻撃を無効化しました！");
-            return;
+            return false;
         }
 
         StunTimer = TickTimer.CreateFromSeconds(Runner, stunTime);
@@ -230,12 +230,14 @@ public class PlayerMovement : NetworkBehaviour
             PickupCooldown = TickTimer.CreateFromSeconds(Runner, 1.0f);
 
             var ballRb = MyBall.GetComponent<Rigidbody>();
-            if (ballRb != null)
+            if (ballRb != null && MyBall.HasStateAuthority)
             {
                 ballRb.isKinematic = false;
                 ballRb.AddForce(forceDirection, ForceMode.VelocityChange);
             }
         }
+
+        return true;
     }
 
     public void ApplyDash(float speedMultiplier, float duration)
