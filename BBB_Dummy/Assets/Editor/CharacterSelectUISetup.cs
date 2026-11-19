@@ -72,9 +72,24 @@ public static class CharacterSelectUISetup
         else if(es.GetComponent<InputSystemUIInputModule>()==null){ var oldInput=es.GetComponent<StandaloneInputModule>(); if(oldInput!=null) Undo.DestroyObjectImmediate(oldInput); Undo.AddComponent<InputSystemUIInputModule>(es.gameObject).AssignDefaultActions(); }
 
         root.SetActive(false);
+        EnsureSelectionPoint();
         EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
         Selection.activeGameObject=canvas.gameObject;
         Debug.Log("[CharacterSelectUISetup] Canvas内に永続UIを作成し2_Lobbyを保存しました。");
+    }
+
+    private static void EnsureSelectionPoint()
+    {
+        GameObject point = GameObject.Find("CharacterSelectPoint");
+        if (point != null) return;
+        point = new GameObject("CharacterSelectPoint");
+        Undo.RegisterCreatedObjectUndo(point, "Create Character Select Point");
+        point.transform.position = Vector3.zero;
+        var trigger = point.AddComponent<SphereCollider>();
+        trigger.isTrigger = true;
+        trigger.radius = 3f;
+        Undo.AddComponent<CharacterSelectInteractable>(point);
+        Debug.LogWarning("[CharacterSelectUISetup] CharacterSelectPointを原点に作成しました。Sceneビューでロビーのキャラクター選択場所へ移動してください。");
     }
 
     private static GameObject Panel(string name,Transform parent,Vector2 min,Vector2 max,Color color)
