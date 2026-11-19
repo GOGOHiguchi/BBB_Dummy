@@ -101,11 +101,11 @@ public class Landmine : NetworkBehaviour
 
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
-        // 通常のDespawnやシーン終了では爆発エフェクトを出さない
-        if (!HasTriggered || explosionEffectPrefab == null)
+        // Despawn通知を受け取った各クライアントでローカル演出を再生する。
+        // 発動直後にDespawnされるため、ここではNetworkedフラグの最終同期に依存しない。
+        if (explosionEffectPrefab == null)
             return;
 
-        // NetworkObjectではないローカル演出として各クライアントで一度ずつ再生
         GameObject effect = Instantiate(
             explosionEffectPrefab,
             transform.position,
