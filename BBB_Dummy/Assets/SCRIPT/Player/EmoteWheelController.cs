@@ -45,6 +45,9 @@ public class EmoteWheelController : NetworkBehaviour
     [Networked]
     private TickTimer CelebrationEmoteTimer { get; set; }
 
+    [Networked]
+    private NetworkBool CelebrationGapPending { get; set; }
+
     [Header("撃破後ランダムエモート設定")]
     [SerializeField] private float celebrationEmoteMinInterval = 2.5f;
     [SerializeField] private float celebrationEmoteMaxInterval = 4.0f;
@@ -226,6 +229,7 @@ public class EmoteWheelController : NetworkBehaviour
         }
 
         IsCelebrating = true;
+        CelebrationGapPending = false;
         EmoteResetTimer = TickTimer.None;
         SelectNextCelebrationEmote();
         Debug.Log($"[EmoteWheelController] 撃破後ランダムエモート開始: {Object.InputAuthority}");
@@ -291,7 +295,19 @@ public class EmoteWheelController : NetworkBehaviour
         {
             if (CelebrationEmoteTimer.Expired(Runner))
             {
-                SelectNextCelebrationEmote();
+                // 既存ホットリングと同じく、いったん0へ戻してから次のエモートを開始する。
+                // Animator側の「再生中エモート→待機→次のエモート」の遷移を確実に通す。
+                if (!CelebrationGapPending)
+                {
+                    CurrentEmoteIndex = 0;
+                    CelebrationGapPending = true;
+                    CelebrationEmoteTimer = TickTimer.CreateFromSeconds(Runner, 0.25f);
+                }
+                else
+                {
+                    CelebrationGapPending = false;
+                    SelectNextCelebrationEmote();
+                }
             }
             return;
         }
