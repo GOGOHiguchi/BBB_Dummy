@@ -87,7 +87,13 @@ public class BowlingPin : MonoBehaviour
             if (otherPin != null)
             {
                 otherPin.WakeUp();
-                otherPin.ApplyImpactBoost(collision.relativeVelocity);
+
+                Vector3 chainDirection = otherPin.transform.position - transform.position;
+                Vector3 chainVelocity = chainDirection.sqrMagnitude > 0.001f
+                    ? chainDirection.normalized * collision.relativeVelocity.magnitude
+                    : collision.relativeVelocity;
+
+                otherPin.ApplyImpactBoost(chainVelocity);
             }
         }
     }
