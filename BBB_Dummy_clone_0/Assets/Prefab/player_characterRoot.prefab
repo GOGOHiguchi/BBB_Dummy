@@ -84,6 +84,7 @@ GameObject:
   - component: {fileID: 8254073344637112618}
   - component: {fileID: 8534347393795758242}
   - component: {fileID: 5492635999955099451}
+  - component: {fileID: 5875504371944771069}
   m_Layer: 3
   m_Name: player_characterRoot
   m_TagString: Player
@@ -252,6 +253,7 @@ MonoBehaviour:
   - {fileID: 6709598812309766830}
   - {fileID: 8348039023313663990}
   - {fileID: 2769844385377898156}
+  - {fileID: 5875504371944771069}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &2769844385377898156
 MonoBehaviour:
@@ -488,6 +490,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5875504371944771069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179855995982138228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f4d9a2b7c1e4a6d9b3f5c8e2a7d1b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterModelSwitcher
+  maleModelPrefab: {fileID: 7478225697116208144, guid: 6fb37f825ee63264b9c2600bf1a52006, type: 3}
+  femaleModelPrefab: {fileID: 6252356961377389083, guid: 2db03e7c8a8135146b280e5da7e0289c, type: 3}
+  characterVisualRoot: {fileID: 1124980616883435515}
+  _CharacterModelId: 0
 --- !u!1 &1877205548887381854
 GameObject:
   m_ObjectHideFlags: 0

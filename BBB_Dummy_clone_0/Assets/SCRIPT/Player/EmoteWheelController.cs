@@ -65,6 +65,13 @@ public class EmoteWheelController : NetworkBehaviour
         if (emoteWheelUI != null) emoteWheelUI.SetActive(false);
     }
 
+    /// <summary>キャラクターモデル差し替え時にAnimator参照を更新する。</summary>
+    public void SetCharacterAnimator(Animator value)
+    {
+        animator = value;
+    }
+
+
     private void Update()
     {
         // 自分が操作するプレイヤーでない場合は操作を受け付けない
