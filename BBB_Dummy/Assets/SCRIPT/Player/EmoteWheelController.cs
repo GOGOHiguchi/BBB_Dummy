@@ -34,6 +34,13 @@ public class EmoteWheelController : NetworkBehaviour
     [Networked]
     public int CurrentEmoteIndex { get; set; }
 
+    // エモート番号がクライアントへ届く前に消えないよう、一定時間保持する。
+    [Networked]
+    private TickTimer EmoteResetTimer { get; set; }
+
+    [Header("ネットワーク同期設定")]
+    [SerializeField] private float emoteNetworkDisplayDuration = 0.25f;
+
     private static readonly int EmoteIndexHash = Animator.StringToHash("EmoteIndex");
     private bool _isWheelOpen;
 
@@ -182,7 +189,14 @@ public class EmoteWheelController : NetworkBehaviour
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     private void RpcPlayEmote(int emoteIndex)
     {
+        if (emoteIndex <= 0 || emoteIndex >= closeSlotIndex)
+            return;
+
+        // Animatorへ反映される時間を確保し、ネットワークTickで後からリセットする。
         CurrentEmoteIndex = emoteIndex;
+        EmoteResetTimer = TickTimer.CreateFromSeconds(Runner, emoteNetworkDisplayDuration);
+
+        Debug.Log($"EmoteWheel: Player {Object.InputAuthority} がエモート {emoteIndex} を再生します。");
 
         // バク宙エモートなら踏切タイミングに合わせて実際にジャンプさせる
         if (emoteIndex == backflipEmoteIndex && playerMovement != null)
@@ -200,18 +214,25 @@ public class EmoteWheelController : NetworkBehaviour
         }
     }
 
+    public override void FixedUpdateNetwork()
+    {
+        // Networked変数の変更はRenderではなくState AuthorityのネットワークTickで行う。
+        // これによりエモート番号がスナップショットへ含まれる時間を確保する。
+        if (HasStateAuthority &&
+            CurrentEmoteIndex != 0 &&
+            EmoteResetTimer.Expired(Runner))
+        {
+            CurrentEmoteIndex = 0;
+            EmoteResetTimer = TickTimer.None;
+        }
+    }
+
     public override void Render()
     {
-        if (animator != null)
-        {
-            // Networked変数の値をAnimatorのEmoteIndex(Int)パラメータに毎フレーム適用
-            animator.SetInteger(EmoteIndexHash, CurrentEmoteIndex);
+        if (animator == null)
+            return;
 
-            // エモートが適用されたら、Any Stateからの再突入（ループ）を防ぐために即座に0リセットする
-            if (CurrentEmoteIndex != 0 && HasStateAuthority)
-            {
-                CurrentEmoteIndex = 0;
-            }
-        }
+        // ホスト・クライアントとも、同期されたエモート番号をAnimatorへ反映する。
+        animator.SetInteger(EmoteIndexHash, CurrentEmoteIndex);
     }
 }
