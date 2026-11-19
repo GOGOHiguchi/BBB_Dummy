@@ -9,8 +9,11 @@ public class BowlingBallImpact : NetworkBehaviour
 {
     private bool hasCollidedWithPin = false;
 
-    [Header("スコア判定設定")]
+    [Header("スコア判定・観戦移行設定")]
+    [Tooltip("衝突後、ピンの転倒数を集計するまでの待機時間")]
     [SerializeField] private float scoreCalculationDelay = 5f;
+    [Tooltip("集計後、ピンの倒れた状態を見せてから観戦モードへ移行する追加時間")]
+    [SerializeField] private float spectatorDelayAfterScore = 2f;
 
     [Header("物理演算の最適化")]
     [Tooltip("ピンの物理演算をオンにする半径")]
@@ -98,8 +101,8 @@ public class BowlingBallImpact : NetworkBehaviour
             hasCollidedWithPin = true;
             hitPosition = transform.position;
 
+            // ピンの転倒とスコア集計が終わるまで、プレイヤー視点を維持する。
             StartCoroutine(CalculateScoreAndRegisterRoutine());
-            Rpc_SwitchToSpectatorMode(Object.InputAuthority);
         }
     }
 
@@ -122,6 +125,14 @@ public class BowlingBallImpact : NetworkBehaviour
             }
             GameManager.Instance.RegisterPinHit(Object.InputAuthority, pinScore);
         }
+
+        // 集計後も少しだけピンを見せてから観戦モードへ移行する。
+        if (spectatorDelayAfterScore > 0f)
+        {
+            yield return new WaitForSeconds(spectatorDelayAfterScore);
+        }
+
+        Rpc_SwitchToSpectatorMode(Object.InputAuthority);
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
