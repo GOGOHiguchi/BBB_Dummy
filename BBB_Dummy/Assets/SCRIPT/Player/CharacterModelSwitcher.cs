@@ -3,13 +3,18 @@ using UnityEngine;
 
 /// <summary>
 /// Playerのネットワークルートを維持したまま、見た目モデルだけを全クライアントで切り替える。
-/// 0 = 男性、1 = 女性。選択値は各PCのPlayerPrefsからInputAuthorityがStateAuthorityへ通知する。
+/// ID 0～28が男性、29～48が女性。プレビューはローカルだけに適用し、確定時に保存・同期する。
 /// </summary>
 public class CharacterModelSwitcher : NetworkBehaviour
 {
     public const string PreferenceKey = "BBB.CharacterModel";
+    private const string DatabaseResourceName = "CharacterModelDatabase";
 
-    [Header("モデルPrefab（見た目専用）")]
+    [Header("モデルデータ")]
+    [SerializeField] private CharacterModelDatabase modelDatabase;
+
+    // 旧Prefab設定との互換用。Databaseが見つからない場合のみ使用する。
+    [Header("旧モデルPrefab（互換用）")]
     [SerializeField] private GameObject maleModelPrefab;
     [SerializeField] private GameObject femaleModelPrefab;
 
@@ -19,8 +24,12 @@ public class CharacterModelSwitcher : NetworkBehaviour
     [Networked]
     public int CharacterModelId { get; set; }
 
+    public CharacterModelDatabase ModelDatabase => GetDatabase();
+    public int SavedModelId => PlayerPrefs.GetInt(PreferenceKey, 0);
+
     private RuntimeAnimatorController _sharedAnimatorController;
     private int _appliedModelId = -1;
+    private bool _isPreviewing;
 
     private PlayerMovement _playerMovement;
     private EmoteWheelController _emoteController;
@@ -35,55 +44,114 @@ public class CharacterModelSwitcher : NetworkBehaviour
         if (characterVisualRoot == null)
             characterVisualRoot = transform.Find("CharacterVisual");
 
-        // 既存モデルに設定されているAnimator Controllerを新モデルへ引き継ぐ。
         Animator currentAnimator = GetComponentInChildren<Animator>(true);
         if (currentAnimator != null)
             _sharedAnimatorController = currentAnimator.runtimeAnimatorController;
+    }
+
+    private CharacterModelDatabase GetDatabase()
+    {
+        if (modelDatabase == null)
+            modelDatabase = Resources.Load<CharacterModelDatabase>(DatabaseResourceName);
+        return modelDatabase;
     }
 
     public override void Spawned()
     {
         if (HasInputAuthority)
         {
-            int savedModelId = PlayerPrefs.GetInt(PreferenceKey, 0);
-            RpcSetCharacterModel(Mathf.Clamp(savedModelId, 0, 1));
+            int savedModelId = SavedModelId;
+            CharacterModelDatabase database = GetDatabase();
+            if (database != null && !database.IsValidId(savedModelId))
+                savedModelId = 0;
+
+            RpcSetCharacterModel(savedModelId);
         }
     }
 
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     private void RpcSetCharacterModel(int modelId)
     {
-        CharacterModelId = Mathf.Clamp(modelId, 0, 1);
+        CharacterModelDatabase database = GetDatabase();
+        if (database != null && !database.IsValidId(modelId))
+        {
+            Debug.LogWarning($"[CharacterModelSwitcher] 無効なモデルIDを受信しました: {modelId}", this);
+            return;
+        }
+
+        CharacterModelId = Mathf.Clamp(modelId, 0, 48);
     }
 
     public override void Render()
     {
-        // Networked値の更新を各クライアントで検知して、見た目だけを切り替える。
+        if (_isPreviewing)
+            return;
+
         if (_appliedModelId != CharacterModelId)
             ApplyModel(CharacterModelId);
     }
 
-    private void ApplyModel(int modelId)
+    /// <summary>
+    /// 選択画面のプレビュー。PlayerPrefsとNetworked値は変更しない。
+    /// </summary>
+    public bool PreviewModel(int modelId)
+    {
+        CharacterModelDatabase database = GetDatabase();
+        if (database == null || !database.IsValidId(modelId))
+        {
+            Debug.LogWarning($"[CharacterModelSwitcher] プレビュー対象のモデルIDがありません: {modelId}", this);
+            return false;
+        }
+
+        _isPreviewing = true;
+        return ApplyModel(modelId);
+    }
+
+    /// <summary>キャンセル時にネットワーク上の確定済みモデルへ戻す。</summary>
+    public void CancelPreview()
+    {
+        _isPreviewing = false;
+        ApplyModel(CharacterModelId);
+    }
+
+    /// <summary>選択をローカル保存し、Photon Fusion経由で全員へ反映する。</summary>
+    public bool ConfirmSelection(int modelId)
+    {
+        if (!HasInputAuthority)
+            return false;
+
+        CharacterModelDatabase database = GetDatabase();
+        if (database == null || !database.IsValidId(modelId))
+        {
+            Debug.LogError($"[CharacterModelSwitcher] 確定できないモデルIDです: {modelId}", this);
+            return false;
+        }
+
+        PlayerPrefs.SetInt(PreferenceKey, modelId);
+        PlayerPrefs.Save();
+
+        _isPreviewing = false;
+        RpcSetCharacterModel(modelId);
+        return true;
+    }
+
+    private bool ApplyModel(int modelId)
     {
         if (characterVisualRoot == null)
         {
             Debug.LogError("[CharacterModelSwitcher] CharacterVisualが見つかりません。", this);
-            return;
+            return false;
         }
 
-        GameObject modelPrefab = modelId == 1 ? femaleModelPrefab : maleModelPrefab;
+        GameObject modelPrefab = ResolveModelPrefab(modelId);
         if (modelPrefab == null)
         {
             Debug.LogError($"[CharacterModelSwitcher] モデルPrefabが未設定です。ModelId={modelId}", this);
-            return;
+            return false;
         }
 
-        // ロケットランチャーは旧モデルの右手ボーン配下にあるNetworkObject。
-        // モデル本体を破棄する前にプレイヤールートへ退避し、差し替え後の右手へ戻す。
-        GameObject launcherObject = _playerMovement != null
-            ? _playerMovement.RocketLauncherObject
-            : null;
-
+        // NetworkObjectであるロケットランチャーをモデル破棄前に退避する。
+        GameObject launcherObject = _playerMovement != null ? _playerMovement.RocketLauncherObject : null;
         if (launcherObject == null && _playerMovement != null &&
             _playerMovement.RocketLauncherController != null)
         {
@@ -103,12 +171,9 @@ public class CharacterModelSwitcher : NetworkBehaviour
             launcherLocalPosition = launcherTransform.localPosition;
             launcherLocalRotation = launcherTransform.localRotation;
             launcherLocalScale = launcherTransform.localScale;
-
-            // worldPositionStays=trueで一時退避。武器のGameObject/NetworkObjectは破棄しない。
             launcherTransform.SetParent(transform, true);
         }
 
-        // CurrentModelなど、配置先直下にある旧モデルだけを入れ替える。
         for (int i = characterVisualRoot.childCount - 1; i >= 0; i--)
         {
             Transform child = characterVisualRoot.GetChild(i);
@@ -134,9 +199,8 @@ public class CharacterModelSwitcher : NetworkBehaviour
             }
             else
             {
-                // モデル側のボーン名が想定と異なる場合も、武器自体は消さずルートに残す。
                 launcherTransform.SetParent(transform, true);
-                Debug.LogWarning("[CharacterModelSwitcher] 右手の装着先が見つかりません。ロケットランチャーをプレイヤールートに退避しました。", modelInstance);
+                Debug.LogWarning("[CharacterModelSwitcher] 右手の装着先が見つからないため、ロケットランチャーをプレイヤールートに退避しました。", modelInstance);
             }
         }
 
@@ -144,14 +208,13 @@ public class CharacterModelSwitcher : NetworkBehaviour
         if (modelAnimator == null)
         {
             Debug.LogError($"[CharacterModelSwitcher] {modelPrefab.name} にAnimatorがありません。", modelPrefab);
-            _appliedModelId = modelId;
-            return;
+            _appliedModelId = -1;
+            return false;
         }
 
         if (_sharedAnimatorController != null)
             modelAnimator.runtimeAnimatorController = _sharedAnimatorController;
 
-        // ルートのNetworkCharacterControllerで移動するため、モデル側のRoot Motionは無効。
         modelAnimator.applyRootMotion = false;
 
         Transform leftUpperArm = FindLeftUpperArm(modelInstance.transform);
@@ -166,7 +229,20 @@ public class CharacterModelSwitcher : NetworkBehaviour
             _bowlingArmController.SetCharacterAnimator(modelAnimator, leftUpperArm);
 
         _appliedModelId = modelId;
-        Debug.Log($"[CharacterModelSwitcher] モデルを切り替えました: {modelPrefab.name}", this);
+        return true;
+    }
+
+    private GameObject ResolveModelPrefab(int modelId)
+    {
+        CharacterModelDatabase database = GetDatabase();
+        if (database != null && database.TryGetEntry(modelId, out CharacterModelDatabase.Entry entry))
+            return entry.Prefab;
+
+        // Database導入前の既存シーンでも起動できるようにする。
+        if (database == null)
+            return modelId == 1 ? femaleModelPrefab : maleModelPrefab;
+
+        return null;
     }
 
     private static Transform FindRightHandContainer(Transform modelRoot)
@@ -175,7 +251,8 @@ public class CharacterModelSwitcher : NetworkBehaviour
         {
             if (child.name == "R_hand_container" ||
                 child.name == "RightHandContainer" ||
-                child.name == "RightHand")
+                child.name == "RightHand" ||
+                child.name == "mixamorig:RightHand")
                 return child;
         }
 
@@ -188,11 +265,12 @@ public class CharacterModelSwitcher : NetworkBehaviour
         {
             if (child.name == "Bip001 L UpperArm" ||
                 child.name == "LeftUpperArm" ||
-                child.name == "mixamorig:LeftArm")
+                child.name == "LeftArm" ||
+                child.name == "mixamorig:LeftArm" ||
+                child.name == "upperarm_l")
                 return child;
         }
 
-        Debug.LogWarning("[CharacterModelSwitcher] 左腕ボーンが見つかりません。投球時の腕補正は無効になります。", modelRoot);
         return null;
     }
 }
