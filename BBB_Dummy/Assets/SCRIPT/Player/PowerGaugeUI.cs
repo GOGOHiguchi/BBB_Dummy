@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public class PowerGaugeUI : MonoBehaviour
@@ -14,6 +15,11 @@ public class PowerGaugeUI : MonoBehaviour
 
     [Header("設定")]
     [SerializeField] private float maxForce = 90f;     // PlayerMovement の maxThrowForce に合わせる
+
+    // クライアント側のゲージ開始遅延をなくすための表示専用チャージ予測。
+    private float _predictedCharge;
+    private bool _wasLocalCharging;
+    private float _predictionReleaseTime;
 
     private void Start()
     {
@@ -33,10 +39,56 @@ public class PowerGaugeUI : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerMovement.Local == null || powerSlider == null) return;
+        PlayerMovement player = PlayerMovement.Local;
+        if (player == null || powerSlider == null) return;
 
-        float currentCharge = PlayerMovement.Local.CurrentCharge;
-        bool isCharging = PlayerMovement.Local.IsHoldingBall && currentCharge > 0f;
+        bool isHoldingBall = player.IsHoldingBall;
+        bool localCharging = isHoldingBall && Mouse.current != null &&
+                             Mouse.current.leftButton.isPressed;
+
+        if (!isHoldingBall)
+        {
+            _predictedCharge = 0f;
+            _wasLocalCharging = false;
+            _predictionReleaseTime = 0f;
+        }
+        else if (localCharging)
+        {
+            if (!_wasLocalCharging)
+            {
+                _predictedCharge = Mathf.Max(_predictedCharge, player.CurrentCharge);
+            }
+
+            _predictedCharge = Mathf.Min(
+                _predictedCharge + player.ChargeRate * Time.deltaTime,
+                maxForce * 1.15f
+            );
+        }
+        else
+        {
+            if (_wasLocalCharging)
+            {
+                // リリース後はサーバーの投球確定を少しだけ待つ。
+                _predictionReleaseTime = Time.unscaledTime + 0.6f;
+            }
+
+            _predictedCharge = Mathf.Max(_predictedCharge, player.CurrentCharge);
+
+            // サーバー側でチャージが成立しなかった場合の表示残留を防止。
+            if (player.CurrentCharge <= 0f &&
+                _predictionReleaseTime > 0f &&
+                Time.unscaledTime >= _predictionReleaseTime)
+            {
+                _predictedCharge = 0f;
+                _predictionReleaseTime = 0f;
+            }
+        }
+
+        _wasLocalCharging = localCharging;
+
+        // UIのみローカル予測を使用。投球速度やネットワーク上のCurrentChargeは変更しない。
+        float currentCharge = Mathf.Max(player.CurrentCharge, _predictedCharge);
+        bool isCharging = isHoldingBall && currentCharge > 0f;
 
         // チャージ中のみ表示切り替え
         if (powerSlider.gameObject.activeSelf != isCharging)
