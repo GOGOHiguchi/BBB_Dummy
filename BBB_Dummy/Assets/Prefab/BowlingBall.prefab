@@ -255,9 +255,9 @@ MonoBehaviour:
   speedMass: 3.5
   powerMass: 4.1
   curveMass: 3.8
-  speedMaxVelocity: 40
-  powerMaxVelocity: 35
-  curveMaxVelocity: 35
+  speedMaxVelocity: 18
+  powerMaxVelocity: 16
+  curveMaxVelocity: 17
   curveForce: 15
   speedPhysicMaterial: {fileID: 0}
   powerPhysicMaterial: {fileID: 0}
