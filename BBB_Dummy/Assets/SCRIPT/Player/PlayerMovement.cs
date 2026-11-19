@@ -1090,6 +1090,9 @@ public class PlayerMovement : NetworkBehaviour
             _predictingPickupVisual = false;
         }
 
+        if (CharacterSelectInteractable.IsLocalPlayerInRange || CharacterSelectUI.IsAnyOpen)
+            return;
+
         if (Keyboard.current == null || !Keyboard.current.eKey.wasPressedThisFrame)
             return;
 
