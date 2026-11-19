@@ -21,7 +21,9 @@ public static class CharacterSelectUISetup
             return;
 
         var scene = EditorSceneManager.OpenScene(LobbyScenePath, OpenSceneMode.Single);
-        Canvas canvas = Object.FindFirstObjectByType<Canvas>();
+        Canvas canvas = GameObject.Find("Canvas") != null
+            ? GameObject.Find("Canvas").GetComponent<Canvas>()
+            : Object.FindFirstObjectByType<Canvas>();
 
         if (canvas == null)
         {
@@ -38,11 +40,12 @@ public static class CharacterSelectUISetup
 
         CanvasScaler scaler = canvas.GetComponent<CanvasScaler>();
         if (scaler == null)
+        {
             scaler = Undo.AddComponent<CanvasScaler>(canvas.gameObject);
-
-        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = new Vector2(1920f, 1080f);
-        scaler.matchWidthOrHeight = 0.5f;
+            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution = new Vector2(1920f, 1080f);
+            scaler.matchWidthOrHeight = 0.5f;
+        }
 
         if (canvas.GetComponent<CharacterSelectUI>() == null)
             Undo.AddComponent<CharacterSelectUI>(canvas.gameObject);
