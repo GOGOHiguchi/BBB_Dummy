@@ -697,7 +697,7 @@ public class PlayerMovement : NetworkBehaviour
                 }
             }
 
-            if ((HasStateAuthority || HasInputAuthority) && MyBall != null)
+            if (HasStateAuthority && MyBall != null)
             {
                 var ballRb = MyBall.GetComponent<Rigidbody>();
 
