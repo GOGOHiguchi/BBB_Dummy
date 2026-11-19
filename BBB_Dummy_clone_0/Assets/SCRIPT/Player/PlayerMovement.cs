@@ -2,6 +2,7 @@ using Fusion;
 using UnityEngine;
 using Unity.Cinemachine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 using Lovatto.MiniMap;
 
 public class PlayerMovement : NetworkBehaviour
@@ -928,15 +929,39 @@ public class PlayerMovement : NetworkBehaviour
             }
         }
 
+        // Escapeでカーソルを表示し、UIではないゲーム画面をクリックしたときに再びロックする。
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            ShowCursor();
+        }
+
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame &&
+            Cursor.visible && Cursor.lockState != CursorLockMode.Locked)
+        {
+            bool clickedUI = EventSystem.current != null &&
+                             EventSystem.current.IsPointerOverGameObject();
+
+            if (!clickedUI)
+            {
+                LockCursor();
+            }
         }
 
         UpdateInteractVisuals();
         UpdateTrajectory();
         UpdateCameraTargetOffset();
+    }
+
+    private void ShowCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    private void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void LateUpdate()
