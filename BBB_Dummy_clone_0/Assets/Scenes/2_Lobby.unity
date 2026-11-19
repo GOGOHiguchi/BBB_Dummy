@@ -422,6 +422,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &12854002
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -968,6 +972,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &32636787
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1383,6 +1391,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &54907489
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1751,6 +1763,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &84709055
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1931,6 +1947,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &87271093
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2414,6 +2434,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &96379455
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2834,6 +2858,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &108683192
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3336,6 +3364,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &123132869
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3629,6 +3661,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &129126891
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3809,6 +3845,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &130587275
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4354,6 +4394,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &156884287
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4556,6 +4600,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &165141916
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4858,6 +4906,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &173390380
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5038,6 +5090,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &174083461
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5240,6 +5296,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &178129726
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5834,6 +5894,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &197011277
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6290,6 +6354,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &216104445
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6585,6 +6653,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &235384152
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6967,6 +7039,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &245456445
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7225,6 +7301,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &258674337
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7489,6 +7569,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &282104472
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8508,6 +8592,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &335828517
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9668,6 +9756,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &370920945
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10537,6 +10629,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &397042556
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15131,6 +15227,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &442217830
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15553,6 +15653,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &480041695
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16064,6 +16168,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &505793308
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16288,6 +16396,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &515060959
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16520,6 +16632,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &518910347
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16940,6 +17056,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &524118185
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17832,6 +17952,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &558902342
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18303,6 +18427,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &572939706
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18514,6 +18642,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &577747159
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18694,6 +18826,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &583471017
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18931,6 +19067,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &590772062
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19133,6 +19273,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &595573476
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19411,6 +19555,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &599171189
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19940,6 +20088,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &626403256
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20372,6 +20524,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &645735304
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20552,6 +20708,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &645821696
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20732,6 +20892,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &647026261
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20912,6 +21076,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &647913757
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21264,6 +21432,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &658154979
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21902,6 +22074,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &695052302
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22202,6 +22378,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &702396621
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22580,6 +22760,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &719621006
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22760,6 +22944,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &722532672
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -23098,6 +23286,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &742597188
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -23421,6 +23613,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &754280155
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -23860,6 +24056,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &764201958
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24071,6 +24271,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &766848804
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24376,6 +24580,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &785333890
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24556,6 +24764,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &785381397
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24758,6 +24970,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &795977620
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -25258,6 +25474,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &827856374
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -25783,6 +26003,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &840103354
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -26317,6 +26541,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &857204340
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -26497,6 +26725,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &860478062
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -26975,6 +27207,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &887541018
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27737,6 +27973,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &930056933
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27917,6 +28157,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &930329909
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -28593,6 +28837,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &951903017
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -28795,6 +29043,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &953063453
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -29363,6 +29615,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &965024146
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -30011,6 +30267,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &983835763
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31479,6 +31739,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1018053910
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31950,6 +32214,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1035852677
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -33029,6 +33297,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1118072755
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -33231,6 +33503,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1126170949
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -33866,6 +34142,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1152401189
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -34188,6 +34468,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1156726014
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -34434,6 +34718,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1178491789
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -34614,6 +34902,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1182168493
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -35050,6 +35342,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1217921791
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -35301,6 +35597,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1229044795
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -35530,6 +35830,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1231619199
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -35759,6 +36063,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1232921953
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -36486,6 +36794,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1243800956
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -36710,6 +37022,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1252540117
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -36997,6 +37313,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1256298805
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -37863,6 +38183,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1284825538
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -38466,6 +38790,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1297148088
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -38805,6 +39133,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1306679110
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -39189,6 +39521,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1311339366
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -39773,6 +40109,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1317685444
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -40102,6 +40442,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1335310262
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -40507,6 +40851,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1356122445
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -41070,6 +41418,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1374452244
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -41250,6 +41602,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1376501626
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -41501,6 +41857,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1387891605
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -41905,6 +42265,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1396453599
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -42172,6 +42536,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1400365884
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -42435,6 +42803,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1409602937
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -42879,6 +43251,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1424890238
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -43285,6 +43661,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1432646795
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -43531,6 +43911,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1446882109
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -43807,6 +44191,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1454327271
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -44070,6 +44458,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1461104888
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -44250,6 +44642,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1466264182
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -44430,6 +44826,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1468575594
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -44754,6 +45154,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1487195826
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -45039,6 +45443,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1493479112
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -45290,6 +45698,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1519354561
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -45571,6 +45983,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1542043980
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -45910,6 +46326,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1547881780
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -46090,6 +46510,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1549031438
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -46328,6 +46752,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1555893298
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -46530,6 +46958,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1558701400
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -47039,6 +47471,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1580362586
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -47263,6 +47699,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1587900442
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -47611,6 +48051,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1599724002
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -47866,6 +48310,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1609248771
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -48046,6 +48494,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1609497656
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -48436,6 +48888,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1615534357
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -48813,6 +49269,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1639096245
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -49050,6 +49510,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1642588152
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -49230,6 +49694,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1643932529
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -50174,6 +50642,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1693959737
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -50661,6 +51133,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1711654362
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -51000,6 +51476,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1717769196
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -51487,6 +51967,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1736764639
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -51870,6 +52354,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1761278741
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -52072,6 +52560,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1778070391
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -52450,6 +52942,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1782196608
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -52630,6 +53126,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1784631864
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -53064,6 +53564,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1795847507
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -53586,6 +54090,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1836988726
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -53810,6 +54318,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1847923717
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -54340,6 +54852,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1872992215
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -54696,6 +55212,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1885932961
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -54898,6 +55418,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1893263784
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -55153,6 +55677,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1893812003
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -55641,6 +56169,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1919918805
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -56016,6 +56548,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1922249223
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -56253,6 +56789,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1926424571
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -56909,6 +57449,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1944449854
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -57182,6 +57726,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1952285072
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -57384,6 +57932,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1954907927
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -58057,6 +58609,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1970082154
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -58295,6 +58851,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1988050033
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -58734,6 +59294,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1997009647
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -59288,6 +59852,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2010209302
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -59490,6 +60058,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2012536933
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -59714,6 +60286,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2014898813
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -60004,6 +60580,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2026459177
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -60228,6 +60808,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2031955461
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -60408,6 +60992,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2032712322
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -60708,6 +61296,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2038894174
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -60888,6 +61480,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2039369840
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -61248,6 +61844,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2051248483
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -61599,6 +62199,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2058476495
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -61857,6 +62461,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2066573017
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -62203,6 +62811,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2080493915
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -62383,6 +62995,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2084616891
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -62607,6 +63223,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2090931964
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -62938,6 +63558,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2100351476
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -63118,6 +63742,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2108486622
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -63437,6 +64065,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2109779351
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -63666,6 +64298,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2125611939
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -64104,6 +64740,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2133347633
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -64745,7 +65385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasicSpawner
   _playerPrefab:
-    RawGuidValue: 0e2364598be860f47bd8704cae9b7598
+    RawGuidValue: a402ce26aaa5f0f42a3c729794ec7fba
   _spawnPoints:
   - {fileID: 821925558}
   - {fileID: 1705518813}
@@ -64757,6 +65397,7 @@ MonoBehaviour:
   - {fileID: 810705778}
   - {fileID: 419481976}
   - {fileID: 1293016172}
+  _minimumSpawnDistance: 2.5
 --- !u!1 &3177300115657846562
 GameObject:
   m_ObjectHideFlags: 0

@@ -543,6 +543,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &18512749
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1296,6 +1300,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &54782387
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1476,6 +1484,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &58882218
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1656,6 +1668,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &59808528
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2077,6 +2093,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &74351581
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2257,6 +2277,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &74842203
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2437,6 +2461,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &75873605
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2782,68 +2810,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80037473}
   m_Mesh: {fileID: 4300000, guid: 5b37bebced2befa4cb0fa7e92016e465, type: 3}
---- !u!1001 &87172972
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (11)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 25.566284
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -96.643295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &87172973 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 87172972}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &90044477
 GameObject:
   m_ObjectHideFlags: 0
@@ -2917,6 +2883,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &90044481
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3218,6 +3188,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &92753253
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3398,6 +3372,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &93072828
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3998,68 +3976,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 101118598}
   m_Mesh: {fileID: 4300000, guid: 5b37bebced2befa4cb0fa7e92016e465, type: 3}
---- !u!1001 &101225118
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (15)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 22.58628
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -98.76329
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &101225119 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 101225118}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &101735347
 GameObject:
   m_ObjectHideFlags: 0
@@ -4133,6 +4049,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &101735351
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4442,6 +4362,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &103153264
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4880,6 +4804,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &116231987
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5174,6 +5102,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &119990673
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5354,6 +5286,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &125924444
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5771,6 +5707,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &132524008
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5993,68 +5933,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 135861458}
   m_Mesh: {fileID: 4300000, guid: 495aba848fd785f43bf771270ddea3dc, type: 3}
---- !u!1001 &138723790
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 24.666283
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -94.4933
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &138723791 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 138723790}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &141088730
 GameObject:
   m_ObjectHideFlags: 0
@@ -6479,6 +6357,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &158556882
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6780,6 +6662,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &165870061
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6960,6 +6846,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &166483962
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7193,6 +7083,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &167748223
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7487,6 +7381,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &169531640
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7667,6 +7565,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &177848098
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7973,6 +7875,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &199760283
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8381,6 +8287,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &222858817
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8675,6 +8585,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &233012823
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8855,6 +8769,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &240507895
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9035,6 +8953,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &241789563
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9760,6 +9682,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &259447301
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10195,6 +10121,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9075901731311791238, guid: 3247db75de5506c4182b94e21d52963b, type: 3}
+      propertyPath: SortKey
+      value: 1016887952
+      objectReference: {fileID: 0}
     - target: {fileID: 3438974039802528380, guid: 3247db75de5506c4182b94e21d52963b, type: 3}
       propertyPath: m_Name
       value: kuruma2
@@ -10317,6 +10247,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &287877407
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10497,6 +10431,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &291305345
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10791,6 +10729,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &302871212
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10971,6 +10913,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &302924263
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11266,6 +11212,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &305888102
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11446,6 +11396,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &311312607
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11747,6 +11701,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &320601989
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11927,6 +11885,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &320888876
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12414,68 +12376,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 337624997}
   m_Mesh: {fileID: 4300000, guid: 72e65272e9752d842a914dd27fd86306, type: 3}
---- !u!1001 &339915305
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (19)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 19.216278
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -94.4933
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &339915306 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 339915305}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &340291328
 GameObject:
   m_ObjectHideFlags: 0
@@ -12549,6 +12449,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &340291332
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12740,6 +12644,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &346399208
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12920,6 +12828,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &346743162
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13327,6 +13239,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &352858718
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13507,6 +13423,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &354332120
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13687,6 +13607,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &357695273
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13867,6 +13791,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &361623861
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14300,6 +14228,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &365735154
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14480,6 +14412,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &366278130
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14660,6 +14596,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &366741559
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15311,6 +15251,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &398743657
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15418,68 +15362,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398743653}
   m_Mesh: {fileID: -5100648875313457504, guid: 75d5e74f171c0ff459e09b14934162c2, type: 3}
---- !u!1001 &399721737
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (12)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 26.286278
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -98.76329
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &399721738 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 399721737}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &400388469
 GameObject:
   m_ObjectHideFlags: 0
@@ -15892,6 +15774,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &405694998
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16072,6 +15958,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &405741036
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16490,6 +16380,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &420060697
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16884,6 +16778,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &433080878
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17292,6 +17190,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &441834254
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17700,6 +17602,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &447688616
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18043,6 +17949,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &458058916
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18461,6 +18371,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &466949843
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18641,6 +18555,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &467442203
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18821,6 +18739,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &469680117
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19001,6 +18923,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &471868767
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19181,6 +19107,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &472338769
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19589,6 +19519,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &488430699
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19769,6 +19703,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &488698330
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20258,6 +20196,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &505313191
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20810,6 +20752,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &513922008
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20990,6 +20936,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &518553090
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21170,6 +21120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &522080260
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21350,6 +21304,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &526435421
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21530,6 +21488,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &527015015
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21710,6 +21672,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &534586999
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21890,6 +21856,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &537086274
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22070,6 +22040,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &537813362
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22406,6 +22380,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &556131894
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22586,6 +22564,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &568081202
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22766,6 +22748,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &569761046
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -23075,6 +23061,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &570548937
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -23670,6 +23660,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &587877390
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -23964,6 +23958,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &591715039
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24071,68 +24069,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591715035}
   m_Mesh: {fileID: -5100648875313457504, guid: 75d5e74f171c0ff459e09b14934162c2, type: 3}
---- !u!1001 &604500018
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (22)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 20.14627
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -92.433304
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &604500019 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 604500018}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &605339565
 GameObject:
   m_ObjectHideFlags: 0
@@ -24335,6 +24271,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &610854722
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24772,6 +24712,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &621154872
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24952,6 +24896,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &624114384
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -25176,6 +25124,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &630480755
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -25356,6 +25308,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &637129062
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -25536,6 +25492,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &651425638
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -25643,68 +25603,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651425634}
   m_Mesh: {fileID: -5100648875313457504, guid: 75d5e74f171c0ff459e09b14934162c2, type: 3}
---- !u!1001 &655502172
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 22.90628
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -90.433304
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &655502173 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 655502172}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &655922712
 GameObject:
   m_ObjectHideFlags: 0
@@ -26013,6 +25911,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &660314053
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -26314,6 +26216,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &672417972
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -26494,6 +26400,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &673604073
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -26795,6 +26705,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &683395967
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27089,6 +27003,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &690069587
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27269,6 +27187,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &694436523
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27677,6 +27599,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &702876619
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -28120,6 +28046,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &706738917
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -28300,6 +28230,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &708696204
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -28480,6 +28414,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &709139061
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -29038,6 +28976,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &713898501
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -29218,6 +29160,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &718809894
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -29398,6 +29344,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &719564709
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -29578,6 +29528,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &722016836
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -29758,6 +29712,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &726956170
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -29938,6 +29896,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &732698989
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -30239,6 +30201,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &735061433
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -30419,6 +30385,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &738461836
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -30599,6 +30569,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &739733402
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -30866,7 +30840,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapGameManager
   countdownText: {fileID: 1261152753}
-  goDisplayDelay: 1.5
   audioSource: {fileID: 0}
   countSound: {fileID: 0}
   goSound: {fileID: 0}
@@ -30955,6 +30928,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &743428357
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31135,6 +31112,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &745705108
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31242,68 +31223,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 745705104}
   m_Mesh: {fileID: -5100648875313457504, guid: 75d5e74f171c0ff459e09b14934162c2, type: 3}
---- !u!1001 &749167923
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 23.816277
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -92.433304
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &749167924 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 749167923}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &749422404
 GameObject:
   m_ObjectHideFlags: 0
@@ -31377,6 +31296,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &749422408
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31650,6 +31573,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &752606335
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31830,6 +31757,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &754755150
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -32010,6 +31941,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &755865234
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -32537,6 +32472,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &763883746
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -32846,6 +32785,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &766504851
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -32953,68 +32896,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766504847}
   m_Mesh: {fileID: -5100648875313457504, guid: 75d5e74f171c0ff459e09b14934162c2, type: 3}
---- !u!1001 &771049822
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 22.076279
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -92.433304
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &771049823 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 771049822}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &778941191
 GameObject:
   m_ObjectHideFlags: 0
@@ -33428,6 +33309,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &786597649
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -33665,6 +33550,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &797547491
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -34082,6 +33971,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &811606602
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -34262,6 +34155,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &812621703
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -34483,68 +34380,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 814954488}
   m_Mesh: {fileID: 4300000, guid: 5b37bebced2befa4cb0fa7e92016e465, type: 3}
---- !u!1001 &817480712
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (7)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 22.926285
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -94.4933
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &817480713 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 817480712}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &818769062
 GameObject:
   m_ObjectHideFlags: 0
@@ -34618,6 +34453,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &818769066
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -34798,6 +34637,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &822569974
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -35091,6 +34934,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &832133561
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -35385,6 +35232,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &834237574
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -35679,6 +35530,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &844557157
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -35980,6 +35835,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &849653806
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -36160,6 +36019,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &854285906
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -36340,6 +36203,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &856708210
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -37088,6 +36955,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &869768960
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -37755,6 +37626,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &890099727
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -37935,6 +37810,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &894892129
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -38042,68 +37921,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894892125}
   m_Mesh: {fileID: -5100648875313457504, guid: 75d5e74f171c0ff459e09b14934162c2, type: 3}
---- !u!1001 &900341052
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (23)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 21.86628
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -96.643295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &900341053 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 900341052}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &902404576
 GameObject:
   m_ObjectHideFlags: 0
@@ -38177,6 +37994,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &902404580
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -38357,6 +38178,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &903043318
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -38537,6 +38362,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &913591344
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -38872,68 +38701,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 922538797}
   m_Mesh: {fileID: 4300000, guid: 5b37bebced2befa4cb0fa7e92016e465, type: 3}
---- !u!1001 &926586613
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 21.166283
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -90.433304
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &926586614 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 926586613}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &930022735
 GameObject:
   m_ObjectHideFlags: 0
@@ -39007,6 +38774,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &930022739
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -39187,6 +38958,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &931377129
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -39367,6 +39142,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &933501529
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -39547,6 +39326,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &935966386
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -39727,6 +39510,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &938382129
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -40475,6 +40262,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &958736905
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -40768,6 +40559,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &964748232
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -41419,6 +41214,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &980387256
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -41599,6 +41398,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &985120273
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -42248,6 +42051,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1003224211
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -42669,6 +42476,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1018158086
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -42849,6 +42660,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1020014391
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -43151,6 +42966,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1024344148
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -43331,6 +43150,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1028532030
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -43718,6 +43541,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1036850200
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -43898,6 +43725,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1042014710
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -44199,6 +44030,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1046748016
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -44379,6 +44214,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1049010134
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -44559,6 +44398,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1049609070
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -44739,6 +44582,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1054405761
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -44919,6 +44766,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1055435968
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -45099,6 +44950,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1056513415
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -45335,68 +45190,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061305935}
   m_Mesh: {fileID: 4300000, guid: a31ede3a68c1fc642a73d7ab6870b43e, type: 3}
---- !u!1001 &1070060470
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (16)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 19.066284
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -98.76329
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &1070060471 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 1070060470}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1070983547
 GameObject:
   m_ObjectHideFlags: 0
@@ -45470,6 +45263,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1070983551
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -45992,6 +45789,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1077844791
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -46172,6 +45973,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1084560116
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -46352,6 +46157,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1085808962
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -46656,6 +46465,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1097385992
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -46950,6 +46763,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1106192025
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -47130,6 +46947,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1119594163
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -47310,6 +47131,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1120986518
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -47490,6 +47315,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1121404171
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -47913,6 +47742,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1141468887
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -48020,68 +47853,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1141468883}
   m_Mesh: {fileID: -5100648875313457504, guid: 75d5e74f171c0ff459e09b14934162c2, type: 3}
---- !u!1001 &1145131286
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (21)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 18.376282
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -96.643295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &1145131287 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 1145131286}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1146475248
 GameObject:
   m_ObjectHideFlags: 0
@@ -48155,6 +47926,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1146475252
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -48335,6 +48110,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1148013868
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -48866,6 +48645,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1165616488
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -49046,6 +48829,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1167185314
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -49226,6 +49013,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1167361754
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -49406,6 +49197,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1170903515
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -49586,6 +49381,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1177149776
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -50114,6 +49913,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1186946076
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -50408,6 +50211,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1190259303
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -50588,6 +50395,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1196040776
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -50768,6 +50579,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1196364669
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -50948,6 +50763,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1203948844
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -51542,6 +51361,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1222559918
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -51815,6 +51638,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1225703598
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -52108,6 +51935,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1228285329
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -52415,6 +52246,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1235248308
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -53231,6 +53066,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1241541740
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -53411,6 +53250,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1242232588
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -53591,6 +53434,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1249102650
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -53908,6 +53755,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1261412180
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -54088,6 +53939,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1266174679
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -54494,6 +54349,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1273569366
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -55015,6 +54874,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1280719946
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -55195,6 +55058,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1280803668
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -55489,6 +55356,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1297000645
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -55669,6 +55540,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1298695266
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -55963,6 +55838,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1307421360
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -56143,6 +56022,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1311313993
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -56444,6 +56327,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1314978900
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -56624,6 +56511,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1318987669
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -56804,6 +56695,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1327716603
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -56984,6 +56879,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1330393476
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -57164,6 +57063,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1332376635
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -57344,6 +57247,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1332494872
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -57524,6 +57431,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1334745020
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -57978,130 +57889,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346206630}
   m_Mesh: {fileID: 4300000, guid: 72e65272e9752d842a914dd27fd86306, type: 3}
---- !u!1001 &1346592102
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 24.68628
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -90.433304
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &1346592103 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 1346592102}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1348212022
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (20)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 20.11628
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -96.643295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &1348212023 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 1348212022}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1360103050 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5396430742756067038, guid: a151a32ca69371a448f732b2315a428d, type: 3}
@@ -58190,6 +57977,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1364088784
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -58491,6 +58282,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1367711720
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -58702,6 +58497,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1368922620
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -59391,6 +59190,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1392308379
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -59848,6 +59651,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1402553938
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -60100,6 +59907,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1406299673
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -60280,6 +60091,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1410800518
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -60574,6 +60389,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1419842028
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -60754,6 +60573,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1420695017
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -60861,68 +60684,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420695013}
   m_Mesh: {fileID: -5100648875313457504, guid: 75d5e74f171c0ff459e09b14934162c2, type: 3}
---- !u!1001 &1423346299
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (14)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 28.066277
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -98.76329
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &1423346300 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 1423346299}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1423533276
 GameObject:
   m_ObjectHideFlags: 0
@@ -60996,6 +60757,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1423533280
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -61176,6 +60941,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1423916371
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -61356,6 +61125,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1425895775
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -61478,68 +61251,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2138911570068330377, guid: a151a32ca69371a448f732b2315a428d, type: 3}
   m_PrefabInstance: {fileID: 2079741342}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1426962703
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (13)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 24.54628
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -98.76329
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &1426962704 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 1426962703}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1429725095
 GameObject:
   m_ObjectHideFlags: 0
@@ -61613,6 +61324,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1429725099
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -61793,6 +61508,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1430010327
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -61973,6 +61692,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1435801511
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -62153,6 +61876,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1438881718
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -62333,6 +62060,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1446550451
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -62513,6 +62244,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1448686776
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -62806,6 +62541,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1459991353
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -62986,6 +62725,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1460893233
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -63166,6 +62909,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1461732264
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -63346,6 +63093,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1465215199
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -63526,6 +63277,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1465808806
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -63737,6 +63492,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1473883206
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -63917,6 +63676,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1476431813
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -64210,6 +63973,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1481472578
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -64390,6 +64157,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1484022205
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -64575,6 +64346,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1485461081
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -64755,6 +64530,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1485737241
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -65288,6 +65067,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1490789971
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -65620,6 +65403,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1500151110
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -65800,6 +65587,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1500229264
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -65980,6 +65771,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1503205731
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -66160,6 +65955,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1504433196
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -66659,68 +66458,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1515758976}
   m_Mesh: {fileID: 4300000, guid: 55ca7edad2f1e3b40b4dc5801b9f454b, type: 3}
---- !u!1001 &1516337807
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (17)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 20.806282
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -98.76329
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &1516337808 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 1516337807}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1520480195
 GameObject:
   m_ObjectHideFlags: 0
@@ -66907,6 +66644,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1528996206
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -67232,6 +66973,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1537720490
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -67526,6 +67271,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1538904409
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -67706,6 +67455,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1540768769
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -67886,6 +67639,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1541426211
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -68066,6 +67823,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1543303718
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -68633,6 +68394,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1555873392
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -68926,6 +68691,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1560191289
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -69106,6 +68875,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1560667189
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -69286,6 +69059,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1565543756
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -69466,6 +69243,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1572674396
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -69646,6 +69427,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1574684068
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -69826,6 +69611,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1574795225
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -70006,6 +69795,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1583420038
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -70408,6 +70201,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1600793799
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -70702,6 +70499,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1606010094
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -71011,6 +70812,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1614976487
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -71432,6 +71237,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1631257688
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -72059,6 +71868,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1649243907
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -72353,6 +72166,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1654683326
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -72533,6 +72350,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1655060596
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -72713,6 +72534,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1662861866
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -73006,6 +72831,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1669181761
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -73186,6 +73015,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1669491161
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -73366,6 +73199,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1670629760
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -73898,6 +73735,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1678610624
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -74078,6 +73919,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1685680361
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -74258,6 +74103,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1685812207
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -74552,6 +74401,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1687729433
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -74732,6 +74585,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1693521108
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -74912,6 +74769,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1695159684
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -75206,6 +75067,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1707555195
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -75515,6 +75380,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1714674652
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -75695,6 +75564,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1723110378
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -75802,62 +75675,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1723110374}
   m_Mesh: {fileID: -5100648875313457504, guid: 75d5e74f171c0ff459e09b14934162c2, type: 3}
---- !u!1 &1726826423
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1726826424}
-  m_Layer: 0
-  m_Name: pin
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1726826424
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1726826423}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 65.99372, y: 22.4095, z: -227.6967}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 655502173}
-  - {fileID: 926586614}
-  - {fileID: 749167924}
-  - {fileID: 771049823}
-  - {fileID: 1786829894}
-  - {fileID: 604500019}
-  - {fileID: 339915306}
-  - {fileID: 1780851426}
-  - {fileID: 1145131287}
-  - {fileID: 1348212023}
-  - {fileID: 817480713}
-  - {fileID: 138723791}
-  - {fileID: 87172973}
-  - {fileID: 1423346300}
-  - {fileID: 1426962704}
-  - {fileID: 399721738}
-  - {fileID: 1516337808}
-  - {fileID: 1070060471}
-  - {fileID: 101225119}
-  - {fileID: 1944568578}
-  - {fileID: 900341053}
-  - {fileID: 2135476191}
-  - {fileID: 1781789991}
-  - {fileID: 1851071436}
-  - {fileID: 1346592103}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1733378458
 GameObject:
   m_ObjectHideFlags: 0
@@ -75931,6 +75748,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1733378462
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -76111,6 +75932,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1735962426
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -76634,6 +76459,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1749428483
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -77176,6 +77005,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1754343638
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -77356,6 +77189,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1754461461
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -77649,6 +77486,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1757668297
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -77829,6 +77670,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1761178800
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -78130,6 +77975,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1770914151
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -78431,6 +78280,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1778632941
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -78683,192 +78536,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 329156374}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!1001 &1780851425
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (18)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 20.996277
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -94.4933
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &1780851426 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 1780851425}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1781789990
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (9)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 27.346283
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -96.643295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &1781789991 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 1781789990}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1786829893
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (8)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 26.446281
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -94.4933
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &1786829894 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 1786829893}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1787827800
 GameObject:
   m_ObjectHideFlags: 0
@@ -78942,6 +78609,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1787827804
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -79122,6 +78793,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1790422280
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -79302,6 +78977,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1791542422
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -79603,6 +79282,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1797657173
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -79783,6 +79466,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1799884367
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -80077,6 +79764,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1816220577
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -80370,6 +80061,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1817453582
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -80550,6 +80245,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1820988417
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -81170,6 +80869,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1839895180
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -81350,6 +81053,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1843488510
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -81457,68 +81164,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1843488506}
   m_Mesh: {fileID: -5100648875313457504, guid: 75d5e74f171c0ff459e09b14934162c2, type: 3}
---- !u!1001 &1851071435
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 25.596275
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -92.433304
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &1851071436 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 1851071435}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1851076097
 GameObject:
   m_ObjectHideFlags: 0
@@ -81592,6 +81237,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1851076101
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -81803,6 +81452,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1857435405
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -82058,6 +81711,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1866732034
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -82238,6 +81895,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1871283965
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -82418,6 +82079,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1872918675
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -82598,6 +82263,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1873526083
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -82892,6 +82561,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1888367952
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -83072,6 +82745,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1897165003
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -83252,6 +82929,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1897911762
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -83432,6 +83113,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1898918378
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -83726,6 +83411,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1908090290
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -83906,6 +83595,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1908821561
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -84199,6 +83892,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1912734570
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -84902,6 +84599,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1943733596
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -85082,6 +84783,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1944516331
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -85189,68 +84894,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1944516327}
   m_Mesh: {fileID: -5100648875313457504, guid: 75d5e74f171c0ff459e09b14934162c2, type: 3}
---- !u!1001 &1944568577
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (10)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 23.826286
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -96.643295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &1944568578 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 1944568577}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1947570011
 GameObject:
   m_ObjectHideFlags: 0
@@ -85580,6 +85223,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1968423264
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -85760,6 +85407,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1969634220
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -85940,6 +85591,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1974795798
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -86120,6 +85775,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1975952733
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -86300,6 +85959,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1977223996
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -86480,6 +86143,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1985598088
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -86774,6 +86441,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1989297572
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -86954,6 +86625,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &1999631990
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -87134,6 +86809,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2003174046
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -87314,6 +86993,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2008893448
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -87494,6 +87177,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2013422589
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -87674,6 +87361,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2015333006
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -87854,6 +87545,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2023497199
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -88034,6 +87729,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2025874825
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -88214,6 +87913,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2028597342
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -88394,6 +88097,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2032612539
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -88574,6 +88281,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2041108642
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -88754,6 +88465,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2041459635
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -89048,6 +88763,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2058162563
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -89462,6 +89181,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2064248118
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -89642,6 +89365,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2064441874
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -90142,6 +89869,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2073816254
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -90322,6 +90053,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2073990094
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -91547,6 +91282,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2087095871
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -91965,6 +91704,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2099437252
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -92145,6 +91888,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2104336373
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -92438,6 +92185,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2122588430
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -92618,6 +92369,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2123903788
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -92798,6 +92553,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2125036072
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -92978,6 +92737,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2126547134
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -93158,6 +92921,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2128215145
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -93459,68 +93226,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8181764595702705224, guid: d2b004dfa23d00c4b822b56eef6e64a0, type: 3}
   m_PrefabInstance: {fileID: 2130678637}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &2135476190
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1726826424}
-    m_Modifications:
-    - target: {fileID: 199473842351325521, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_Name
-      value: Pin (24)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 17.076279
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -20.729527
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -98.84331
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
---- !u!4 &2135476191 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1247685711363836028, guid: 335badcaae39d9b48afa28be2dd1efe3, type: 3}
-  m_PrefabInstance: {fileID: 2135476190}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2139131460
 GameObject:
   m_ObjectHideFlags: 0
@@ -93791,6 +93496,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2140370553
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -93971,6 +93680,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2142421188
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -94151,6 +93864,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2143311384
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -94458,6 +94175,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingPin
   knockdownAngle: 30
+  impactVelocityMultiplier: 0.22
+  minimumImpactVelocity: 2.5
+  maximumExtraVelocity: 4.5
+  upwardImpactBoost: 0.08
 --- !u!54 &2145500775
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -94616,7 +94337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BasicSpawner
   _playerPrefab:
-    RawGuidValue: 0e2364598be860f47bd8704cae9b7598
+    RawGuidValue: a402ce26aaa5f0f42a3c729794ec7fba
   _spawnPoints:
   - {fileID: 329156374}
   - {fileID: 110116095}
@@ -94628,6 +94349,7 @@ MonoBehaviour:
   - {fileID: 1779594350}
   - {fileID: 141088731}
   - {fileID: 1368195337}
+  _minimumSpawnDistance: 2.5
 --- !u!224 &1493570675732165992
 RectTransform:
   m_ObjectHideFlags: 0
@@ -95236,6 +94958,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9075901731311791238, guid: 3247db75de5506c4182b94e21d52963b, type: 3}
+      propertyPath: SortKey
+      value: 1960309454
+      objectReference: {fileID: 0}
     - target: {fileID: 3438974039802528380, guid: 3247db75de5506c4182b94e21d52963b, type: 3}
       propertyPath: m_Name
       value: kuruma
@@ -97131,7 +96857,6 @@ SceneRoots:
   - {fileID: 248082728}
   - {fileID: 2139131468}
   - {fileID: 1023437060}
-  - {fileID: 1726826424}
   - {fileID: 712711415}
   - {fileID: 6276762589825683873}
   - {fileID: 47133619}
