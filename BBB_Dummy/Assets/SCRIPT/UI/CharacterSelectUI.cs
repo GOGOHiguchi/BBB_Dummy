@@ -1,652 +1,262 @@
 using System.Collections;
 using System.Collections.Generic;
-using Fusion;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
-/// <summary>
-/// ロビー用アバター選択画面。Canvasに追加するとUIを自動生成する。
-/// CharacterModelDatabaseの49モデルからサムネイルをランタイム生成する。
-/// </summary>
 [DisallowMultipleComponent]
 public sealed class CharacterSelectUI : MonoBehaviour
 {
-    private const string DatabaseResourceName = "CharacterModelDatabase";
-    private const int PreviewLayer = 31;
-
-    [Header("表示設定")]
+    [Header("Canvasに保存するUI")]
+    [SerializeField] private GameObject panelRoot;
+    [SerializeField] private RawImage previewImage;
+    [SerializeField] private Text selectedNameText;
+    [SerializeField] private Transform modelListRoot;
+    [SerializeField] private Button maleTabButton;
+    [SerializeField] private Button femaleTabButton;
+    [SerializeField] private Button confirmButton;
+    [SerializeField] private Button cancelButton;
     [SerializeField] private CharacterModelDatabase database;
-    [SerializeField] private bool showOnStart = true;
-    [SerializeField] private Color panelColor = new Color(0.025f, 0.12f, 0.25f, 0.97f);
 
-    private readonly List<Texture2D> _thumbnailTextures = new List<Texture2D>();
-    private readonly List<Sprite> _thumbnailSprites = new List<Sprite>();
-    private readonly Dictionary<int, Sprite> _thumbnailById = new Dictionary<int, Sprite>();
-    private readonly Dictionary<int, TilePortrait> _tilesById = new Dictionary<int, TilePortrait>();
-    private readonly List<Button> _maleButtons = new List<Button>();
-    private readonly List<Button> _femaleButtons = new List<Button>();
+    private const int PreviewLayer = 31;
+    private readonly Dictionary<int, RawImage> portraits = new Dictionary<int, RawImage>();
+    private readonly List<RenderTexture> thumbnailTextures = new List<RenderTexture>();
+    private Camera previewCamera, thumbnailCamera;
+    private RenderTexture previewTexture;
+    private Transform stage;
+    private GameObject previewModel;
+    private CharacterModelSwitcher target;
+    private int selectedId, originalId;
+    private bool showFemale, opened;
 
-    private RectTransform _root;
-    private RectTransform _gridContent;
-    private ScrollRect _scrollRect;
-    private RawImage _previewImage;
-    private Text _maleCount;
-    private Text _femaleCount;
-    private Text _selectedName;
-    private Text _statusText;
-    private Button _maleTab;
-    private Button _femaleTab;
-    private Button _confirmButton;
-    private Button _cancelButton;
+    public static bool IsAnyOpen { get; private set; }
+    public bool IsOpen => opened;
 
-    private Camera _previewCamera;
-    private RenderTexture _previewTexture;
-    private Transform _previewStage;
-    private GameObject _previewModel;
-    private CharacterModelSwitcher _localSwitcher;
-
-    private int _selectedId;
-    private int _originalId;
-    private bool _showFemale;
-    private bool _built;
-    private bool _closed;
-
-    private Font _font;
-    private RuntimeAnimatorController _sharedAnimatorController;
-
-    private void Start()
+    private void Awake()
     {
-        if (database == null)
-            database = Resources.Load<CharacterModelDatabase>(DatabaseResourceName);
-
-        if (database == null)
+        if (database == null) database = Resources.Load<CharacterModelDatabase>("CharacterModelDatabase");
+        if (panelRoot == null || previewImage == null || modelListRoot == null ||
+            maleTabButton == null || femaleTabButton == null || confirmButton == null || cancelButton == null || database == null)
         {
-            Debug.LogError("[CharacterSelectUI] Resources/CharacterModelDatabase が見つかりません。", this);
-            return;
+            Debug.LogError("[CharacterSelectUI] UI参照またはCharacterModelDatabaseが不足しています。Tools/BBB/Build Character Select UI in 2_Lobbyを実行してください。", this);
+            enabled = false; return;
         }
 
-        _localSwitcher = FindLocalSwitcher();
-        PlayerMovement localMovement = _localSwitcher != null
-            ? _localSwitcher.GetComponent<PlayerMovement>()
-            : FindFirstObjectByType<PlayerMovement>();
-        Animator sourceAnimator = localMovement != null
-            ? localMovement.GetComponentInChildren<Animator>(true)
-            : null;
-        if (sourceAnimator != null)
-            _sharedAnimatorController = sourceAnimator.runtimeAnimatorController;
+        maleTabButton.onClick.AddListener(() => SetGender(false));
+        femaleTabButton.onClick.AddListener(() => SetGender(true));
+        confirmButton.onClick.AddListener(Confirm);
+        cancelButton.onClick.AddListener(Cancel);
+        panelRoot.SetActive(false);
+        BuildCameras();
+        BuildTiles();
+        StartCoroutine(BuildThumbnails());
+    }
 
-        _originalId = _localSwitcher != null
-            ? _localSwitcher.SavedModelId
-            : PlayerPrefs.GetInt(CharacterModelSwitcher.PreferenceKey, 0);
-
-        if (!database.IsValidId(_originalId))
-            _originalId = 0;
-
-        _selectedId = _originalId;
-        _showFemale = _selectedId >= 29;
-
-        BuildPreviewStage();
-        BuildInterface();
-        RefreshGrid();
-        UpdatePreview(_selectedId);
-        SetVisible(showOnStart);
-
-        if (_previewModel != null)
-            _previewModel.SetActive(false);
-        StartCoroutine(GenerateAllThumbnails());
+    private void Update()
+    {
+        if (opened && Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame) Cancel();
     }
 
     private void LateUpdate()
     {
-        if (_previewModel != null && !_closed)
-            _previewModel.transform.Rotate(0f, 12f * Time.unscaledDeltaTime, 0f, Space.World);
-    }
-
-    private CharacterModelSwitcher FindLocalSwitcher()
-    {
-        CharacterModelSwitcher[] switchers = FindObjectsByType<CharacterModelSwitcher>(FindObjectsSortMode.None);
-        foreach (CharacterModelSwitcher candidate in switchers)
+        if (opened && previewModel != null)
         {
-            if (candidate != null && candidate.Object != null && candidate.HasInputAuthority)
-                return candidate;
-        }
-        return null;
-    }
-
-    private void BuildPreviewStage()
-    {
-        GameObject stage = new GameObject("CharacterSelect_PreviewStage");
-        stage.transform.position = new Vector3(0f, -1000f, 0f);
-        _previewStage = stage.transform;
-
-        GameObject cameraObject = new GameObject("CharacterSelect_PreviewCamera");
-        cameraObject.transform.SetParent(_previewStage, false);
-        _previewCamera = cameraObject.AddComponent<Camera>();
-        _previewCamera.enabled = false;
-        _previewCamera.clearFlags = CameraClearFlags.SolidColor;
-        _previewCamera.backgroundColor = new Color(0.12f, 0.68f, 0.88f, 1f);
-        _previewCamera.orthographic = true;
-        _previewCamera.nearClipPlane = 0.05f;
-        _previewCamera.farClipPlane = 30f;
-        _previewCamera.cullingMask = 1 << PreviewLayer;
-
-        _previewTexture = new RenderTexture(256, 320, 16, RenderTextureFormat.ARGB32);
-        _previewTexture.name = "CharacterSelect_Preview_RT";
-        _previewTexture.Create();
-        _previewCamera.targetTexture = _previewTexture;
-    }
-
-    private void BuildInterface()
-    {
-        if (_built) return;
-        _built = true;
-
-        _font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        if (_font == null)
-            _font = Font.CreateDynamicFontFromOSFont("Arial", 20);
-
-        _root = CreateRect("CharacterSelect_Root", transform);
-        Stretch(_root);
-        Image rootImage = _root.gameObject.AddComponent<Image>();
-        rootImage.color = new Color(0.015f, 0.045f, 0.10f, 0.96f);
-        rootImage.raycastTarget = true;
-
-        RectTransform left = CreateRect("LeftPanel", _root);
-        Anchor(left, 0.015f, 0.025f, 0.335f, 0.975f);
-        AddImage(left, new Color(0.025f, 0.20f, 0.36f, 0.98f), 22);
-
-        RectTransform right = CreateRect("RightPanel", _root);
-        Anchor(right, 0.35f, 0.025f, 0.985f, 0.975f);
-        AddImage(right, new Color(0.015f, 0.07f, 0.16f, 0.98f), 22);
-
-        CreateText(left, "CHARACTERS", 38, FontStyle.Bold, Color.white,
-            new Vector2(0.04f, 0.91f), new Vector2(0.96f, 0.99f), TextAnchor.MiddleCenter);
-        CreateText(left, "キャラクター", 27, FontStyle.Bold, Color.white,
-            new Vector2(0.04f, 0.855f), new Vector2(0.96f, 0.925f), TextAnchor.MiddleCenter);
-
-        RectTransform previewFrame = CreateRect("PreviewFrame", left);
-        Anchor(previewFrame, 0.055f, 0.205f, 0.945f, 0.845f);
-        AddImage(previewFrame, new Color(0.05f, 0.52f, 0.73f, 1f), 18);
-
-        RectTransform previewRect = CreateRect("AvatarPreview", previewFrame);
-        Stretch(previewRect);
-        _previewImage = previewRect.gameObject.AddComponent<RawImage>();
-        _previewImage.texture = _previewTexture;
-        _previewImage.color = Color.white;
-        _previewImage.raycastTarget = false;
-
-        _selectedName = CreateText(left, "", 24, FontStyle.Bold, Color.white,
-            new Vector2(0.08f, 0.14f), new Vector2(0.92f, 0.205f), TextAnchor.MiddleCenter);
-
-        _cancelButton = CreateButton(left, "もどる\n(CANCEL)", new Color(0.10f, 0.43f, 0.78f),
-            new Vector2(0.055f, 0.035f), new Vector2(0.475f, 0.135f), 27, CancelSelection);
-        _confirmButton = CreateButton(left, "決定\n(SAVE)", new Color(0.15f, 0.72f, 0.16f),
-            new Vector2(0.525f, 0.035f), new Vector2(0.945f, 0.135f), 29, ConfirmSelection);
-
-        CreateText(right, "アバター設定", 48, FontStyle.Bold, new Color(1f, 0.84f, 0.15f),
-            new Vector2(0.05f, 0.89f), new Vector2(0.95f, 0.99f), TextAnchor.MiddleCenter);
-        CreateText(right, "CHOOSE YOUR CHARACTER", 24, FontStyle.Bold, Color.white,
-            new Vector2(0.05f, 0.845f), new Vector2(0.95f, 0.90f), TextAnchor.MiddleCenter);
-
-        _maleTab = CreateButton(right, "男性  (29)\nMALE / BOYS", new Color(0.06f, 0.40f, 0.88f),
-            new Vector2(0.035f, 0.735f), new Vector2(0.49f, 0.835f), 27,
-            () => SetGender(false));
-        _femaleTab = CreateButton(right, "女性  (20)\nFEMALE / GIRLS", new Color(0.90f, 0.25f, 0.10f),
-            new Vector2(0.51f, 0.735f), new Vector2(0.965f, 0.835f), 27,
-            () => SetGender(true));
-
-        _maleCount = CreateText(right, "29", 25, FontStyle.Bold, Color.white,
-            new Vector2(0.43f, 0.72f), new Vector2(0.49f, 0.78f), TextAnchor.MiddleCenter);
-        _femaleCount = CreateText(right, "20", 25, FontStyle.Bold, Color.white,
-            new Vector2(0.905f, 0.72f), new Vector2(0.965f, 0.78f), TextAnchor.MiddleCenter);
-
-        RectTransform scrollArea = CreateRect("CharacterScrollView", right);
-        Anchor(scrollArea, 0.025f, 0.025f, 0.975f, 0.715f);
-        Image scrollBackground = AddImage(scrollArea, new Color(0.005f, 0.035f, 0.09f, 1f), 16);
-
-        _scrollRect = scrollArea.gameObject.AddComponent<ScrollRect>();
-        _scrollRect.horizontal = false;
-        _scrollRect.vertical = true;
-        _scrollRect.movementType = ScrollRect.MovementType.Clamped;
-        _scrollRect.scrollSensitivity = 35f;
-
-        RectTransform viewport = CreateRect("Viewport", scrollArea);
-        Stretch(viewport);
-        Image viewportImage = viewport.gameObject.AddComponent<Image>();
-        viewportImage.color = Color.white;
-        viewportImage.raycastTarget = true;
-        Mask mask = viewport.gameObject.AddComponent<Mask>();
-        mask.showMaskGraphic = false;
-
-        _gridContent = CreateRect("GridContent", viewport);
-        _gridContent.anchorMin = new Vector2(0f, 1f);
-        _gridContent.anchorMax = new Vector2(1f, 1f);
-        _gridContent.pivot = new Vector2(0.5f, 1f);
-        _gridContent.anchoredPosition = Vector2.zero;
-        _gridContent.sizeDelta = new Vector2(0f, 0f);
-
-        GridLayoutGroup grid = _gridContent.gameObject.AddComponent<GridLayoutGroup>();
-        grid.padding = new RectOffset(12, 12, 12, 12);
-        grid.spacing = new Vector2(12f, 12f);
-        grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
-        grid.constraintCount = 5;
-        grid.cellSize = new Vector2(205f, 210f);
-        grid.startCorner = GridLayoutGroup.Corner.UpperLeft;
-        grid.startAxis = GridLayoutGroup.Axis.Horizontal;
-        grid.childAlignment = TextAnchor.UpperCenter;
-
-        ContentSizeFitter fitter = _gridContent.gameObject.AddComponent<ContentSizeFitter>();
-        fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-
-        _scrollRect.viewport = viewport;
-        _scrollRect.content = _gridContent;
-
-        _statusText = CreateText(right, "", 16, FontStyle.Normal, Color.white,
-            new Vector2(0.04f, 0.0f), new Vector2(0.96f, 0.035f), TextAnchor.MiddleCenter);
-    }
-
-    private void RefreshGrid()
-    {
-        if (_gridContent == null) return;
-
-        for (int i = _gridContent.childCount - 1; i >= 0; i--)
-            Destroy(_gridContent.GetChild(i).gameObject);
-
-        _maleButtons.Clear();
-        _femaleButtons.Clear();
-
-        IReadOnlyList<CharacterModelDatabase.Entry> entries = database.Entries;
-        for (int i = 0; i < entries.Count; i++)
-        {
-            CharacterModelDatabase.Entry entry = entries[i];
-            if (entry == null || entry.Prefab == null || entry.IsFemale != _showFemale)
-                continue;
-
-            CreateCharacterTile(entry);
-        }
-
-        _scrollRect.verticalNormalizedPosition = 1f;
-        UpdateTabAppearance();
-    }
-
-    private void CreateCharacterTile(CharacterModelDatabase.Entry entry)
-    {
-        GameObject tileObject = new GameObject("Character_" + entry.Id, typeof(RectTransform), typeof(Image), typeof(Button));
-        tileObject.transform.SetParent(_gridContent, false);
-
-        Image tileImage = tileObject.GetComponent<Image>();
-        tileImage.color = new Color(0.025f, 0.25f, 0.58f, 1f);
-
-        Button button = tileObject.GetComponent<Button>();
-        button.transition = Selectable.Transition.ColorTint;
-        ColorBlock colors = button.colors;
-        colors.normalColor = Color.white;
-        colors.highlightedColor = new Color(0.75f, 0.9f, 1f);
-        colors.pressedColor = new Color(0.5f, 0.75f, 1f);
-        button.colors = colors;
-        button.onClick.AddListener(() => SelectCharacter(entry.Id));
-
-        Outline outline = tileObject.AddComponent<Outline>();
-        outline.effectColor = new Color(1f, 0.85f, 0.1f, 1f);
-        outline.effectDistance = new Vector2(4f, -4f);
-        outline.enabled = entry.Id == _selectedId;
-
-        RectTransform tileRect = tileObject.GetComponent<RectTransform>();
-        tileRect.sizeDelta = new Vector2(150f, 165f);
-
-        GameObject portraitObject = new GameObject("Portrait", typeof(RectTransform), typeof(Image));
-        portraitObject.transform.SetParent(tileObject.transform, false);
-        RectTransform portraitRect = portraitObject.GetComponent<RectTransform>();
-        Anchor(portraitRect, 0.06f, 0.20f, 0.94f, 0.96f);
-        Image portrait = portraitObject.GetComponent<Image>();
-        portrait.color = new Color(0.1f, 0.45f, 0.85f, 1f);
-        portrait.preserveAspect = true;
-        if (entry.Thumbnail != null)
-            portrait.sprite = entry.Thumbnail;
-        else if (_thumbnailById.TryGetValue(entry.Id, out Sprite cachedSprite))
-            portrait.sprite = cachedSprite;
-
-        Text placeholder = CreateText(tileObject.transform, entry.DisplayName, 14, FontStyle.Bold,
-            Color.white, new Vector2(0.04f, 0.015f), new Vector2(0.96f, 0.22f), TextAnchor.MiddleCenter);
-        placeholder.resizeTextForBestFit = true;
-        placeholder.horizontalOverflow = HorizontalWrapMode.Wrap;
-        placeholder.verticalOverflow = VerticalWrapMode.Truncate;
-
-        if (entry.IsFemale) _femaleButtons.Add(button);
-        else _maleButtons.Add(button);
-
-        TilePortrait portraitData = new TilePortrait { Image = portrait, Outline = outline, Id = entry.Id };
-        _tilesById[entry.Id] = portraitData;
-    }
-
-    private void SetGender(bool female)
-    {
-        if (_showFemale == female)
-            return;
-
-        _showFemale = female;
-        IReadOnlyList<CharacterModelDatabase.Entry> entries = database.Entries;
-        for (int i = 0; i < entries.Count; i++)
-        {
-            CharacterModelDatabase.Entry entry = entries[i];
-            if (entry != null && entry.Prefab != null && entry.IsFemale == female)
-            {
-                _selectedId = entry.Id;
-                break;
-            }
-        }
-
-        RefreshGrid();
-        UpdatePreview(_selectedId);
-        _statusText.text = "選択中: " + GetEntryName(_selectedId);
-    }
-
-    private void UpdateTabAppearance()
-    {
-        if (_maleTab != null)
-            _maleTab.interactable = _showFemale;
-        if (_femaleTab != null)
-            _femaleTab.interactable = !_showFemale;
-    }
-
-    private void SelectCharacter(int id)
-    {
-        if (!database.IsValidId(id)) return;
-
-        _selectedId = id;
-        _showFemale = id >= 29;
-        RefreshGrid();
-        UpdatePreview(id);
-
-        if (_localSwitcher == null)
-            _localSwitcher = FindLocalSwitcher();
-
-        _statusText.text = "選択中: " + GetEntryName(id);
-    }
-
-    private void UpdatePreview(int id)
-    {
-        if (_previewStage == null || !database.TryGetEntry(id, out CharacterModelDatabase.Entry entry))
-            return;
-
-        if (_previewModel != null)
-            Destroy(_previewModel);
-
-        _previewModel = Instantiate(entry.Prefab, _previewStage);
-        _previewModel.name = "Preview_" + entry.DisplayName;
-        _previewModel.transform.localPosition = Vector3.zero;
-        _previewModel.transform.localRotation = Quaternion.identity;
-        SetLayerRecursively(_previewModel, PreviewLayer);
-
-        Animator previewAnimator = _previewModel.GetComponentInChildren<Animator>(true);
-        if (previewAnimator != null)
-        {
-            if (_sharedAnimatorController != null)
-                previewAnimator.runtimeAnimatorController = _sharedAnimatorController;
-            previewAnimator.applyRootMotion = false;
-        }
-
-        FitPreviewCamera(_previewModel);
-        _previewCamera.Render();
-
-        if (_selectedName != null)
-            _selectedName.text = entry.DisplayName;
-    }
-
-    private void FitPreviewCamera(GameObject model)
-    {
-        Renderer[] renderers = model.GetComponentsInChildren<Renderer>(true);
-        if (renderers.Length == 0) return;
-
-        Bounds bounds = renderers[0].bounds;
-        for (int i = 1; i < renderers.Length; i++)
-            bounds.Encapsulate(renderers[i].bounds);
-
-        Vector3 center = bounds.center;
-        float height = Mathf.Max(bounds.size.y, 1f);
-        float width = Mathf.Max(bounds.size.x, 0.6f);
-        _previewCamera.orthographicSize = Mathf.Max(height * 0.62f, width * 0.85f);
-        _previewCamera.transform.position = center + new Vector3(0f, height * 0.12f, -5.5f);
-        _previewCamera.transform.LookAt(center + Vector3.up * (height * 0.08f));
-    }
-
-    private IEnumerator GenerateAllThumbnails()
-    {
-        if (_gridContent == null) yield break;
-
-        IReadOnlyList<CharacterModelDatabase.Entry> entries = database.Entries;
-        for (int i = 0; i < entries.Count; i++)
-        {
-            CharacterModelDatabase.Entry entry = entries[i];
-            if (entry == null || entry.Prefab == null) continue;
-
-            if (entry.Thumbnail != null || _thumbnailById.ContainsKey(entry.Id))
-                continue;
-
-            GameObject capture = Instantiate(entry.Prefab, _previewStage);
-            capture.name = "ThumbnailCapture_" + entry.DisplayName;
-            capture.transform.localPosition = Vector3.zero;
-            capture.transform.localRotation = Quaternion.identity;
-            SetLayerRecursively(capture, PreviewLayer);
-            Animator captureAnimator = capture.GetComponentInChildren<Animator>(true);
-            if (captureAnimator != null)
-            {
-                if (_sharedAnimatorController != null)
-                    captureAnimator.runtimeAnimatorController = _sharedAnimatorController;
-                captureAnimator.applyRootMotion = false;
-            }
-            FitPreviewCamera(capture);
-
-            yield return null;
-            yield return new WaitForEndOfFrame();
-            _previewCamera.Render();
-
-            RenderTexture previous = RenderTexture.active;
-            RenderTexture.active = _previewTexture;
-            Texture2D texture = new Texture2D(128, 160, TextureFormat.RGBA32, false);
-            texture.ReadPixels(new Rect(64f, 80f, 128f, 160f), 0, 0);
-            texture.Apply(false, false);
-            RenderTexture.active = previous;
-
-            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),
-                new Vector2(0.5f, 0.5f), 100f);
-            _thumbnailById[entry.Id] = sprite;
-            if (_tilesById.TryGetValue(entry.Id, out TilePortrait tile) && tile.Image != null)
-            {
-                tile.Image.sprite = sprite;
-                tile.Image.color = Color.white;
-                tile.Image.preserveAspect = true;
-            }
-            _thumbnailTextures.Add(texture);
-            _thumbnailSprites.Add(sprite);
-
-            Destroy(capture);
-            yield return null;
-        }
-
-        UpdatePreview(_selectedId);
-    }
-
-    private string GetEntryName(int id)
-    {
-        return database.TryGetEntry(id, out CharacterModelDatabase.Entry entry)
-            ? entry.DisplayName
-            : "Unknown";
-    }
-
-    private void ConfirmSelection()
-    {
-        if (!database.IsValidId(_selectedId)) return;
-
-        if (_localSwitcher == null)
-            _localSwitcher = FindLocalSwitcher();
-
-        bool confirmed = false;
-        if (_localSwitcher != null && _localSwitcher.HasInputAuthority)
-            confirmed = _localSwitcher.ConfirmSelection(_selectedId);
-
-        if (!confirmed)
-        {
-            PlayerPrefs.SetInt(CharacterModelSwitcher.PreferenceKey, _selectedId);
-            PlayerPrefs.Save();
-        }
-
-        _originalId = _selectedId;
-        _closed = true;
-        SetVisible(false);
-    }
-
-    private void CancelSelection()
-    {
-        if (_localSwitcher == null)
-            _localSwitcher = FindLocalSwitcher();
-
-        _selectedId = _originalId;
-        _showFemale = _selectedId >= 29;
-        UpdatePreview(_selectedId);
-        _closed = true;
-        SetVisible(false);
-    }
-
-    public void Open()
-    {
-        if (!_built || database == null) return;
-
-        _closed = false;
-        _selectedId = PlayerPrefs.GetInt(CharacterModelSwitcher.PreferenceKey, _originalId);
-        if (!database.IsValidId(_selectedId)) _selectedId = 0;
-        _showFemale = _selectedId >= 29;
-        RefreshGrid();
-        UpdatePreview(_selectedId);
-        SetVisible(true);
-    }
-
-    public void SetVisible(bool visible)
-    {
-        if (_root != null)
-            _root.gameObject.SetActive(visible);
-
-        if (visible)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            previewModel.transform.Rotate(Vector3.up, 14f * Time.unscaledDeltaTime, Space.World);
+            previewCamera.Render();
         }
     }
 
     private void OnDestroy()
     {
-        if (_previewCamera != null)
-            _previewCamera.targetTexture = null;
-        if (_previewTexture != null)
+        IsAnyOpen = false;
+        if (previewTexture != null) { previewTexture.Release(); Destroy(previewTexture); }
+        foreach (var rt in thumbnailTextures) if (rt != null) { rt.Release(); Destroy(rt); }
+        if (stage != null) Destroy(stage.gameObject);
+    }
+
+    public void Open(CharacterModelSwitcher player)
+    {
+        if (player == null || !enabled) return;
+        target = player;
+        originalId = player.SavedModelId;
+        if (!database.IsValidId(originalId)) originalId = 0;
+        selectedId = originalId;
+        showFemale = selectedId >= 29;
+        opened = IsAnyOpen = true;
+        panelRoot.SetActive(true);
+        SetGender(showFemale);
+        ShowModel(selectedId);
+        UpdateName();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    private void SetGender(bool female)
+    {
+        showFemale = female;
+        maleTabButton.interactable = female;
+        femaleTabButton.interactable = !female;
+        foreach (var pair in portraits)
         {
-            _previewTexture.Release();
-            Destroy(_previewTexture);
+            if (database.TryGetEntry(pair.Key, out var entry))
+                pair.Value.transform.parent.gameObject.SetActive(entry.IsFemale == showFemale);
         }
-        if (_previewModel != null)
-            Destroy(_previewModel);
-        if (_previewStage != null)
-            Destroy(_previewStage.gameObject);
-
-        foreach (Sprite sprite in _thumbnailSprites)
-            if (sprite != null) Destroy(sprite);
-        foreach (Texture2D texture in _thumbnailTextures)
-            if (texture != null) Destroy(texture);
     }
 
-    private RectTransform CreateRect(string objectName, Transform parent)
+    private void BuildTiles()
     {
-        GameObject go = new GameObject(objectName, typeof(RectTransform));
-        go.transform.SetParent(parent, false);
-        return go.GetComponent<RectTransform>();
+        foreach (Transform child in modelListRoot) Destroy(child.gameObject);
+        foreach (var pair in portraits) { }
+        portraits.Clear();
+
+        foreach (var entry in database.Entries)
+        {
+            if (entry == null || entry.Prefab == null) continue;
+            GameObject tile = new GameObject("Character_" + entry.Id, typeof(RectTransform), typeof(Image), typeof(Button), typeof(Outline));
+            tile.transform.SetParent(modelListRoot, false);
+            tile.GetComponent<RectTransform>().sizeDelta = new Vector2(150, 172);
+            tile.GetComponent<Image>().color = new Color(.035f,.22f,.52f,1);
+            tile.GetComponent<Button>().onClick.AddListener(() => Select(entry.Id));
+
+            GameObject portrait = new GameObject("Portrait", typeof(RectTransform), typeof(RawImage));
+            portrait.transform.SetParent(tile.transform, false);
+            var pr = portrait.GetComponent<RectTransform>();
+            pr.anchorMin = new Vector2(.05f,.22f); pr.anchorMax = new Vector2(.95f,.96f);
+            pr.offsetMin = pr.offsetMax = Vector2.zero;
+            var raw = portrait.GetComponent<RawImage>();
+            raw.raycastTarget = false;
+            if (entry.Thumbnail != null) raw.texture = entry.Thumbnail.texture;
+            portraits[entry.Id] = raw;
+
+            GameObject labelObj = new GameObject("Name", typeof(RectTransform), typeof(Text));
+            labelObj.transform.SetParent(tile.transform, false);
+            var lr = labelObj.GetComponent<RectTransform>();
+            lr.anchorMin = new Vector2(.02f,.01f); lr.anchorMax = new Vector2(.98f,.23f);
+            lr.offsetMin = lr.offsetMax = Vector2.zero;
+            var label = labelObj.GetComponent<Text>();
+            label.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            label.fontSize = 13; label.alignment = TextAnchor.MiddleCenter; label.color = Color.white;
+            label.resizeTextForBestFit = true; label.raycastTarget = false;
+            label.text = string.IsNullOrEmpty(entry.DisplayName) ? entry.Prefab.name : entry.DisplayName;
+            var outline = tile.GetComponent<Outline>();
+            outline.effectColor = new Color(1,.84f,.08f,1); outline.effectDistance = new Vector2(4,-4);
+            outline.enabled = false;
+            tile.SetActive(false);
+        }
     }
 
-    private void Stretch(RectTransform rect)
+    private IEnumerator BuildThumbnails()
     {
-        rect.anchorMin = Vector2.zero;
-        rect.anchorMax = Vector2.one;
-        rect.offsetMin = Vector2.zero;
-        rect.offsetMax = Vector2.zero;
+        foreach (var entry in database.Entries)
+        {
+            if (entry == null || entry.Prefab == null || entry.Thumbnail != null) continue;
+            GameObject model = Instantiate(entry.Prefab, stage);
+            SetLayer(model, PreviewLayer);
+            RenderTexture rt = new RenderTexture(144,160,16,RenderTextureFormat.ARGB32);
+            rt.Create(); thumbnailTextures.Add(rt);
+            Frame(thumbnailCamera, model, 2.5f);
+            thumbnailCamera.targetTexture = rt;
+            thumbnailCamera.Render();
+            if (portraits.TryGetValue(entry.Id, out var image)) image.texture = rt;
+            Destroy(model);
+            yield return null;
+        }
     }
 
-    private void Anchor(RectTransform rect, float xMin, float yMin, float xMax, float yMax)
+    private void BuildCameras()
     {
-        rect.anchorMin = new Vector2(xMin, yMin);
-        rect.anchorMax = new Vector2(xMax, yMax);
-        rect.offsetMin = Vector2.zero;
-        rect.offsetMax = Vector2.zero;
+        GameObject stageObject = new GameObject("CharacterSelect_PreviewStage");
+        stageObject.transform.position = new Vector3(0,-1000,0);
+        stage = stageObject.transform;
+        previewTexture = new RenderTexture(512,640,16,RenderTextureFormat.ARGB32);
+        previewTexture.Create(); previewImage.texture = previewTexture;
+        previewCamera = MakeCamera("PreviewCamera", previewTexture);
+        thumbnailCamera = MakeCamera("ThumbnailCamera", null);
     }
 
-    private Image AddImage(RectTransform rect, Color color, float radius)
+    private Camera MakeCamera(string name, RenderTexture rt)
     {
-        Image image = rect.gameObject.AddComponent<Image>();
-        image.color = color;
-        return image;
+        GameObject go = new GameObject(name); go.transform.SetParent(stage,false);
+        Camera cam = go.AddComponent<Camera>();
+        cam.enabled = false; cam.clearFlags = CameraClearFlags.SolidColor;
+        cam.backgroundColor = new Color(.10f,.62f,.84f);
+        cam.orthographic = true; cam.nearClipPlane = .05f; cam.farClipPlane = 40;
+        cam.cullingMask = 1 << PreviewLayer; cam.targetTexture = rt;
+        return cam;
     }
 
-    private Text CreateText(Transform parent, string value, int size, FontStyle style, Color color,
-        Vector2 anchorMin, Vector2 anchorMax, TextAnchor alignment)
+    private void ShowModel(int id)
     {
-        GameObject go = new GameObject("Text_" + value, typeof(RectTransform), typeof(Text));
-        go.transform.SetParent(parent, false);
-        RectTransform rect = go.GetComponent<RectTransform>();
-        Anchor(rect, anchorMin.x, anchorMin.y, anchorMax.x, anchorMax.y);
-
-        Text text = go.GetComponent<Text>();
-        text.font = _font;
-        text.text = value;
-        text.fontSize = size;
-        text.fontStyle = style;
-        text.color = color;
-        text.alignment = alignment;
-        text.horizontalOverflow = HorizontalWrapMode.Overflow;
-        text.verticalOverflow = VerticalWrapMode.Overflow;
-        text.raycastTarget = false;
-        return text;
+        if (!database.TryGetEntry(id, out var entry)) return;
+        if (previewModel != null) Destroy(previewModel);
+        previewModel = Instantiate(entry.Prefab, stage);
+        SetLayer(previewModel, PreviewLayer);
+        Frame(previewCamera, previewModel, 2.15f);
+        previewCamera.targetTexture = previewTexture;
+        previewCamera.Render();
     }
 
-    private Button CreateButton(Transform parent, string label, Color color,
-        Vector2 anchorMin, Vector2 anchorMax, int fontSize, UnityEngine.Events.UnityAction action)
+    private void Frame(Camera cam, GameObject model, float scale)
     {
-        GameObject go = new GameObject("Button_" + label.Replace("\n", "_"),
-            typeof(RectTransform), typeof(Image), typeof(Button));
-        go.transform.SetParent(parent, false);
-
-        RectTransform rect = go.GetComponent<RectTransform>();
-        Anchor(rect, anchorMin.x, anchorMin.y, anchorMax.x, anchorMax.y);
-
-        Image image = go.GetComponent<Image>();
-        image.color = color;
-
-        Button button = go.GetComponent<Button>();
-        button.targetGraphic = image;
-        button.onClick.AddListener(action);
-
-        Outline outline = go.AddComponent<Outline>();
-        outline.effectColor = new Color(0f, 0f, 0f, 0.85f);
-        outline.effectDistance = new Vector2(3f, -3f);
-
-        Text text = CreateText(go.transform, label, fontSize, FontStyle.Bold, Color.white,
-            new Vector2(0.02f, 0.02f), new Vector2(0.98f, 0.98f), TextAnchor.MiddleCenter);
-        text.resizeTextForBestFit = true;
-        text.resizeTextMinSize = 12;
-        text.resizeTextMaxSize = fontSize;
-        text.lineSpacing = 0.9f;
-
-        return button;
+        var renderers = model.GetComponentsInChildren<Renderer>(true);
+        Bounds bounds = new Bounds(model.transform.position, Vector3.one);
+        bool found = false;
+        foreach (var r in renderers) { if (!found) { bounds=r.bounds; found=true; } else bounds.Encapsulate(r.bounds); }
+        Vector3 center = stage.position;
+        model.transform.position += center - bounds.center;
+        float h = Mathf.Max(bounds.size.y,1.2f), w = Mathf.Max(bounds.size.x,.7f);
+        cam.transform.position = center + Vector3.forward * Mathf.Max(h,w) * scale + Vector3.up*h*.04f;
+        cam.transform.LookAt(center + Vector3.up*h*.48f);
+        cam.orthographicSize = Mathf.Max(h*.58f,w*.9f);
     }
 
-    private static void SetLayerRecursively(GameObject target, int layer)
+    private void Select(int id)
     {
-        target.layer = layer;
-        foreach (Transform child in target.transform)
-            SetLayerRecursively(child.gameObject, layer);
+        if (!database.IsValidId(id)) return;
+        selectedId=id; ShowModel(id); UpdateName();
+        foreach (var entry in database.Entries)
+        {
+            if (entry == null) continue;
+            var tile = modelListRoot.Find("Character_"+entry.Id);
+            if (tile != null)
+            {
+                var outline=tile.GetComponent<Outline>();
+                if (outline != null) outline.enabled=entry.Id==selectedId;
+            }
+        }
     }
 
-    private sealed class TilePortrait
+    private void UpdateName()
     {
-        public int Id;
-        public Image Image;
-        public Outline Outline;
+        if (database.TryGetEntry(selectedId,out var entry) && selectedNameText != null)
+            selectedNameText.text = string.IsNullOrEmpty(entry.DisplayName) ? entry.Prefab.name : entry.DisplayName;
+    }
+
+    private void Confirm()
+    {
+        if (target == null || !target.ConfirmSelection(selectedId)) return;
+        Close();
+    }
+
+    private void Cancel()
+    {
+        if (target != null) target.CancelPreview();
+        selectedId=originalId;
+        Close();
+    }
+
+    private void Close()
+    {
+        opened=IsAnyOpen=false;
+        panelRoot.SetActive(false);
+        target=null;
+        Cursor.lockState=CursorLockMode.Locked;
+        Cursor.visible=false;
+    }
+
+    private static void SetLayer(GameObject obj,int layer)
+    {
+        obj.layer=layer;
+        foreach(Transform child in obj.transform) SetLayer(child.gameObject,layer);
     }
 }
