@@ -9,6 +9,14 @@ public class BowlingBallImpact : NetworkBehaviour
 {
     private bool hasCollidedWithPin = false;
 
+    [Header("ピン撃破時のプレイヤー処理")]
+    [Tooltip("ピンに当たったプレイヤーを後方へ吹き飛ばす水平速度")]
+    [SerializeField] private float finishKnockbackSpeed = 22f;
+    [Tooltip("吹き飛ばし時の上方向速度")]
+    [SerializeField] private float finishKnockbackUpSpeed = 8f;
+    [Tooltip("吹き飛ばしの継続時間")]
+    [SerializeField] private float finishKnockbackDuration = 2.5f;
+
     [Header("スコア判定・観戦移行設定")]
     [Tooltip("衝突後、ピンの転倒数を集計するまでの待機時間")]
     [SerializeField] private float scoreCalculationDelay = 5f;
@@ -101,9 +109,65 @@ public class BowlingBallImpact : NetworkBehaviour
             hasCollidedWithPin = true;
             hitPosition = transform.position;
 
+            // 最初のピン衝突時点でプレイヤーを吹き飛ばし、操作と再投球をロックする。
+            BeginOwnerPinFinish(collision);
+
             // ピンの転倒とスコア集計が終わるまで、プレイヤー視点を維持する。
             StartCoroutine(CalculateScoreAndRegisterRoutine());
         }
+    }
+
+    private void BeginOwnerPinFinish(Collision collision)
+    {
+        if (Object.InputAuthority == PlayerRef.None)
+        {
+            Debug.LogWarning("[BowlingBallImpact] ボールのInputAuthorityがないため、撃破プレイヤーを特定できません。", this);
+            return;
+        }
+
+        NetworkObject playerObject = Runner.GetPlayerObject(Object.InputAuthority);
+        if (playerObject == null)
+        {
+            Debug.LogWarning($"[BowlingBallImpact] PlayerObjectが見つかりません: {Object.InputAuthority}", this);
+            return;
+        }
+
+        PlayerMovement player = playerObject.GetComponent<PlayerMovement>();
+        if (player == null)
+        {
+            Debug.LogWarning("[BowlingBallImpact] PlayerMovementが見つかりません。", playerObject);
+            return;
+        }
+
+        Vector3 contactPoint = collision.contactCount > 0
+            ? collision.GetContact(0).point
+            : transform.position;
+
+        // ピンの衝突地点からプレイヤーがいる方向へ押し戻し、ピンの近くに残らないようにする。
+        Vector3 awayDirection = player.transform.position - contactPoint;
+        awayDirection.y = 0f;
+
+        if (awayDirection.sqrMagnitude < 0.01f)
+        {
+            Rigidbody ballRb = GetComponent<Rigidbody>();
+            Vector3 ballVelocity = ballRb != null ? ballRb.linearVelocity : transform.forward;
+            awayDirection = -ballVelocity;
+            awayDirection.y = 0f;
+        }
+
+        if (awayDirection.sqrMagnitude < 0.01f)
+        {
+            awayDirection = -transform.forward;
+            awayDirection.y = 0f;
+        }
+
+        awayDirection.Normalize();
+
+        Vector3 knockbackVelocity =
+            awayDirection * finishKnockbackSpeed +
+            Vector3.up * finishKnockbackUpSpeed;
+
+        player.BeginPinFinish(knockbackVelocity, finishKnockbackDuration);
     }
 
     private IEnumerator CalculateScoreAndRegisterRoutine()
