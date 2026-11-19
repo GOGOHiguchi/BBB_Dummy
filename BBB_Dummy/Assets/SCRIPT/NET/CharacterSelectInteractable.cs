@@ -9,22 +9,40 @@ public sealed class CharacterSelectInteractable : MonoBehaviour
 {
     [SerializeField] private CharacterSelectUI selectionUI;
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (selectionUI == null || selectionUI.IsOpen)
-            return;
+    private PlayerMovement _localPlayerInRange;
 
+    private void Awake()
+    {
+        if (selectionUI == null)
+            selectionUI = FindFirstObjectByType<CharacterSelectUI>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
         PlayerMovement player = other.GetComponentInParent<PlayerMovement>();
-        if (player == null || !player.HasInputAuthority)
+        if (player != null && player.HasInputAuthority)
+            _localPlayerInRange = player;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        PlayerMovement player = other.GetComponentInParent<PlayerMovement>();
+        if (player != null && player == _localPlayerInRange)
+            _localPlayerInRange = null;
+    }
+
+    private void Update()
+    {
+        if (_localPlayerInRange == null || selectionUI == null || selectionUI.IsOpen)
             return;
 
         if (Keyboard.current == null || !Keyboard.current.eKey.wasPressedThisFrame)
             return;
 
-        CharacterModelSwitcher switcher = player.GetComponent<CharacterModelSwitcher>();
+        CharacterModelSwitcher switcher = _localPlayerInRange.GetComponent<CharacterModelSwitcher>();
         if (switcher == null)
         {
-            Debug.LogWarning("[CharacterSelectInteractable] PlayerにCharacterModelSwitcherがありません。", player);
+            Debug.LogWarning("[CharacterSelectInteractable] PlayerにCharacterModelSwitcherがありません。", _localPlayerInRange);
             return;
         }
 
