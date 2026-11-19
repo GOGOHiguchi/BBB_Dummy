@@ -28,14 +28,9 @@ public class MovingCar : NetworkBehaviour
     [Tooltip("エフェクトを発生させないタグ（例: Mine, Aura など）")]
     [SerializeField] private List<string> ignoreEffectTags = new List<string> { "Mine", "Aura", "Invincible" };
 
-    private Vector3 _initialPosition;
-
     public override void Spawned()
     {
-        _initialPosition = transform.position;
-
-        // シーン配置オブジェクトとしてロードされているか確認しやすくするログ
-        Debug.Log($"[MovingCar] Spawned. StateAuthority={HasStateAuthority}, SceneObject={Object.IsSceneObject}");
+        Debug.Log($"[MovingCar] Spawned. StateAuthority={HasStateAuthority}");
     }
 
     public override void FixedUpdateNetwork()
