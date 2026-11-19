@@ -1,9 +1,14 @@
 using Fusion;
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
-public class MovingCar : MonoBehaviour
+/// <summary>
+/// シーンに配置されたネットワーク車両。
+/// 移動・衝突判定はState Authorityのみが実行し、
+/// TransformはNetworkTransformで全クライアントへ同期する。
+/// </summary>
+[RequireComponent(typeof(NetworkObject))]
+public class MovingCar : NetworkBehaviour
 {
     [Header("移動設定")]
     [SerializeField] private float moveSpeed = 30f;
@@ -16,92 +21,122 @@ public class MovingCar : MonoBehaviour
     [SerializeField] private float stunDuration = 2f;
 
     [Header("ノックバック設定（ボール専用）")]
-    [SerializeField] private float ballKnockbackMultiplier = 2.0f; // ボール吹き飛ばしの倍率
+    [SerializeField] private float ballKnockbackMultiplier = 2.0f;
 
     [Header("エフェクト設定")]
     [SerializeField] private GameObject hitEffectPrefab;
     [Tooltip("エフェクトを発生させないタグ（例: Mine, Aura など）")]
     [SerializeField] private List<string> ignoreEffectTags = new List<string> { "Mine", "Aura", "Invincible" };
 
-    private Vector3 currentVelocity;
-
-    private void Update()
+    public override void Spawned()
     {
-        if (!MapGameManager.IsGameStarted) return;
+        Debug.Log($"[MovingCar] Spawned. StateAuthority={HasStateAuthority}");
+    }
 
-        currentVelocity = Vector3.forward * moveSpeed;
-        transform.Translate(currentVelocity * Time.deltaTime, Space.Self);
+    public override void FixedUpdateNetwork()
+    {
+        // 車の位置を決定するのはState Authorityだけ。
+        if (!HasStateAuthority)
+            return;
+
+        GameManager gameManager = GameManager.Instance;
+        if (gameManager == null || gameManager.CurrentState != GameManager.GameState.Playing)
+            return;
+
+        transform.position += transform.forward * moveSpeed * Runner.DeltaTime;
 
         if (transform.position.z >= endZ)
         {
-            Vector3 newPosition = transform.position;
-            newPosition.z = startZ;
-            transform.position = newPosition;
+            Vector3 position = transform.position;
+            position.z = startZ;
+            transform.position = position;
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        ProcessHit(collision.gameObject, collision.contacts.Length > 0 ? collision.contacts[0].point : transform.position);
+        if (!HasStateAuthority)
+            return;
+
+        Vector3 hitPoint = collision.contactCount > 0
+            ? collision.GetContact(0).point
+            : transform.position;
+
+        ProcessHit(collision.gameObject, hitPoint);
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!HasStateAuthority)
+            return;
+
         ProcessHit(other.gameObject, other.ClosestPoint(transform.position));
     }
 
     private void ProcessHit(GameObject hitObject, Vector3 hitPoint)
     {
-        // 1. プレイヤー判定（ノックバック ＋ エフェクト生成）
-        PlayerMovement pm = hitObject.GetComponentInParent<PlayerMovement>();
-        if (pm == null) pm = hitObject.GetComponent<PlayerMovement>();
+        if (hitObject == null)
+            return;
 
-        if (pm != null)
+        // 1. プレイヤー
+        PlayerMovement player = hitObject.GetComponentInParent<PlayerMovement>();
+        if (player == null)
+            player = hitObject.GetComponent<PlayerMovement>();
+
+        if (player != null)
         {
-            Vector3 knockbackForce = (Vector3.forward * knockbackBackSpeed) + (Vector3.up * knockbackUpSpeed);
-            pm.ApplyKnockback(knockbackForce, stunDuration);
-            SpawnHitEffect(pm.transform.position + Vector3.up * 1.0f);
+            Vector3 knockbackForce =
+                Vector3.forward * knockbackBackSpeed +
+                Vector3.up * knockbackUpSpeed;
+
+            player.ApplyKnockback(knockbackForce, stunDuration);
+            RpcSpawnHitEffect(player.transform.position + Vector3.up);
             return;
         }
 
-        // 2. ボール（Ballタグ）判定（倍率をかけた強力なノックバック / エフェクト非表示）
-        if (hitObject.CompareTag("Ball"))
+        // 2. ボウリングボール
+        if (HasTagSafe(hitObject, "Ball"))
         {
             Rigidbody ballRb = hitObject.GetComponentInParent<Rigidbody>();
-            if (ballRb == null) ballRb = hitObject.GetComponent<Rigidbody>();
+            if (ballRb == null)
+                ballRb = hitObject.GetComponent<Rigidbody>();
 
-            if (ballRb != null)
+            NetworkObject ballObject = hitObject.GetComponentInParent<NetworkObject>();
+            if (ballRb != null && ballObject != null && ballObject.HasStateAuthority)
             {
-                // Networked Rigidbody は State Authority だけが変更する。
-                NetworkObject ballObject = hitObject.GetComponentInParent<NetworkObject>();
-                if (ballObject != null && ballObject.HasStateAuthority)
-                {
-                    Vector3 ballKnockback = ((Vector3.forward * knockbackBackSpeed) + (Vector3.up * knockbackUpSpeed)) * ballKnockbackMultiplier;
-                    ballRb.AddForce(ballKnockback, ForceMode.Impulse);
-                }
+                Vector3 ballKnockback =
+                    (Vector3.forward * knockbackBackSpeed +
+                     Vector3.up * knockbackUpSpeed) * ballKnockbackMultiplier;
+
+                ballRb.AddForce(ballKnockback, ForceMode.Impulse);
             }
-            return; // エフェクトを出さずに終了
+
+            return;
         }
 
-        // 3. 除外タグ判定（地雷や無敵オーラなどエフェクト非表示）
+        // 3. エフェクト除外タグ
         foreach (string ignoreTag in ignoreEffectTags)
         {
-            if (!string.IsNullOrEmpty(ignoreTag) && hitObject.CompareTag(ignoreTag))
-            {
-                return; // エフェクトを出さずに終了
-            }
+            if (!string.IsNullOrEmpty(ignoreTag) && HasTagSafe(hitObject, ignoreTag))
+                return;
         }
 
-        // 4. その他のオブジェクト（ロケランの弾など）の場合（エフェクト生成）
-        SpawnHitEffect(hitPoint);
+        // 4. その他のオブジェクト
+        RpcSpawnHitEffect(hitPoint);
     }
 
-    private void SpawnHitEffect(Vector3 position)
+    private bool HasTagSafe(GameObject target, string tagName)
     {
-        if (hitEffectPrefab != null)
-        {
-            GameObject effect = Instantiate(hitEffectPrefab, position, Quaternion.identity);
-            Destroy(effect, 2.0f);
-        }
+        return target != null && target.CompareTag(tagName);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RpcSpawnHitEffect(Vector3 position)
+    {
+        if (hitEffectPrefab == null)
+            return;
+
+        GameObject effect = Instantiate(hitEffectPrefab, position, Quaternion.identity);
+        Destroy(effect, 2f);
     }
 }
