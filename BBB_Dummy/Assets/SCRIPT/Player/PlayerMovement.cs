@@ -915,6 +915,32 @@ public class PlayerMovement : NetworkBehaviour
         UpdateCameraTargetOffset();
     }
 
+    private void LateUpdate()
+    {
+        if (!_isSpawned || MyBall == null)
+            return;
+
+        // State Authority以外ではローカル物理演算を行わない。
+        // NetworkTransformによる位置更新とRigidbodyの物理演算が競合するのを防ぐ。
+        if (!HasStateAuthority)
+        {
+            Rigidbody ballRb = MyBall.GetComponent<Rigidbody>();
+            if (ballRb != null && !ballRb.isKinematic)
+            {
+                ballRb.linearVelocity = Vector3.zero;
+                ballRb.angularVelocity = Vector3.zero;
+                ballRb.isKinematic = true;
+            }
+        }
+
+        // 操作中クライアントでは、予測移動中のプレイヤーにボールの見た目を追従させる。
+        // ネットワーク上のボール位置や物理状態を書き換える処理ではない。
+        if (HasInputAuthority && !HasStateAuthority && IsHoldingBall && holdPoint != null)
+        {
+            MyBall.transform.SetPositionAndRotation(holdPoint.position, holdPoint.rotation);
+        }
+    }
+
     public override void Render()
     {
         UpdateInteractVisuals();
