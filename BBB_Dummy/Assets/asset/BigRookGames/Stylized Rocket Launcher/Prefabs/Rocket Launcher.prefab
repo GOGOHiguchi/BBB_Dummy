@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 4490302565791019162}
   - component: {fileID: 2205214468985690845}
   - component: {fileID: 3417078542764664653}
+  - component: {fileID: 2044105691939598056}
   m_Layer: 0
   m_Name: Rocket Launcher
   m_TagString: Untagged
@@ -484,3 +485,23 @@ CapsuleCollider:
   m_Height: 0.49504426
   m_Direction: 1
   m_Center: {x: 0.0628705, y: -0.000007644445, z: 0.23636952}
+--- !u!114 &2044105691939598056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4490302565791019165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
+  SortKey: 2863946746
+  SendPriority: 1
+  EnableInterpolation: 1
+  Flags: 262146
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 6189497911733632641}
+  ForceRemoteRenderTimeframe: 0

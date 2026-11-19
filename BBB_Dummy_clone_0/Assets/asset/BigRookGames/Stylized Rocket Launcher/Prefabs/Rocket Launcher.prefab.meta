@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: f26add0b8561051438426890f3bd0f19
+labels:
+- FusionPrefab
 AssetOrigin:
   serializedVersion: 1
   productId: 178718

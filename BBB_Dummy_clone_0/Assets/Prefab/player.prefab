@@ -384,13 +384,13 @@ MonoBehaviour:
   EnableInterpolation: 1
   Flags: 262402
   NestedObjects:
+  - {fileID: 1329624077008387241}
   - {fileID: 5585731809462580809}
   NetworkedBehaviours:
   - {fileID: 2832201320303243297}
   - {fileID: 8445215461778232733}
   - {fileID: 3085305019715580707}
   - {fileID: 2704779823229876429}
-  - {fileID: 6613635871984479424}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &2704779823229876429
 MonoBehaviour:
@@ -405,7 +405,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   cameraTarget: {fileID: 2746261471449268019}
-  normalCameraOffset: {x: 0, y: 0, z: 0}
   aimingCameraOffset: {x: 4, y: 3.5, z: 0}
   cameraTransitionSpeed: 10
   animator: {fileID: 1459828410568117829}
@@ -2238,6 +2237,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1459828410560372749}
     m_Modifications:
+    - target: {fileID: 2044105691939598056, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+      propertyPath: Flags
+      value: 262146
+      objectReference: {fileID: 0}
+    - target: {fileID: 2044105691939598056, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+      propertyPath: SortKey
+      value: 2956493957
+      objectReference: {fileID: 0}
+    - target: {fileID: 2044105691939598056, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+      propertyPath: NetworkedBehaviours.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2044105691939598056, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+      propertyPath: 'NetworkedBehaviours.Array.data[0]'
+      value: 
+      objectReference: {fileID: 6613635871984479424}
     - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.49999997
@@ -2303,6 +2318,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+--- !u!114 &1329624077008387241 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2044105691939598056, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+  m_PrefabInstance: {fileID: 1021711586656375361}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3493978722215813852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
 --- !u!1 &3493978722215813852 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4490302565791019165, guid: f26add0b8561051438426890f3bd0f19, type: 3}
@@ -2332,6 +2358,54 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1459828410560372739}
     m_Modifications:
+    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.14047188
+      objectReference: {fileID: 0}
+    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.050543588
+      objectReference: {fileID: 0}
+    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.057296008
+      objectReference: {fileID: 0}
+    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.047918614
+      objectReference: {fileID: 0}
+    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.025873855
+      objectReference: {fileID: 0}
+    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.95028263
+      objectReference: {fileID: 0}
+    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.30658975
+      objectReference: {fileID: 0}
+    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -35.815
+      objectReference: {fileID: 0}
+    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 185.322
+      objectReference: {fileID: 0}
+    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 1.399
+      objectReference: {fileID: 0}
+    - target: {fileID: 4490302565791019165, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+      propertyPath: m_Name
+      value: Rocket Launcher
+      objectReference: {fileID: 0}
+    - target: {fileID: 4490302565791019165, guid: f26add0b8561051438426890f3bd0f19, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1979486138613015504, guid: 7941a5a65b3d26f4d93d5faa548124c2, type: 3}
       propertyPath: m_Intensity
       value: 0
@@ -2418,54 +2492,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7742004005930575722, guid: 7941a5a65b3d26f4d93d5faa548124c2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.14047188
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.050543588
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.057296008
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.047918614
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.025873855
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.95028263
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.30658975
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -35.815
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 185.322
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826672958807468583, guid: f26add0b8561051438426890f3bd0f19, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 1.399
-      objectReference: {fileID: 0}
-    - target: {fileID: 4490302565791019165, guid: f26add0b8561051438426890f3bd0f19, type: 3}
-      propertyPath: m_Name
-      value: Rocket Launcher
-      objectReference: {fileID: 0}
-    - target: {fileID: 4490302565791019165, guid: f26add0b8561051438426890f3bd0f19, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
