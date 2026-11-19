@@ -9,18 +9,20 @@ public class BowlingPin : MonoBehaviour
 
     [Header("吹き飛び演出")]
     [Tooltip("衝突速度に掛ける追加の吹き飛び倍率")]
-    [SerializeField, Range(0f, 0.5f)] private float impactVelocityMultiplier = 0.16f;
+    [SerializeField, Range(0f, 0.5f)] private float impactVelocityMultiplier = 0.22f;
     [Tooltip("衝突時に追加する最低速度")]
-    [SerializeField] private float minimumImpactVelocity = 2.0f;
+    [SerializeField] private float minimumImpactVelocity = 2.5f;
     [Tooltip("衝突時に追加する速度の上限")]
-    [SerializeField] private float maximumExtraVelocity = 6.0f;
+    [SerializeField] private float maximumExtraVelocity = 4.5f;
     [Tooltip("吹き飛び方向に加える上向き成分")]
-    [SerializeField, Range(0f, 0.5f)] private float upwardImpactBoost = 0.12f;
+    [SerializeField, Range(0f, 0.5f)] private float upwardImpactBoost = 0.08f;
 
     // スコアとして集計済みかどうか
     public bool IsScored { get; set; } = false;
 
     private Rigidbody rb;
+    // 1本のピンに対する追加Impulseは、ボール直撃・連鎖を合わせて1回だけ。
+    private bool hasReceivedImpactBoost;
 
     private void Awake()
     {
@@ -77,7 +79,7 @@ public class BowlingPin : MonoBehaviour
         if (hitByBall)
         {
             // 事前にDynamic化できていれば通常の衝突力に追加して吹き飛びを強める。
-            ApplyImpactBoost(collision.relativeVelocity);
+            ApplyImpactBoost(collision.relativeVelocity, impactVelocityMultiplier, minimumImpactVelocity, maximumExtraVelocity, upwardImpactBoost, 0.25f);
         }
         else if (hitByPin && !rb.isKinematic)
         {
@@ -93,14 +95,20 @@ public class BowlingPin : MonoBehaviour
                     ? chainDirection.normalized * collision.relativeVelocity.magnitude
                     : collision.relativeVelocity;
 
-                otherPin.ApplyImpactBoost(chainVelocity);
+                otherPin.ApplyImpactBoost(chainVelocity, 0.10f, 0.8f, 2.5f, 0.05f, 0.20f);
             }
         }
     }
 
-    private void ApplyImpactBoost(Vector3 incomingVelocity)
+    private void ApplyImpactBoost(
+        Vector3 incomingVelocity,
+        float velocityMultiplier,
+        float minimumExtraVelocity,
+        float maximumExtraVelocity,
+        float upwardBoost,
+        float spinMultiplier)
     {
-        if (rb == null || rb.isKinematic) return;
+        if (rb == null || rb.isKinematic || hasReceivedImpactBoost) return;
 
         Vector3 horizontalDirection = Vector3.ProjectOnPlane(incomingVelocity, Vector3.up);
         if (horizontalDirection.sqrMagnitude < 0.001f)
@@ -113,19 +121,20 @@ public class BowlingPin : MonoBehaviour
         horizontalDirection.Normalize();
 
         float extraSpeed = Mathf.Clamp(
-            incomingVelocity.magnitude * impactVelocityMultiplier,
-            minimumImpactVelocity,
+            incomingVelocity.magnitude * velocityMultiplier,
+            minimumExtraVelocity,
             maximumExtraVelocity
         );
 
-        Vector3 launchDirection = (horizontalDirection + Vector3.up * upwardImpactBoost).normalized;
+        hasReceivedImpactBoost = true;
+        Vector3 launchDirection = (horizontalDirection + Vector3.up * upwardBoost).normalized;
         rb.AddForce(launchDirection * extraSpeed, ForceMode.VelocityChange);
 
         // 横方向の回転も少し加え、ピンらしい転がり・ tumbling を出す。
         Vector3 spinAxis = Vector3.Cross(Vector3.up, horizontalDirection).normalized;
         if (spinAxis.sqrMagnitude > 0.001f)
         {
-            rb.AddTorque(spinAxis * (extraSpeed * 0.35f), ForceMode.VelocityChange);
+            rb.AddTorque(spinAxis * (extraSpeed * spinMultiplier), ForceMode.VelocityChange);
         }
     }
 }
