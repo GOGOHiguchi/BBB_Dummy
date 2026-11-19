@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// ロビーのキャラクター選択UI。
 /// panel / modelListRoot / modelButtonPrefab等はInspectorから割り当てる。
 /// </summary>
-public sealed class CharacterSelectUI : MonoBehaviour
+public sealed class characterSelectUI : MonoBehaviour
 {
     [Header("画面")]
     [SerializeField] private GameObject panel;

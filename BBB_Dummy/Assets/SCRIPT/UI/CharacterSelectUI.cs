@@ -142,7 +142,7 @@ public sealed class CharacterSelectUI : MonoBehaviour
         if (_built) return;
         _built = true;
 
-        _font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+        _font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         if (_font == null)
             _font = Font.CreateDynamicFontFromOSFont("Arial", 20);
 
