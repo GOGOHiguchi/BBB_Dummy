@@ -38,6 +38,17 @@ public class EmoteWheelController : NetworkBehaviour
     [Networked]
     private TickTimer EmoteResetTimer { get; set; }
 
+    // ピン撃破後にState Authorityが選んだエモートを全クライアントへ同期する。
+    [Networked]
+    public NetworkBool IsCelebrating { get; set; }
+
+    [Networked]
+    private TickTimer CelebrationEmoteTimer { get; set; }
+
+    [Header("撃破後ランダムエモート設定")]
+    [SerializeField] private float celebrationEmoteMinInterval = 2.5f;
+    [SerializeField] private float celebrationEmoteMaxInterval = 4.0f;
+
     [Header("ネットワーク同期設定")]
     [SerializeField] private float emoteNetworkDisplayDuration = 0.25f;
 
@@ -55,6 +66,20 @@ public class EmoteWheelController : NetworkBehaviour
     {
         // 自分が操作するプレイヤーでない場合は操作を受け付けない
         if (!HasInputAuthority) return;
+
+        // 撃破後はホットリングを開けない。開いていた場合も閉じてカーソルを戻す。
+        if (IsCelebrating || (playerMovement != null && playerMovement.IsPinFinished))
+        {
+            if (_isWheelOpen)
+            {
+                _isWheelOpen = false;
+                if (emoteWheelUI != null) emoteWheelUI.SetActive(false);
+                ResetAllSlotHighlights();
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            return;
+        }
 
         // Rキー押下中でホイール開閉
         if (Keyboard.current != null && Keyboard.current[emoteKey].isPressed)
@@ -186,9 +211,51 @@ public class EmoteWheelController : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// ピン撃破後のランダムエモートを開始する。State Authorityからのみ呼び出す。
+    /// </summary>
+    public void BeginCelebration()
+    {
+        if (!HasStateAuthority || IsCelebrating)
+            return;
+
+        if (closeSlotIndex <= 1)
+        {
+            Debug.LogWarning("[EmoteWheelController] 再生可能なエモート枠がありません。", this);
+            return;
+        }
+
+        IsCelebrating = true;
+        EmoteResetTimer = TickTimer.None;
+        SelectNextCelebrationEmote();
+        Debug.Log($"[EmoteWheelController] 撃破後ランダムエモート開始: {Object.InputAuthority}");
+    }
+
+    private void SelectNextCelebrationEmote()
+    {
+        int emoteCount = closeSlotIndex - 1;
+        int nextIndex = Random.Range(1, closeSlotIndex);
+
+        // 同じエモートが連続しないようにする（2種類以上ある場合）。
+        if (emoteCount > 1 && nextIndex == CurrentEmoteIndex)
+        {
+            nextIndex = (nextIndex % emoteCount) + 1;
+        }
+
+        CurrentEmoteIndex = nextIndex;
+
+        float minInterval = Mathf.Max(0.25f, celebrationEmoteMinInterval);
+        float maxInterval = Mathf.Max(minInterval, celebrationEmoteMaxInterval);
+        float nextInterval = Random.Range(minInterval, maxInterval);
+        CelebrationEmoteTimer = TickTimer.CreateFromSeconds(Runner, nextInterval);
+    }
+
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     private void RpcPlayEmote(int emoteIndex)
     {
+        if (IsCelebrating || (playerMovement != null && playerMovement.IsPinFinished))
+            return;
+
         if (emoteIndex <= 0 || emoteIndex >= closeSlotIndex)
             return;
 
@@ -216,11 +283,21 @@ public class EmoteWheelController : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        // Networked変数の変更はRenderではなくState AuthorityのネットワークTickで行う。
-        // これによりエモート番号がスナップショットへ含まれる時間を確保する。
-        if (HasStateAuthority &&
-            CurrentEmoteIndex != 0 &&
-            EmoteResetTimer.Expired(Runner))
+        if (!HasStateAuthority)
+            return;
+
+        // 撃破後は試合オブジェクトが破棄されるまでランダムエモートを継続する。
+        if (IsCelebrating)
+        {
+            if (CelebrationEmoteTimer.Expired(Runner))
+            {
+                SelectNextCelebrationEmote();
+            }
+            return;
+        }
+
+        // 通常のホットリングエモートは従来どおり短時間だけ表示する。
+        if (CurrentEmoteIndex != 0 && EmoteResetTimer.Expired(Runner))
         {
             CurrentEmoteIndex = 0;
             EmoteResetTimer = TickTimer.None;
