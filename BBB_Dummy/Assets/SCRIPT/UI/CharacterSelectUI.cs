@@ -322,8 +322,24 @@ public sealed class CharacterSelectUI : MonoBehaviour
 
     private void SetGender(bool female)
     {
+        if (_showFemale == female)
+            return;
+
         _showFemale = female;
+        IReadOnlyList<CharacterModelDatabase.Entry> entries = database.Entries;
+        for (int i = 0; i < entries.Count; i++)
+        {
+            CharacterModelDatabase.Entry entry = entries[i];
+            if (entry != null && entry.Prefab != null && entry.IsFemale == female)
+            {
+                _selectedId = entry.Id;
+                break;
+            }
+        }
+
         RefreshGrid();
+        UpdatePreview(_selectedId);
+        _statusText.text = "選択中: " + GetEntryName(_selectedId);
     }
 
     private void UpdateTabAppearance()
