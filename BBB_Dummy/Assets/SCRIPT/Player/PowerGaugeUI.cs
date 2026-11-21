@@ -42,6 +42,13 @@ public class PowerGaugeUI : MonoBehaviour
         PlayerMovement player = PlayerMovement.Local;
         if (player == null || powerSlider == null) return;
 
+        // Local参照が取得できても、FusionのSpawned()完了前はNetworked値を読まない。
+        if (!player.IsPlayerSpawned)
+        {
+            ResetGaugeUI();
+            return;
+        }
+
         bool isHoldingBall = player.IsHoldingBall;
         bool localCharging = isHoldingBall && Mouse.current != null &&
                              Mouse.current.leftButton.isPressed;
@@ -148,5 +155,33 @@ public class PowerGaugeUI : MonoBehaviour
             float percent = (currentCharge / maxForce) * 100f;
             percentageText.text = $"{Mathf.FloorToInt(percent)}";
         }
+    }
+
+    // Spawn待機中またはボール非保持時のUIを安全な初期状態に戻す。
+    private void ResetGaugeUI()
+    {
+        _predictedCharge = 0f;
+        _wasLocalCharging = false;
+        _predictionReleaseTime = 0f;
+
+        if (powerSlider != null)
+        {
+            powerSlider.value = 0f;
+            if (powerSlider.gameObject.activeSelf)
+                powerSlider.gameObject.SetActive(false);
+        }
+
+        if (normalFillImage != null)
+            normalFillImage.fillAmount = 0f;
+
+        if (overPowerFillImage != null)
+        {
+            overPowerFillImage.fillAmount = 0f;
+            if (overPowerFillImage.gameObject.activeSelf)
+                overPowerFillImage.gameObject.SetActive(false);
+        }
+
+        if (percentageText != null)
+            percentageText.text = "0";
     }
 }
