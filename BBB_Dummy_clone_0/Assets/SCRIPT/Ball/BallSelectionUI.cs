@@ -28,8 +28,9 @@ public class BallSelectionUI : MonoBehaviour
         // 状態の変化に合わせてUIの活性/非活性状態を更新
         UpdateUI();
 
-        // プレイヤーが存在しない、またはボールを手に持っていない場合はキー入力を無視
-        if (PlayerMovement.Local == null || !PlayerMovement.Local.IsHoldingBall) return;
+        // FusionのSpawn完了前はNetworkedプロパティにアクセスしない。
+        PlayerMovement player = PlayerMovement.Local;
+        if (player == null || !player.IsPlayerSpawned || !player.IsHoldingBall) return;
 
         // 十字キーの左右入力でボール選択を順繰り切り替え
         if (Keyboard.current != null)
@@ -56,17 +57,18 @@ public class BallSelectionUI : MonoBehaviour
 
     private void SelectBall(BallType type)
     {
-        // ボールを手に持っていない場合は変更を弾く
-        if (PlayerMovement.Local == null || !PlayerMovement.Local.IsHoldingBall) return;
+        // Spawn完了前・ボール非保持時の選択操作を拒否する。
+        PlayerMovement player = PlayerMovement.Local;
+        if (player == null || !player.IsPlayerSpawned || !player.IsHoldingBall) return;
 
         // 選択データをローカルに保存
         PlayerBallData.SetBallType(type);
         Debug.Log($"[BallSelection] ボールタイプを変更しました: {type}");
 
         // 自分の手元にあるボール本体へ即座に反映
-        if (PlayerMovement.Local.MyBall != null)
+        if (player.MyBall != null)
         {
-            var bowlingBall = PlayerMovement.Local.MyBall.GetComponent<BowlingBall>();
+            var bowlingBall = player.MyBall.GetComponent<BowlingBall>();
             if (bowlingBall != null)
             {
                 bowlingBall.SetBallType(type);
@@ -80,8 +82,9 @@ public class BallSelectionUI : MonoBehaviour
     {
         BallType currentType = PlayerBallData.SelectedType;
 
-        // 手に持っているか判定
-        bool isHolding = PlayerMovement.Local != null && PlayerMovement.Local.IsHoldingBall;
+        // Spawn完了後のみNetworkedプロパティの保持状態を参照する。
+        PlayerMovement player = PlayerMovement.Local;
+        bool isHolding = player != null && player.IsPlayerSpawned && player.IsHoldingBall;
 
         // ボールを持っていない間はすべてのボタンを非活性（押せない状態）にする
         if (speedButton != null) speedButton.interactable = isHolding && (currentType != BallType.Speed);
