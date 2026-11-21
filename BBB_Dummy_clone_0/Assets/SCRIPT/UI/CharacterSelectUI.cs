@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using TMPro;
 
 [DisallowMultipleComponent]
 public sealed class CharacterSelectUI : MonoBehaviour
@@ -10,7 +11,7 @@ public sealed class CharacterSelectUI : MonoBehaviour
     [Header("Canvasに保存するUI")]
     [SerializeField] private GameObject panelRoot;
     [SerializeField] private RawImage previewImage;
-    [SerializeField] private Text selectedNameText;
+    [SerializeField] private TMP_Text selectedNameText; // ★Text から TMP_Text に変更
     [SerializeField] private Transform modelListRoot;
     [SerializeField] private Button maleTabButton;
     [SerializeField] private Button femaleTabButton;
@@ -122,7 +123,6 @@ public sealed class CharacterSelectUI : MonoBehaviour
     private void BuildTiles()
     {
         foreach (Transform child in modelListRoot) Destroy(child.gameObject);
-        foreach (var pair in portraits) { }
         portraits.Clear();
 
         foreach (var entry in database.Entries)
@@ -131,13 +131,13 @@ public sealed class CharacterSelectUI : MonoBehaviour
             GameObject tile = new GameObject("Character_" + entry.Id, typeof(RectTransform), typeof(Image), typeof(Button), typeof(Outline));
             tile.transform.SetParent(modelListRoot, false);
             tile.GetComponent<RectTransform>().sizeDelta = new Vector2(150, 172);
-            tile.GetComponent<Image>().color = new Color(.035f,.22f,.52f,1);
+            tile.GetComponent<Image>().color = new Color(.035f, .22f, .52f, 1);
             tile.GetComponent<Button>().onClick.AddListener(() => Select(entry.Id));
 
             GameObject portrait = new GameObject("Portrait", typeof(RectTransform), typeof(RawImage));
             portrait.transform.SetParent(tile.transform, false);
             var pr = portrait.GetComponent<RectTransform>();
-            pr.anchorMin = new Vector2(.05f,.22f); pr.anchorMax = new Vector2(.95f,.96f);
+            pr.anchorMin = new Vector2(.05f, .22f); pr.anchorMax = new Vector2(.95f, .96f);
             pr.offsetMin = pr.offsetMax = Vector2.zero;
             var raw = portrait.GetComponent<RawImage>();
             raw.raycastTarget = false;
@@ -147,7 +147,7 @@ public sealed class CharacterSelectUI : MonoBehaviour
             GameObject labelObj = new GameObject("Name", typeof(RectTransform), typeof(Text));
             labelObj.transform.SetParent(tile.transform, false);
             var lr = labelObj.GetComponent<RectTransform>();
-            lr.anchorMin = new Vector2(.02f,.01f); lr.anchorMax = new Vector2(.98f,.23f);
+            lr.anchorMin = new Vector2(.02f, .01f); lr.anchorMax = new Vector2(.98f, .23f);
             lr.offsetMin = lr.offsetMax = Vector2.zero;
             var label = labelObj.GetComponent<Text>();
             label.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
@@ -155,7 +155,7 @@ public sealed class CharacterSelectUI : MonoBehaviour
             label.resizeTextForBestFit = true; label.raycastTarget = false;
             label.text = string.IsNullOrEmpty(entry.DisplayName) ? entry.Prefab.name : entry.DisplayName;
             var outline = tile.GetComponent<Outline>();
-            outline.effectColor = new Color(1,.84f,.08f,1); outline.effectDistance = new Vector2(4,-4);
+            outline.effectColor = new Color(1, .84f, .08f, 1); outline.effectDistance = new Vector2(4, -4);
             outline.enabled = false;
             tile.SetActive(false);
         }
@@ -168,7 +168,7 @@ public sealed class CharacterSelectUI : MonoBehaviour
             if (entry == null || entry.Prefab == null || entry.Thumbnail != null) continue;
             GameObject model = Instantiate(entry.Prefab, stage);
             SetLayer(model, PreviewLayer);
-            RenderTexture rt = new RenderTexture(144,160,16,RenderTextureFormat.ARGB32);
+            RenderTexture rt = new RenderTexture(144, 160, 16, RenderTextureFormat.ARGB32);
             rt.Create(); thumbnailTextures.Add(rt);
             bool previewWasActive = previewModel != null && previewModel.activeSelf;
             if (previewWasActive) previewModel.SetActive(false);
@@ -185,9 +185,9 @@ public sealed class CharacterSelectUI : MonoBehaviour
     private void BuildCameras()
     {
         GameObject stageObject = new GameObject("CharacterSelect_PreviewStage");
-        stageObject.transform.position = new Vector3(0,-1000,0);
+        stageObject.transform.position = new Vector3(0, -1000, 0);
         stage = stageObject.transform;
-        previewTexture = new RenderTexture(512,640,16,RenderTextureFormat.ARGB32);
+        previewTexture = new RenderTexture(512, 640, 16, RenderTextureFormat.ARGB32);
         previewTexture.Create(); previewImage.texture = previewTexture;
         previewCamera = MakeCamera("PreviewCamera", previewTexture);
         thumbnailCamera = MakeCamera("ThumbnailCamera", null);
@@ -195,10 +195,10 @@ public sealed class CharacterSelectUI : MonoBehaviour
 
     private Camera MakeCamera(string name, RenderTexture rt)
     {
-        GameObject go = new GameObject(name); go.transform.SetParent(stage,false);
+        GameObject go = new GameObject(name); go.transform.SetParent(stage, false);
         Camera cam = go.AddComponent<Camera>();
         cam.enabled = false; cam.clearFlags = CameraClearFlags.SolidColor;
-        cam.backgroundColor = new Color(.10f,.62f,.84f);
+        cam.backgroundColor = new Color(.10f, .62f, .84f);
         cam.orthographic = true; cam.nearClipPlane = .05f; cam.farClipPlane = 40;
         cam.cullingMask = 1 << PreviewLayer; cam.targetTexture = rt;
         return cam;
@@ -235,19 +235,19 @@ public sealed class CharacterSelectUI : MonoBehaviour
         var renderers = model.GetComponentsInChildren<Renderer>(true);
         Bounds bounds = new Bounds(model.transform.position, Vector3.one);
         bool found = false;
-        foreach (var r in renderers) { if (!found) { bounds=r.bounds; found=true; } else bounds.Encapsulate(r.bounds); }
+        foreach (var r in renderers) { if (!found) { bounds = r.bounds; found = true; } else bounds.Encapsulate(r.bounds); }
         Vector3 center = stage.position;
         model.transform.position += center - bounds.center;
-        float h = Mathf.Max(bounds.size.y,1.2f), w = Mathf.Max(bounds.size.x,.7f);
-        cam.transform.position = center + Vector3.forward * Mathf.Max(h,w) * scale + Vector3.up*h*.04f;
-        cam.transform.LookAt(center + Vector3.up*h*.48f);
-        cam.orthographicSize = Mathf.Max(h*.58f,w*.9f);
+        float h = Mathf.Max(bounds.size.y, 1.2f), w = Mathf.Max(bounds.size.x, .7f);
+        cam.transform.position = center + Vector3.forward * Mathf.Max(h, w) * scale + Vector3.up * h * .04f;
+        cam.transform.LookAt(center + Vector3.up * h * .48f);
+        cam.orthographicSize = Mathf.Max(h * .58f, w * .9f);
     }
 
     private void Select(int id)
     {
         if (!database.IsValidId(id)) return;
-        selectedId=id;
+        selectedId = id;
         ShowModel(id);
         UpdateName();
         RefreshSelectionOutline();
@@ -267,7 +267,7 @@ public sealed class CharacterSelectUI : MonoBehaviour
 
     private void UpdateName()
     {
-        if (database.TryGetEntry(selectedId,out var entry) && selectedNameText != null)
+        if (database.TryGetEntry(selectedId, out var entry) && selectedNameText != null)
             selectedNameText.text = string.IsNullOrEmpty(entry.DisplayName) ? entry.Prefab.name : entry.DisplayName;
     }
 
@@ -280,22 +280,22 @@ public sealed class CharacterSelectUI : MonoBehaviour
     private void Cancel()
     {
         // プレビューは専用ステージ内だけで行っているため、プレイヤー本体は変更しない。
-        selectedId=originalId;
+        selectedId = originalId;
         Close();
     }
 
     private void Close()
     {
-        opened=IsAnyOpen=false;
+        opened = IsAnyOpen = false;
         panelRoot.SetActive(false);
-        target=null;
-        Cursor.lockState=CursorLockMode.Locked;
-        Cursor.visible=false;
+        target = null;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
-    private static void SetLayer(GameObject obj,int layer)
+    private static void SetLayer(GameObject obj, int layer)
     {
-        obj.layer=layer;
-        foreach(Transform child in obj.transform) SetLayer(child.gameObject,layer);
+        obj.layer = layer;
+        foreach (Transform child in obj.transform) SetLayer(child.gameObject, layer);
     }
 }
