@@ -29,6 +29,7 @@ public class PowerGaugeUI : MonoBehaviour
             // スライダー全体の長さを 115% 相当に設定
             powerSlider.maxValue = maxForce * 1.15f;
             powerSlider.value = 0f;
+            powerSlider.gameObject.SetActive(false);
         }
 
         if (overPowerFillImage != null)
