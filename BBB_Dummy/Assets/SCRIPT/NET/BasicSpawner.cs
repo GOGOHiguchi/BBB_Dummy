@@ -17,6 +17,8 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     [SerializeField] private List<Transform> _spawnPoints = new List<Transform>();
 
     private NetworkRunner _currentRunner;
+    // 同じPlayerRefへのSpawn要求が重なった場合の再入防止。
+    private readonly HashSet<PlayerRef> _playersSpawning = new HashSet<PlayerRef>();
     private int _spawnCount = 0;
     [SerializeField] private float _minimumSpawnDistance = 2.5f;
 
@@ -119,76 +121,108 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     private void SpawnPlayer(NetworkRunner runner, PlayerRef player)
     {
-        if (!runner.IsServer)
+        if (runner == null || !runner.IsRunning || !runner.IsServer)
             return;
+
+        if (!_playerPrefab.IsValid)
+        {
+            Debug.LogError("BasicSpawner: Player Prefabが未設定または無効です。");
+            return;
+        }
+
+        if (!player.IsValid)
+        {
+            Debug.LogWarning($"BasicSpawner: 無効なPlayerRefのSpawn要求を拒否しました。Player={player}");
+            return;
+        }
 
         if (runner.GetPlayerObject(player) != null)
         {
-            Debug.Log($"Player {player} は既にSpawn済み");
+            Debug.Log($"BasicSpawner: Player {player} は既にPlayerObject登録済みです。Spawnをスキップします。");
             return;
         }
 
-        Debug.Log($"Player {player} をSpawnします");
-
-        Vector3 spawnPosition;
-        Quaternion spawnRotation;
-
-        if (_spawnPoints != null && _spawnPoints.Count > 0)
+        if (!_playersSpawning.Add(player))
         {
-            if (!TrySelectSpawnPoint(
-                    runner,
-                    player,
-                    out Transform selectedPoint,
-                    out int pointIndex,
-                    out float nearestPlayerDistance))
-            {
-                Debug.LogError("BasicSpawner: 有効なスポーンポイントがありません。各要素のTransform設定を確認してください。");
-                return;
-            }
+            Debug.LogWarning($"BasicSpawner: Player {player} はSpawn処理中です。重複要求を拒否しました。");
+            return;
+        }
 
-            spawnPosition = selectedPoint.position;
-            spawnRotation = selectedPoint.rotation;
+        try
+        {
+            Debug.Log($"BasicSpawner: Player {player} のSpawn処理を開始します。");
 
-            if (nearestPlayerDistance < _minimumSpawnDistance)
+            Vector3 spawnPosition;
+            Quaternion spawnRotation;
+
+            if (_spawnPoints != null && _spawnPoints.Count > 0)
             {
-                Debug.LogWarning(
-                    $"BasicSpawner: 全スポーンポイントが使用中です。最も距離を確保できる " +
-                    $"[{pointIndex}] ({selectedPoint.name}) を使用します。 " +
-                    $"最寄りプレイヤーとの距離={nearestPlayerDistance:F2}"
-                );
+                if (!TrySelectSpawnPoint(
+                        runner,
+                        player,
+                        out Transform selectedPoint,
+                        out int pointIndex,
+                        out float nearestPlayerDistance))
+                {
+                    Debug.LogError("BasicSpawner: 有効なスポーンポイントがありません。各要素のTransform設定を確認してください。");
+                    return;
+                }
+
+                spawnPosition = selectedPoint.position;
+                spawnRotation = selectedPoint.rotation;
+
+                if (nearestPlayerDistance < _minimumSpawnDistance)
+                {
+                    Debug.LogWarning(
+                        $"BasicSpawner: 全スポーンポイントが使用中です。最も距離を確保できる " +
+                        $"[{pointIndex}] ({selectedPoint.name}) を使用します。 " +
+                        $"最寄りプレイヤーとの距離={nearestPlayerDistance:F2}"
+                    );
+                }
+                else
+                {
+                    Debug.Log($"Player {player} はスポーンポイント[{pointIndex}] ({selectedPoint.name}) に配置されます。");
+                }
             }
             else
             {
-                Debug.Log(
-                    $"Player {player} はスポーンポイント[{pointIndex}] " +
-                    $"({selectedPoint.name}) に配置されます。"
-                );
+                Debug.LogWarning("BasicSpawner: スポーンポイントが設定されていません。");
+                spawnPosition = new Vector3(0, 5, 0);
+                spawnRotation = Quaternion.identity;
             }
+
+            NetworkObject networkPlayerObject = runner.Spawn(
+                _playerPrefab,
+                spawnPosition,
+                spawnRotation,
+                player
+            );
+
+            if (networkPlayerObject == null)
+            {
+                Debug.LogError($"BasicSpawner: Player {player} のSpawnに失敗しました。");
+                return;
+            }
+
+            runner.SetPlayerObject(player, networkPlayerObject);
+
+            if (runner.GetPlayerObject(player) != networkPlayerObject)
+            {
+                Debug.LogError($"BasicSpawner: Player {player} のPlayerObject登録確認に失敗しました。");
+                return;
+            }
+
+            _spawnCount++;
+            Debug.Log($"BasicSpawner: Player {player} のSpawn・PlayerObject登録が完了しました。");
         }
-        else
+        catch (Exception e)
         {
-            Debug.LogWarning("BasicSpawner: スポーンポイントが設定されていません。");
-            spawnPosition = new Vector3(0, 5, 0);
-            spawnRotation = Quaternion.identity;
+            Debug.LogError($"BasicSpawner: Player {player} のSpawn処理中に例外が発生しました。\n{e}");
         }
-
-        NetworkObject networkPlayerObject = runner.Spawn(
-            _playerPrefab,
-            spawnPosition,
-            spawnRotation,
-            player
-        );
-
-        if (networkPlayerObject == null)
+        finally
         {
-            Debug.LogError($"BasicSpawner: Player {player} のSpawnに失敗しました。");
-            return;
+            _playersSpawning.Remove(player);
         }
-
-        runner.SetPlayerObject(player, networkPlayerObject);
-        _spawnCount++;
-
-        Debug.Log($"Player {player} のSpawn完了");
     }
 
     /// <summary>
