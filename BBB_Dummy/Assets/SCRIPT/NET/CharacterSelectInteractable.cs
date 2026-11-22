@@ -34,7 +34,6 @@ public sealed class CharacterSelectInteractable : MonoBehaviour
         if (player == null || !player.HasInputAuthority)
             return;
 
-        // 既に別プレイヤーを追跡中なら、その参照を混在させない。
         if (localPlayer != null && localPlayer != player)
             return;
 
@@ -48,14 +47,14 @@ public sealed class CharacterSelectInteractable : MonoBehaviour
         if (!localPlayerColliders.Remove(other))
             return;
 
-        // プレイヤーの全ColliderがTriggerから出た時だけ範囲外にする。
+        // 全Colliderが退出したときだけ範囲外にする。
         if (localPlayerColliders.Count == 0)
             ClearLocalPlayer();
     }
 
     private void Update()
     {
-        // Colliderの無効化やプレイヤー破棄などでExitが来なかった場合の保険。
+        // Collider無効化やプレイヤー破棄でExitが来なかった場合の保険。
         localPlayerColliders.RemoveWhere(collider => collider == null || !collider.enabled || !collider.gameObject.activeInHierarchy);
 
         if (localPlayer == null || localPlayerColliders.Count == 0)
@@ -70,9 +69,12 @@ public sealed class CharacterSelectInteractable : MonoBehaviour
         if (Keyboard.current == null || !Keyboard.current.eKey.wasPressedThisFrame)
             return;
 
-        // staleな参照による遠距離からの再オープンを防ぐため、現在のTrigger内に
-        // プレイヤーのルート位置があることも確認する。
-        if (triggerCollider == null || !triggerCollider.bounds.Contains(localPlayer.transform.position))
+        // Exitイベントが取りこぼされても、現在のプレイヤーColliderがTriggerと重なっている
+        // ことを再確認し、古い参照による遠距離からのUI再オープンを防ぐ。
+        bool stillOverlapping = triggerCollider != null &&
+            localPlayerColliders.Exists(collider => triggerCollider.bounds.Intersects(collider.bounds));
+
+        if (!stillOverlapping)
         {
             ClearLocalPlayer();
             return;
@@ -95,5 +97,19 @@ public sealed class CharacterSelectInteractable : MonoBehaviour
     private void OnDisable()
     {
         ClearLocalPlayer();
+    }
+}
+
+// HashSetにColliderの存在条件を適用する小さな拡張。
+internal static class CharacterSelectColliderSetExtensions
+{
+    public static bool Exists(this HashSet<Collider> set, System.Func<Collider, bool> predicate)
+    {
+        foreach (Collider collider in set)
+        {
+            if (collider != null && predicate(collider))
+                return true;
+        }
+        return false;
     }
 }
