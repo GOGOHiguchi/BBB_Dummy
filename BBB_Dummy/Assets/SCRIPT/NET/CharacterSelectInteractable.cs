@@ -69,12 +69,8 @@ public sealed class CharacterSelectInteractable : MonoBehaviour
         if (Keyboard.current == null || !Keyboard.current.eKey.wasPressedThisFrame)
             return;
 
-        // Exitイベントが取りこぼされても、現在のプレイヤーColliderがTriggerと重なっている
-        // ことを再確認し、古い参照による遠距離からのUI再オープンを防ぐ。
-        bool stillOverlapping = triggerCollider != null &&
-            localPlayerColliders.Exists(collider => triggerCollider.bounds.Intersects(collider.bounds));
-
-        if (!stillOverlapping)
+        // Exitイベントが取りこぼされても、現在のColliderがTriggerと重なっているか再確認。
+        if (!HasTrackedColliderOverlappingTrigger())
         {
             ClearLocalPlayer();
             return;
@@ -87,6 +83,20 @@ public sealed class CharacterSelectInteractable : MonoBehaviour
             Debug.LogWarning("[CharacterSelectInteractable] PlayerにCharacterModelSwitcherがありません。", localPlayer);
     }
 
+    private bool HasTrackedColliderOverlappingTrigger()
+    {
+        if (triggerCollider == null)
+            return false;
+
+        foreach (Collider playerCollider in localPlayerColliders)
+        {
+            if (playerCollider != null && triggerCollider.bounds.Intersects(playerCollider.bounds))
+                return true;
+        }
+
+        return false;
+    }
+
     private void ClearLocalPlayer()
     {
         localPlayerColliders.Clear();
@@ -97,19 +107,5 @@ public sealed class CharacterSelectInteractable : MonoBehaviour
     private void OnDisable()
     {
         ClearLocalPlayer();
-    }
-}
-
-// HashSetにColliderの存在条件を適用する小さな拡張。
-internal static class CharacterSelectColliderSetExtensions
-{
-    public static bool Exists(this HashSet<Collider> set, System.Func<Collider, bool> predicate)
-    {
-        foreach (Collider collider in set)
-        {
-            if (collider != null && predicate(collider))
-                return true;
-        }
-        return false;
     }
 }
