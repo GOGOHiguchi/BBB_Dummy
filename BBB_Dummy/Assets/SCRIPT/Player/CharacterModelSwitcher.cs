@@ -25,7 +25,61 @@ public class CharacterModelSwitcher : NetworkBehaviour
     public int CharacterModelId { get; set; }
 
     public CharacterModelDatabase ModelDatabase => GetDatabase();
-    public int SavedModelId => PlayerPrefs.GetInt(PreferenceKey, 0);
+    public int SavedModelId => ReadSavedModelId();
+
+    // ParrelSyncのCloneは同じPC上でPlayerPrefsを共有するため、
+    // Unity Editorではプロジェクトパスから各Editorインスタンス固有のキーを作る。
+    // ビルド版では従来キーを使い、既存セーブとの互換性を維持する。
+    private string InstancePreferenceKey
+    {
+        get
+        {
+#if UNITY_EDITOR
+            return PreferenceKey + ".EditorInstance." + StablePathHash(Application.dataPath);
+#else
+            return PreferenceKey;
+#endif
+        }
+    }
+
+    private int ReadSavedModelId()
+    {
+        string key = InstancePreferenceKey;
+
+        if (PlayerPrefs.HasKey(key))
+            return PlayerPrefs.GetInt(key, 0);
+
+        // 既存の共通キーから初回だけ移行する。移行後の保存は個別キーに行う。
+        if (PlayerPrefs.HasKey(PreferenceKey))
+        {
+            int legacyValue = PlayerPrefs.GetInt(PreferenceKey, 0);
+            PlayerPrefs.SetInt(key, legacyValue);
+            PlayerPrefs.Save();
+            return legacyValue;
+        }
+
+        return 0;
+    }
+
+    private static string StablePathHash(string path)
+    {
+        if (string.IsNullOrEmpty(path))
+            return "00000000";
+
+        // String.GetHashCode()は実行環境によって変化する場合があるため、
+        // PlayerPrefsキー用に固定アルゴリズムのFNV-1aを使用する。
+        string normalized = path.Replace('\\', '/').ToLowerInvariant();
+        unchecked
+        {
+            uint hash = 2166136261;
+            for (int i = 0; i < normalized.Length; i++)
+            {
+                hash ^= normalized[i];
+                hash *= 16777619;
+            }
+            return hash.ToString("X8");
+        }
+    }
 
     private RuntimeAnimatorController _sharedAnimatorController;
     private int _appliedModelId = -1;
@@ -127,7 +181,7 @@ public class CharacterModelSwitcher : NetworkBehaviour
             return false;
         }
 
-        PlayerPrefs.SetInt(PreferenceKey, modelId);
+        PlayerPrefs.SetInt(InstancePreferenceKey, modelId);
         PlayerPrefs.Save();
 
         _isPreviewing = false;
