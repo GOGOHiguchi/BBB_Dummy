@@ -65590,6 +65590,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterSelect_Root
       objectReference: {fileID: 0}
+    - target: {fileID: 1743250291769025533, guid: eab89b062655f0e48b256c2717e11284, type: 3}
+      propertyPath: m_CellSize.x
+      value: 210
+      objectReference: {fileID: 0}
+    - target: {fileID: 1743250291769025533, guid: eab89b062655f0e48b256c2717e11284, type: 3}
+      propertyPath: m_CellSize.y
+      value: 250
+      objectReference: {fileID: 0}
     - target: {fileID: 5733162467761556743, guid: eab89b062655f0e48b256c2717e11284, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
