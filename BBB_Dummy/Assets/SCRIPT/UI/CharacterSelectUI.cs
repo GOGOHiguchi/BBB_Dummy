@@ -225,25 +225,47 @@ public sealed class CharacterSelectUI : MonoBehaviour
                 previewAnimator.runtimeAnimatorController = sourceAnimator.runtimeAnimatorController;
         }
 
-        Frame(previewCamera, previewModel, 2.15f);
+        Frame(previewCamera, previewModel, 2.15f, new Vector3(-0.15f, 0f, 0f));
         previewCamera.targetTexture = previewTexture;
         previewCamera.Render();
     }
 
-    private void Frame(Camera cam, GameObject model, float scale)
+    private void Frame(Camera cam, GameObject model, float scale, Vector3 modelOffset = default)
     {
         var renderers = model.GetComponentsInChildren<Renderer>(true);
         Bounds bounds = new Bounds(model.transform.position, Vector3.one);
         bool found = false;
-        foreach (var r in renderers) { if (!found) { bounds = r.bounds; found = true; } else bounds.Encapsulate(r.bounds); }
-        Vector3 center = stage.position;
-        model.transform.position += center - bounds.center;
-        float h = Mathf.Max(bounds.size.y, 1.2f), w = Mathf.Max(bounds.size.x, .7f);
-        cam.transform.position = center + Vector3.forward * Mathf.Max(h, w) * scale + Vector3.up * h * .04f;
-        cam.transform.LookAt(center + Vector3.up * h * .48f);
-        cam.orthographicSize = Mathf.Max(h * .58f, w * .9f);
-    }
 
+        foreach (var r in renderers)
+        {
+            if (!found)
+            {
+                bounds = r.bounds;
+                found = true;
+            }
+            else
+            {
+                bounds.Encapsulate(r.bounds);
+            }
+        }
+
+        Vector3 center = stage.position;
+
+        // キャラクターを中央に配置し、必要に応じて追加オフセットを適用
+        model.transform.position += center - bounds.center + modelOffset;
+
+        float h = Mathf.Max(bounds.size.y, 1.2f);
+        float w = Mathf.Max(bounds.size.x, .7f);
+
+        cam.transform.position =
+            center + Vector3.forward * Mathf.Max(h, w) * scale
+            + Vector3.up * h * .04f;
+
+        cam.transform.LookAt(center + Vector3.up * h * .18f);
+
+        cam.orthographicSize = Mathf.Max(h * .52f, w * .9f);
+    }
+    
     private void Select(int id)
     {
         if (!database.IsValidId(id)) return;
