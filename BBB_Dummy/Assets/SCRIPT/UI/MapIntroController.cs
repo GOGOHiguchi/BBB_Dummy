@@ -1,0 +1,198 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+/// <summary>
+/// Local, camera-only map introduction for a map scene.
+/// This is intentionally independent of Fusion/game-state logic for Phase 1.
+/// Assign the gameplay camera, intro camera, and ordered camera points in the Inspector.
+/// </summary>
+public class MapIntroController : MonoBehaviour
+{
+    [Header("Cameras")]
+    [SerializeField] private Camera introCamera;
+    [SerializeField] private Camera gameplayCamera;
+
+    [Header("Ordered Camera Route (Start -> ... -> Goal)")]
+    [SerializeField] private List<Transform> cameraPoints = new List<Transform>();
+
+    [Header("Motion")]
+    [Min(0.1f)]
+    [SerializeField] private float secondsPerSegment = 3f;
+    [Tooltip("Adds a gentle sideways arc between points. Set to 0 for straight interpolation.")]
+    [SerializeField] private float sidewaysArc = 2f;
+    [Tooltip("Adds a gentle height arc between points.")]
+    [SerializeField] private float heightArc = 1f;
+    [SerializeField] private bool usePointRotation = true;
+
+    [Header("Intro UI (optional)")]
+    [SerializeField] private TextMeshProUGUI stageNameText;
+    [SerializeField] private TextMeshProUGUI holeText;
+    [SerializeField] private string stageName = "CITY RUSH";
+    [SerializeField] private int fallbackHoleNumber = 1;
+
+    [Header("Playback")]
+    [SerializeField] private bool playOnStart = true;
+    [SerializeField] private bool returnToGameplayCameraOnFinish = true;
+
+    private Coroutine playback;
+    private bool finished;
+
+    private void Awake()
+    {
+        if (introCamera != null)
+            introCamera.enabled = false;
+
+        if (stageNameText != null)
+            stageNameText.text = stageName;
+
+        if (holeText != null)
+            holeText.text = $"HOLE {GetHoleNumber():00}";
+    }
+
+    private void Start()
+    {
+        if (playOnStart)
+            PlayIntro();
+    }
+
+    /// <summary>Starts or restarts the intro camera sequence.</summary>
+    public void PlayIntro()
+    {
+        if (playback != null)
+            StopCoroutine(playback);
+
+        finished = false;
+        playback = StartCoroutine(PlaySequence());
+    }
+
+    /// <summary>Can be connected to a UI Skip button in a later phase.</summary>
+    public void SkipIntro()
+    {
+        if (playback != null)
+        {
+            StopCoroutine(playback);
+            playback = null;
+        }
+
+        FinishIntro();
+    }
+
+    private IEnumerator PlaySequence()
+    {
+        if (introCamera == null)
+        {
+            Debug.LogWarning("[MapIntroController] Intro Camera is not assigned. Ending intro.");
+            FinishIntro();
+            yield break;
+        }
+
+        if (cameraPoints == null || cameraPoints.Count < 2)
+        {
+            Debug.LogWarning("[MapIntroController] At least two camera points are required. Ending intro.");
+            FinishIntro();
+            yield break;
+        }
+
+        // Ensure only the intro camera renders while the sequence is playing.
+        if (gameplayCamera != null)
+            gameplayCamera.enabled = false;
+
+        introCamera.enabled = true;
+        introCamera.transform.SetPositionAndRotation(cameraPoints[0].position, cameraPoints[0].rotation);
+
+        for (int segment = 0; segment < cameraPoints.Count - 1; segment++)
+        {
+            Transform from = cameraPoints[segment];
+            Transform to = cameraPoints[segment + 1];
+            if (from == null || to == null)
+                continue;
+
+            Transform previous = segment > 0 ? cameraPoints[segment - 1] : from;
+            Transform next = segment + 2 < cameraPoints.Count ? cameraPoints[segment + 2] : to;
+
+            float elapsed = 0f;
+            float duration = Mathf.Max(0.1f, secondsPerSegment);
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                // Smooth ease-in/ease-out so the camera does not abruptly start or stop.
+                float eased = t * t * (3f - 2f * t);
+
+                Vector3 position = CatmullRom(previous.position, from.position, to.position, next.position, eased);
+                position += CalculateArc(from.position, to.position, eased);
+
+                introCamera.transform.position = position;
+
+                if (usePointRotation)
+                    introCamera.transform.rotation = Quaternion.Slerp(from.rotation, to.rotation, eased);
+                else
+                    introCamera.transform.rotation = Quaternion.LookRotation(to.position - from.position, Vector3.up);
+
+                yield return null;
+            }
+
+            introCamera.transform.SetPositionAndRotation(to.position, to.rotation);
+        }
+
+        playback = null;
+        FinishIntro();
+    }
+
+    private Vector3 CalculateArc(Vector3 start, Vector3 end, float t)
+    {
+        float arcFactor = Mathf.Sin(t * Mathf.PI);
+        Vector3 direction = end - start;
+        Vector3 side = Vector3.Cross(direction.normalized, Vector3.up);
+
+        if (side.sqrMagnitude < 0.001f)
+            side = Vector3.right;
+        else
+            side.Normalize();
+
+        return side * (sidewaysArc * arcFactor) + Vector3.up * (heightArc * arcFactor);
+    }
+
+    private static Vector3 CatmullRom(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float t)
+    {
+        float t2 = t * t;
+        float t3 = t2 * t;
+        return 0.5f * ((2f * p1) + (-p0 + p2) * t +
+                       (2f * p0 - 5f * p1 + 4f * p2 - p3) * t2 +
+                       (-p0 + 3f * p1 - 3f * p2 + p3) * t3);
+    }
+
+    private int GetHoleNumber()
+    {
+        if (GameManager.Instance != null && GameManager.Instance.Runner != null)
+            return Mathf.Max(1, GameManager.Instance.CurrentHole);
+
+        return Mathf.Max(1, fallbackHoleNumber);
+    }
+
+    private void FinishIntro()
+    {
+        if (finished)
+            return;
+
+        finished = true;
+
+        if (introCamera != null)
+            introCamera.enabled = false;
+
+        if (returnToGameplayCameraOnFinish && gameplayCamera != null)
+            gameplayCamera.enabled = true;
+
+        if (stageNameText != null)
+            stageNameText.gameObject.SetActive(false);
+
+        if (holeText != null)
+            holeText.gameObject.SetActive(false);
+
+        playback = null;
+        Debug.Log("[MapIntroController] Intro camera sequence finished.");
+    }
+}
