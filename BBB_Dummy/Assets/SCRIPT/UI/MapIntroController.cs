@@ -30,7 +30,7 @@ public class MapIntroController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI stageNameText;
     [SerializeField] private TextMeshProUGUI holeText;
     [SerializeField] private string stageName = "CITY RUSH";
-    [SerializeField] private int fallbackHoleNumber = 1;
+    [SerializeField] private int holeNumber = 1;
 
     [Header("Playback")]
     [SerializeField] private bool playOnStart = true;
@@ -48,7 +48,7 @@ public class MapIntroController : MonoBehaviour
             stageNameText.text = stageName;
 
         if (holeText != null)
-            holeText.text = $"HOLE {GetHoleNumber():00}";
+            holeText.text = $"HOLE {Mathf.Max(1, holeNumber):00}";
     }
 
     private void Start()
@@ -100,6 +100,8 @@ public class MapIntroController : MonoBehaviour
             gameplayCamera.enabled = false;
 
         introCamera.enabled = true;
+        if (stageNameText != null) stageNameText.gameObject.SetActive(true);
+        if (holeText != null) holeText.gameObject.SetActive(true);
         introCamera.transform.SetPositionAndRotation(cameraPoints[0].position, cameraPoints[0].rotation);
 
         for (int segment = 0; segment < cameraPoints.Count - 1; segment++)
