@@ -29,6 +29,9 @@ public class MapIntroController : MonoBehaviour
     [Header("Intro UI (optional)")]
     [SerializeField] private TextMeshProUGUI stageNameText;
     [SerializeField] private TextMeshProUGUI holeText;
+    [Tooltip("Optional background objects paired with the text. Keep the text references unchanged.")]
+    [SerializeField] private GameObject stageNameBackground;
+    [SerializeField] private GameObject holeBackground;
     [SerializeField] private string stageName = "CITY RUSH";
     [SerializeField] private int holeNumber = 1;
 
@@ -104,6 +107,8 @@ public class MapIntroController : MonoBehaviour
         introCamera.enabled = true;
         if (stageNameText != null) stageNameText.gameObject.SetActive(true);
         if (holeText != null) holeText.gameObject.SetActive(true);
+        if (stageNameBackground != null) stageNameBackground.SetActive(true);
+        if (holeBackground != null) holeBackground.SetActive(true);
         introCamera.transform.SetPositionAndRotation(cameraPoints[0].position, cameraPoints[0].rotation);
 
         for (int segment = 0; segment < cameraPoints.Count - 1; segment++)
@@ -142,8 +147,35 @@ public class MapIntroController : MonoBehaviour
             introCamera.transform.SetPositionAndRotation(to.position, to.rotation);
         }
 
+        yield return ReturnToGameplayCamera();
         playback = null;
         FinishIntro();
+    }
+
+
+    private IEnumerator ReturnToGameplayCamera()
+    {
+        if (!returnToGameplayCameraOnFinish || gameplayCamera == null || introCamera == null)
+            yield break;
+
+        Vector3 startPosition = introCamera.transform.position;
+        Quaternion startRotation = introCamera.transform.rotation;
+        Vector3 targetPosition = gameplayCamera.transform.position;
+        Quaternion targetRotation = gameplayCamera.transform.rotation;
+        float duration = Mathf.Max(0.1f, cameraReturnDuration);
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            float smooth = t * t * (3f - 2f * t);
+            introCamera.transform.position = Vector3.Lerp(startPosition, targetPosition, smooth);
+            introCamera.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, smooth);
+            yield return null;
+        }
+
+        introCamera.transform.SetPositionAndRotation(targetPosition, targetRotation);
     }
 
     private Vector3 CalculateArc(Vector3 start, Vector3 end, float t)
@@ -195,6 +227,10 @@ public class MapIntroController : MonoBehaviour
 
         if (holeText != null)
             holeText.gameObject.SetActive(false);
+        if (stageNameBackground != null)
+            stageNameBackground.SetActive(false);
+        if (holeBackground != null)
+            holeBackground.SetActive(false);
 
         playback = null;
         Debug.Log("[MapIntroController] Intro camera sequence finished.");
