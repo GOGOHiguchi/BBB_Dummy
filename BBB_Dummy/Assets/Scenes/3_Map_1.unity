@@ -26053,6 +26053,39 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660314049}
   m_Mesh: {fileID: -5100648875313457504, guid: 75d5e74f171c0ff459e09b14934162c2, type: 3}
+--- !u!1 &665828352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 665828353}
+  m_Layer: 0
+  m_Name: MapIntro
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &665828353
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665828352}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 1379285641}
+  - {fileID: 2107024559}
+  m_Father: {fileID: 704519733}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &666620004
 GameObject:
   m_ObjectHideFlags: 0
@@ -27988,7 +28021,7 @@ RectTransform:
   - {fileID: 100405548}
   - {fileID: 2130678638}
   - {fileID: 1599589278}
-  - {fileID: 1379285641}
+  - {fileID: 665828353}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -59084,14 +59117,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1379285640}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1742450999}
-  - {fileID: 2107024559}
-  m_Father: {fileID: 704519733}
+  m_Father: {fileID: 665828353}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -85023,11 +85055,13 @@ MonoBehaviour:
   usePointRotation: 1
   stageNameText: {fileID: 1742451000}
   holeText: {fileID: 813760200}
+  stageNameBackground: {fileID: 1379285640}
+  holeBackground: {fileID: 2107024558}
   stageName: CITY RUSH
   holeNumber: 1
   playOnStart: 1
   returnToGameplayCameraOnFinish: 1
-  cameraReturnDuration: 1.2
+  cameraReturnDuration: 2
 --- !u!1 &1938496685
 GameObject:
   m_ObjectHideFlags: 0
@@ -92812,7 +92846,7 @@ RectTransform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 813760199}
-  m_Father: {fileID: 1379285641}
+  m_Father: {fileID: 665828353}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
