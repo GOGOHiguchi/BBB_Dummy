@@ -85027,6 +85027,7 @@ MonoBehaviour:
   holeNumber: 1
   playOnStart: 1
   returnToGameplayCameraOnFinish: 1
+  cameraReturnDuration: 1.2
 --- !u!1 &1938496685
 GameObject:
   m_ObjectHideFlags: 0
