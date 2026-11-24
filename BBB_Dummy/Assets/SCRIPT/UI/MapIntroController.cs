@@ -167,13 +167,13 @@ public class MapIntroController : MonoBehaviour
                        (-p0 + 3f * p1 - 3f * p2 + p3) * t3);
     }
 
-    private int GetHoleNumber()
-    {
-        if (GameManager.Instance != null && GameManager.Instance.Runner != null)
-            return Mathf.Max(1, GameManager.Instance.CurrentHole);
+    // private int GetHoleNumber()
+    // {
+    //     if (GameManager.Instance != null && GameManager.Instance.Runner != null)
+    //         return Mathf.Max(1, GameManager.Instance.CurrentHole);
 
-        return Mathf.Max(1, fallbackHoleNumber);
-    }
+    //     return Mathf.Max(1, fallbackHoleNumber);
+    // }
 
     private void FinishIntro()
     {
