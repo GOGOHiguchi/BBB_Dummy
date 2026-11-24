@@ -35,6 +35,8 @@ public class MapIntroController : MonoBehaviour
     [Header("Playback")]
     [SerializeField] private bool playOnStart = true;
     [SerializeField] private bool returnToGameplayCameraOnFinish = true;
+    [Min(0.1f)]
+    [SerializeField] private float cameraReturnDuration = 1.2f;
 
     private Coroutine playback;
     private bool finished;
