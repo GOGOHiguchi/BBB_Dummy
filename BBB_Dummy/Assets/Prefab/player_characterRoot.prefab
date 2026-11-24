@@ -154,8 +154,8 @@ MonoBehaviour:
   highlightColor: {r: 0.18177521, g: 1, b: 0, a: 1}
   emoteKey: 32
   closeSlotIndex: 8
-  backflipEmoteIndex: 1
-  backflipJumpDelay: 0.45
+  backflipEmoteIndex: 3
+  backflipJumpDelay: 1.1
   backflipJumpPower: 7.5
   _CurrentEmoteIndex: 0
   _IsCelebrating:
@@ -287,12 +287,18 @@ MonoBehaviour:
   jumpBootEffectPrefab: {fileID: 6710139492206580332, guid: 95b8d3d65b5d7f1409c4ed1723887826, type: 3}
   jumpBootEffectOffsetY: 2
   itemAudioSource: {fileID: 5492635999955099451}
-  jumpBootSE: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
+  jumpBootSE: {fileID: 8300000, guid: 2ddb13da678cbe448b9615bbb99012d3, type: 3}
+  jumpBootVolume: 3
   speedBoostSE: {fileID: 8300000, guid: 4e1ff8faed12a475eba9be0e46072269, type: 3}
-  shieldSE: {fileID: 8300000, guid: ff5f85da24bc943d1abdc5760a22bc81, type: 3}
+  speedBoostVolume: 2.1
+  shieldSE: {fileID: 8300000, guid: 35fbad8cdde724f11ba6481f1e64af71, type: 3}
+  shieldVolume: 3
   landminePlaceSE: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+  landminePlaceVolume: 2.3
   satelliteReadySE: {fileID: 8300000, guid: 5039414d94a6e4e70a5ab9e8833e992a, type: 3}
+  satelliteReadyVolume: 1.7
   rocketLauncherSE: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
+  rocketLauncherVolume: 2.8
   carStunDuration: 2
   ballPrefab:
     RawGuidValue: ac145adcb89f5cd4c97eae49726cb318
@@ -502,6 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f4d9a2b7c1e4a6d9b3f5c8e2a7d1b60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterModelSwitcher
+  modelDatabase: {fileID: 0}
   maleModelPrefab: {fileID: 7478225697116208144, guid: 6fb37f825ee63264b9c2600bf1a52006, type: 3}
   femaleModelPrefab: {fileID: 6252356961377389083, guid: 2db03e7c8a8135146b280e5da7e0289c, type: 3}
   characterVisualRoot: {fileID: 1124980616883435515}

@@ -63,6 +63,9 @@ MonoBehaviour:
   respawnTime: 3
   visualRoot: {fileID: 3961914660110222415}
   boxCollider: {fileID: 3142388468173496747}
+  breakSE: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  breakSEVolume: 2.8
+  startOffset: 0.9
   _IsActive:
     RawValue: 0
 --- !u!114 &7734365261568381198

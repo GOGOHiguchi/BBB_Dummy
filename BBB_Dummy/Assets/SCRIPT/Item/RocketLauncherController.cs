@@ -10,9 +10,10 @@ public class RocketLauncherController : NetworkBehaviour
     [Header("効果音・エフェクト")]
     [SerializeField] private AudioSource soundSource;
     [SerializeField] private AudioClip fireSound;
+    [Range(0f, 3f)] [SerializeField] private float fireSoundVolume = 1.0f;
     [SerializeField] private GameObject muzzleFlashPrefab;
 
-    public void FireWeapon(NetworkRunner runner, PlayerRef inputAuthority, bool hasStateAuthority,Vector3 aimDirection)
+    public void FireWeapon(NetworkRunner runner, PlayerRef inputAuthority, bool hasStateAuthority, Vector3 aimDirection)
     {
         Debug.Log("[RocketLauncherController] FireWeapon 実行");
 
@@ -38,6 +39,6 @@ public class RocketLauncherController : NetworkBehaviour
         }
 
         if (muzzleFlashPrefab != null) Instantiate(muzzleFlashPrefab, spawnPos, spawnRot);
-        if (soundSource != null && fireSound != null) soundSource.PlayOneShot(fireSound);
+        if (soundSource != null && fireSound != null) soundSource.PlayOneShot(fireSound, fireSoundVolume);
     }
 }

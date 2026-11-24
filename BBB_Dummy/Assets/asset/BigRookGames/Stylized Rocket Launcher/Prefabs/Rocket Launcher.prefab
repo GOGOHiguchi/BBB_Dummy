@@ -267,6 +267,7 @@ MonoBehaviour:
   muzzlePosition: {fileID: 3643882368892340087}
   soundSource: {fileID: 4490302565791019162}
   fireSound: {fileID: 8300000, guid: 40e71b0f7bd610849b40f150553f4702, type: 3}
+  fireSoundVolume: 2.8
   muzzleFlashPrefab: {fileID: 450044020708499364, guid: 93a162fc463d2d842a8c25e141618684, type: 3}
 --- !u!82 &4490302565791019162
 AudioSource:

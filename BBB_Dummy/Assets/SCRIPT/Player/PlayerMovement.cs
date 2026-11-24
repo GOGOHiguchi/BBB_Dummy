@@ -61,23 +61,44 @@ public class PlayerMovement : NetworkBehaviour
 
     [Header("アイテムSE設定")]
     [SerializeField] private AudioSource itemAudioSource;
+
     [InspectorName("ダッシュ")]
-    [SerializeField] private AudioClip jumpBootSE;       // おすすめ: DM-CGS-21 / 45
+    [SerializeField] private AudioClip jumpBootSE;
+    [InspectorName("ダッシュ音量")]
+    [Range(0f, 3f)] [SerializeField] private float jumpBootVolume = 1.0f;
+
     [InspectorName("スピード")]
-    [SerializeField] private AudioClip speedBoostSE;     // おすすめ: DM-CGS-28 / 15
+    [SerializeField] private AudioClip speedBoostSE;
+    [InspectorName("スピード音量")]
+    [Range(0f, 3f)] [SerializeField] private float speedBoostVolume = 1.0f;
+
     [InspectorName("オーラ")]
-    [SerializeField] private AudioClip shieldSE;         // おすすめ: DM-CGS-32 / 18
+    [SerializeField] private AudioClip shieldSE;
+    [InspectorName("オーラ音量")]
+    [Range(0f, 3f)] [SerializeField] private float shieldVolume = 1.0f;
+
     [InspectorName("地雷")]
-    [SerializeField] private AudioClip landminePlaceSE;  // おすすめ: DM-CGS-03 / 07
+    [SerializeField] private AudioClip landminePlaceSE;
+    [InspectorName("地雷音量")]
+    [Range(0f, 3f)] [SerializeField] private float landminePlaceVolume = 1.0f;
+
     [InspectorName("サテライト")]
-    [SerializeField] private AudioClip satelliteReadySE; // おすすめ: DM-CGS-26 / 47
+    [SerializeField] private AudioClip satelliteReadySE;
+    [InspectorName("サテライト音量")]
+    [Range(0f, 3f)] [SerializeField] private float satelliteReadyVolume = 1.0f;
+
     [InspectorName("ロケラン")]
-    [SerializeField] private AudioClip rocketLauncherSE; // 必要であれば割り当て
+    [SerializeField] private AudioClip rocketLauncherSE;
+    [InspectorName("ロケラン音量")]
+    [Range(0f, 3f)] [SerializeField] private float rocketLauncherVolume = 1.0f;
+
+    private AudioSource _shieldLoopAudioSource; // オーラSE専用3Dスピーカー（エフェクト消滅と同時に停止するため）
 
     [Header("被弾・スタン設定")]
     [SerializeField] private float carStunDuration = 2f;
 
     [Networked] private Vector3 KnockbackVelocity { get; set; }
+    private bool _wasLocalStunned = false; // 自分専用のスタンSE切り替え判定用
 
     [Header("ボウリングボール設定")]
     [SerializeField] private NetworkPrefabRef ballPrefab;
@@ -669,7 +690,7 @@ public class PlayerMovement : NetworkBehaviour
                                 case 5:
                                     ConsumeItem(slot);
                                     ShieldTimer = TickTimer.CreateFromSeconds(Runner, shieldDuration);
-                                    Rpc_PlayItemSE(5);
+                                    // ※オーラSEの再生・停止はUpdateInteractVisualsでエフェクトと完全連動させます
                                     Debug.Log("電磁石シールド展開！");
                                     break;
 
@@ -1173,6 +1194,32 @@ public class PlayerMovement : NetworkBehaviour
     {
         UpdateInteractVisuals();
 
+        bool isStunned = !StunTimer.ExpiredOrNotRunning(Runner);
+
+        // 自分の操作キャラ（HasInputAuthority）だけスタン開始・解除SEを鳴らす
+        // ※ピン撃破後の演出（IsPinFinished）中は通常のスタンSEを鳴らさない
+        if (HasInputAuthority)
+        {
+            bool shouldPlayStunSE = isStunned && !IsPinFinished;
+
+            if (shouldPlayStunSE && !_wasLocalStunned)
+            {
+                if (AudioManager.instance != null)
+                {
+                    AudioManager.instance.PlaySE(SEType.Damage);       // スタンを食らった瞬間の音
+                    AudioManager.instance.PlayLoopSE(SEType.StunLoop); // スタン中のループ音開始
+                }
+            }
+            else if (!shouldPlayStunSE && _wasLocalStunned)
+            {
+                if (AudioManager.instance != null)
+                {
+                    AudioManager.instance.StopLoopSE(); // スタン解除でループ音停止
+                }
+            }
+            _wasLocalStunned = shouldPlayStunSE;
+        }
+
         if (animator == null) animator = GetComponentInChildren<Animator>();
 
         if (animator != null)
@@ -1213,7 +1260,6 @@ public class PlayerMovement : NetworkBehaviour
                 animator.SetBool(IsGroundedHash, cc.isGrounded);
             }
 
-            bool isStunned = !StunTimer.ExpiredOrNotRunning(Runner);
             animator.SetBool(IsStunnedHash, isStunned);
         }
     }
@@ -1326,14 +1372,16 @@ public class PlayerMovement : NetworkBehaviour
             }
         }
 
+        // オーラ（シールド）エフェクトと3D音響SEの完全同期
+        bool isShieldActive = !ShieldTimer.ExpiredOrNotRunning(Runner) && !IsPinFinished;
         if (shieldVisual != null)
         {
-            bool isShieldActive = !ShieldTimer.ExpiredOrNotRunning(Runner);
             if (shieldVisual.activeSelf != isShieldActive)
             {
                 shieldVisual.SetActive(isShieldActive);
             }
         }
+        UpdateShieldLoopSE(isShieldActive);
 
         if (speedBoostVisual != null)
         {
@@ -1367,6 +1415,44 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
+    // オーラ表示中だけ3D音響でSEを鳴らし、エフェクトが消えた瞬間に即停止する
+    private void UpdateShieldLoopSE(bool isActive)
+    {
+        if (isActive && shieldSE != null)
+        {
+            if (_shieldLoopAudioSource == null)
+            {
+                _shieldLoopAudioSource = gameObject.AddComponent<AudioSource>();
+                _shieldLoopAudioSource.loop = true;
+                _shieldLoopAudioSource.playOnAwake = false;
+                _shieldLoopAudioSource.spatialBlend = 1.0f; // 3D空間音響
+                _shieldLoopAudioSource.minDistance = 3f;
+                _shieldLoopAudioSource.maxDistance = 25f;
+
+                if (AudioManager.instance != null && AudioManager.instance.seAudioSource != null)
+                {
+                    _shieldLoopAudioSource.outputAudioMixerGroup = AudioManager.instance.seAudioSource.outputAudioMixerGroup;
+                }
+            }
+
+            _shieldLoopAudioSource.spatialBlend = 1.0f;
+            _shieldLoopAudioSource.volume = Mathf.Clamp01(shieldVolume);
+
+            if (!_shieldLoopAudioSource.isPlaying)
+            {
+                _shieldLoopAudioSource.clip = shieldSE;
+                _shieldLoopAudioSource.Play();
+            }
+        }
+        else
+        {
+            if (_shieldLoopAudioSource != null && _shieldLoopAudioSource.isPlaying)
+            {
+                _shieldLoopAudioSource.Stop();
+            }
+        }
+    }
+
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     public void RpcUpdatePlayerName(string newName)
     {
@@ -1390,28 +1476,82 @@ public class PlayerMovement : NetworkBehaviour
     [Rpc(RpcSources.InputAuthority | RpcSources.StateAuthority, RpcTargets.All)]
     private void Rpc_PlayItemSE(int itemType)
     {
-        if (itemAudioSource == null) itemAudioSource = GetComponent<AudioSource>();
-        if (itemAudioSource == null) return;
-
-        AudioClip clipToPlay = null;
-        switch (itemType)
+        // 地雷（itemType == 3）だけはプレイヤーの3D空間AudioSourceから鳴らす
+        if (itemType == 3)
         {
-            case 1: clipToPlay = speedBoostSE; break;
-            case 2: clipToPlay = rocketLauncherSE; break;
-            case 3: clipToPlay = landminePlaceSE; break;
-            case 4: clipToPlay = jumpBootSE; break;
-            case 5: clipToPlay = shieldSE; break;
-            case 6: clipToPlay = satelliteReadySE; break;
+            if (landminePlaceSE == null) return;
+
+            if (itemAudioSource == null) itemAudioSource = GetComponent<AudioSource>();
+            if (itemAudioSource != null && itemAudioSource.enabled)
+            {
+                itemAudioSource.spatialBlend = 1.0f; // 3D音響
+                if (AudioManager.instance != null && AudioManager.instance.seAudioSource != null)
+                {
+                    itemAudioSource.outputAudioMixerGroup = AudioManager.instance.seAudioSource.outputAudioMixerGroup;
+                }
+                itemAudioSource.PlayOneShot(landminePlaceSE, landminePlaceVolume);
+            }
+            return;
         }
 
-        if (clipToPlay != null)
+        AudioClip clipToPlay = null;
+        float volumeScale = 1.0f;
+
+        switch (itemType)
         {
-            itemAudioSource.PlayOneShot(clipToPlay);
+            case 1:
+                clipToPlay = speedBoostSE;
+                volumeScale = speedBoostVolume;
+                break;
+            case 2:
+                clipToPlay = rocketLauncherSE;
+                volumeScale = rocketLauncherVolume;
+                break;
+            case 4:
+                clipToPlay = jumpBootSE;
+                volumeScale = jumpBootVolume;
+                break;
+            case 5:
+                // オーラ（シールド）はUpdateShieldLoopSEで3Dループ再生するため単発再生しない
+                return;
+            case 6:
+                clipToPlay = satelliteReadySE;
+                volumeScale = satelliteReadyVolume;
+                break;
+        }
+
+        if (clipToPlay == null) return;
+
+        // 地雷・オーラ以外は2D音響（AudioManager）で再生
+        if (AudioManager.instance != null && AudioManager.instance.seAudioSource != null)
+        {
+            AudioManager.instance.seAudioSource.PlayOneShot(clipToPlay, volumeScale);
+            return;
+        }
+
+        // マップ単体起動時の予備
+        if (itemAudioSource == null) itemAudioSource = GetComponent<AudioSource>();
+        if (itemAudioSource != null && itemAudioSource.enabled)
+        {
+            itemAudioSource.PlayOneShot(clipToPlay, volumeScale);
         }
     }
 
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
+        // スタン中に試合終了・退出してもループ音が残らないよう停止
+        if (HasInputAuthority && _wasLocalStunned && AudioManager.instance != null)
+        {
+            AudioManager.instance.StopLoopSE();
+            _wasLocalStunned = false;
+        }
+
+        // オーラSEも確実に停止
+        if (_shieldLoopAudioSource != null && _shieldLoopAudioSource.isPlaying)
+        {
+            _shieldLoopAudioSource.Stop();
+        }
+
         base.Despawned(runner, hasState);
         
         if (hasState && MyBall != null)

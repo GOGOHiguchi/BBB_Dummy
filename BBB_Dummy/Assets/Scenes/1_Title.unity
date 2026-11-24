@@ -151,7 +151,16 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 12a61dd6eef98ba40a95e3531a499d4a, type: 2}
   bgmAudioSource: {fileID: 1954787545}
   seAudioSource: {fileID: 1347937263}
-  seClips: []
+  seClips:
+  - type: 0
+    clip: {fileID: 8300000, guid: 123c93c0ee1612049bf8b2ffb0d70d94, type: 3}
+    volume: 2.5
+  - type: 6
+    clip: {fileID: 8300000, guid: a0010a1a0c474473b81729eb770c485f, type: 3}
+    volume: 1.7
+  - type: 10
+    clip: {fileID: 8300000, guid: a0010a1a0c474473b81729eb770c485f, type: 3}
+    volume: 1.7
 --- !u!4 &23982966
 Transform:
   m_ObjectHideFlags: 0

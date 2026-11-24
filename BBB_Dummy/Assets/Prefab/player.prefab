@@ -301,6 +301,11 @@ MonoBehaviour:
   backflipJumpDelay: 0.45
   backflipJumpPower: 7.5
   _CurrentEmoteIndex: 0
+  _IsCelebrating:
+    RawValue: 0
+  celebrationEmoteMinInterval: 2.5
+  celebrationEmoteMaxInterval: 4
+  emoteNetworkDisplayDuration: 0.25
 --- !u!114 &3085305019715580707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,17 +430,25 @@ MonoBehaviour:
   jumpBootEffectOffsetY: 2
   itemAudioSource: {fileID: 2708170269345464915}
   jumpBootSE: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
+  jumpBootVolume: 2.9
   speedBoostSE: {fileID: 8300000, guid: 4e1ff8faed12a475eba9be0e46072269, type: 3}
-  shieldSE: {fileID: 8300000, guid: ff5f85da24bc943d1abdc5760a22bc81, type: 3}
+  speedBoostVolume: 2.1
+  shieldSE: {fileID: 8300000, guid: 35fbad8cdde724f11ba6481f1e64af71, type: 3}
+  shieldVolume: 2.5
   landminePlaceSE: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+  landminePlaceVolume: 2.3
   satelliteReadySE: {fileID: 8300000, guid: 5039414d94a6e4e70a5ab9e8833e992a, type: 3}
+  satelliteReadyVolume: 1.5
   rocketLauncherSE: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
+  rocketLauncherVolume: 2.8
   carStunDuration: 2
   ballPrefab:
     RawGuidValue: ac145adcb89f5cd4c97eae49726cb318
   holdPoint: {fileID: 9120814429362982042}
   maxThrowForce: 90
   chargeRate: 80
+  minThrowSpeed: 8.5
+  maxThrowSpeed: 15
   pickupDistance: 4
   rocketLauncherController: {fileID: 6613635871984479424}
   rocketLauncherObject: {fileID: 3493978722215813852}
@@ -459,6 +472,8 @@ MonoBehaviour:
   interactUI: {fileID: 0}
   crosshairUI: {fileID: 2121714235824309185}
   _IsReady:
+    RawValue: 0
+  _IsPinFinished:
     RawValue: 0
   _MyBall: {fileID: 0}
   _IsHoldingBall:
