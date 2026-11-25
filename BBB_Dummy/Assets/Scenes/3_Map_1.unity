@@ -22571,6 +22571,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 554111201}
+  - component: {fileID: 554111202}
   m_Layer: 0
   m_Name: MapIntro
   m_TagString: Untagged
@@ -22595,6 +22596,18 @@ Transform:
   - {fileID: 16430351}
   m_Father: {fileID: 7007974927150731597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!225 &554111202
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554111200}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &554512159
 GameObject:
   m_ObjectHideFlags: 0
@@ -60158,13 +60171,16 @@ MonoBehaviour:
   sidewaysArc: 2
   heightArc: 1
   usePointRotation: 1
+  loopReturnDuration: 1.5
   stageNameText: {fileID: 1309739150}
   holeText: {fileID: 1041313781}
   stageNameBackground: {fileID: 1796653033}
   holeBackground: {fileID: 16430348}
+  introInfoCanvasGroup: {fileID: 554111202}
   stageName: CITY RUSH
-  holeNumber: 1
+  fallbackHoleNumber: 1
   introInfoDisplayDuration: 3
+  introInfoFadeDuration: 0.5
   playOnStart: 1
   returnToGameplayCameraOnFinish: 1
   cameraReturnDuration: 2.5
