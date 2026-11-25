@@ -782,7 +782,23 @@ public class PlayerMovement : NetworkBehaviour
                     PrevJumpPressed = data.isJumpPressed;
                 }
 
-                if (IsAimingRocket && data.aimDirection.sqrMagnitude > 0)
+                bool isWaitingForIntro = GameManager.Instance != null &&
+                                         GameManager.Instance.CurrentState == GameManager.GameState.Waiting;
+
+                if (isWaitingForIntro && data.aimDirection.sqrMagnitude > 0)
+                {
+                    // イントロ・カウントダウン開始前は、移動入力に関係なくカメラの水平向きを維持する。
+                    Vector3 lookDir = new Vector3(data.aimDirection.x, 0, data.aimDirection.z).normalized;
+                    if (lookDir != Vector3.zero)
+                    {
+                        transform.forward = Vector3.Lerp(
+                            transform.forward,
+                            lookDir,
+                            Runner.DeltaTime * 15f
+                        );
+                    }
+                }
+                else if (IsAimingRocket && data.aimDirection.sqrMagnitude > 0)
                 {
                     Vector3 lookDir = new Vector3(data.aimDirection.x, 0, data.aimDirection.z).normalized;
                     if (lookDir != Vector3.zero)
@@ -826,6 +842,7 @@ public class PlayerMovement : NetworkBehaviour
 
                 if (data.aimDirection.sqrMagnitude > 0)
                 {
+                    // Waiting中もカメラの水平向きをキャラクターへ反映し、Countdown突入時の向きを保つ。
                     Vector3 lookDir = new Vector3(data.aimDirection.x, 0, data.aimDirection.z).normalized;
                     if (lookDir != Vector3.zero)
                     {
