@@ -44,13 +44,6 @@ public class MapIntroController : MonoBehaviour
     private Coroutine playback;
     private bool finished;
 
-    // Gameplay camera pose expressed relative to the local player's facing direction.
-    private Transform returnPlayerTransform;
-    private Vector3 gameplayCameraLocalOffset;
-    private Quaternion gameplayCameraLocalRotation;
-    private Vector3 fallbackReturnPosition;
-    private Quaternion fallbackReturnRotation;
-
     private void Awake()
     {
         if (introCamera != null)
@@ -106,10 +99,6 @@ public class MapIntroController : MonoBehaviour
             FinishIntro();
             yield break;
         }
-
-        // Cache the gameplay camera's offset relative to the local player's facing direction.
-        // This lets the intro camera retreat behind the player without turning toward the player's front.
-        CacheGameplayReturnPose();
 
         // Ensure only the intro camera renders while the sequence is playing.
         if (gameplayCamera != null)
@@ -172,71 +161,31 @@ public class MapIntroController : MonoBehaviour
         Vector3 startPosition = introCamera.transform.position;
         Quaternion startRotation = introCamera.transform.rotation;
 
+        // Cinemachine may not have updated the disabled gameplay Camera during the intro.
+        // Enable it briefly so its Brain can refresh the player-facing camera pose.
+        gameplayCamera.enabled = true;
+        yield return null;
+
+        Vector3 targetPosition = gameplayCamera.transform.position;
+        Quaternion targetRotation = gameplayCamera.transform.rotation;
+
+        // Keep only the intro camera rendering during the blend.
+        gameplayCamera.enabled = false;
+
         float duration = Mathf.Max(0.1f, cameraReturnDuration);
         float elapsed = 0f;
 
-        // Treat the gameplay view behind the player as the final camera waypoint.
-        // Recalculate it during the transition so the camera follows the player's
-        // current facing direction instead of snapping to a stale pose.
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
-            float smooth = t * t * (3f - 2f);
-
-            Vector3 targetPosition = GetGameplayReturnPosition();
-            Quaternion targetRotation = GetGameplayReturnRotation();
-
+            float smooth = t * t * (3f - 2f * t);
             introCamera.transform.position = Vector3.Lerp(startPosition, targetPosition, smooth);
             introCamera.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, smooth);
             yield return null;
         }
 
-        // Match the gameplay camera to the final intro-camera pose before switching,
-        // reducing the one-frame visual jump when the gameplay camera is enabled.
-        Vector3 finalPosition = GetGameplayReturnPosition();
-        Quaternion finalRotation = GetGameplayReturnRotation();
-        introCamera.transform.SetPositionAndRotation(finalPosition, finalRotation);
-        gameplayCamera.transform.SetPositionAndRotation(finalPosition, finalRotation);
-    }
-
-    private void CacheGameplayReturnPose()
-    {
-        if (gameplayCamera == null)
-            return;
-
-        fallbackReturnPosition = gameplayCamera.transform.position;
-        fallbackReturnRotation = gameplayCamera.transform.rotation;
-        returnPlayerTransform = PlayerMovement.Local != null ? PlayerMovement.Local.transform : null;
-
-        if (returnPlayerTransform == null)
-        {
-            Debug.LogWarning("[MapIntroController] Local player was not available when caching camera return pose. Using the gameplay camera's current pose.");
-            return;
-        }
-
-        gameplayCameraLocalOffset = Quaternion.Inverse(returnPlayerTransform.rotation) *
-                                  (gameplayCamera.transform.position - returnPlayerTransform.position);
-        gameplayCameraLocalRotation = Quaternion.Inverse(returnPlayerTransform.rotation) *
-                                    gameplayCamera.transform.rotation;
-    }
-
-
-    private Vector3 GetGameplayReturnPosition()
-    {
-        if (returnPlayerTransform == null)
-            return fallbackReturnPosition;
-
-        return returnPlayerTransform.position + returnPlayerTransform.rotation * gameplayCameraLocalOffset;
-    }
-
-
-    private Quaternion GetGameplayReturnRotation()
-    {
-        if (returnPlayerTransform == null)
-            return fallbackReturnRotation;
-
-        return returnPlayerTransform.rotation * gameplayCameraLocalRotation;
+        introCamera.transform.SetPositionAndRotation(targetPosition, targetRotation);
     }
 
     private Vector3 CalculateArc(Vector3 start, Vector3 end, float t)
