@@ -159,18 +159,12 @@ public class MapIntroController : MonoBehaviour
             yield break;
 
         Vector3 startPosition = introCamera.transform.position;
-        Quaternion startRotation = introCamera.transform.rotation;
-
-        // Cinemachine may not have updated the disabled gameplay Camera during the intro.
-        // Enable it briefly so its Brain can refresh the player-facing camera pose.
-        gameplayCamera.enabled = true;
-        yield return null;
-
         Vector3 targetPosition = gameplayCamera.transform.position;
-        Quaternion targetRotation = gameplayCamera.transform.rotation;
 
-        // Keep only the intro camera rendering during the blend.
-        gameplayCamera.enabled = false;
+        // Keep the intro camera's final forward direction fixed during the retreat.
+        // Only its position moves; it must not rotate toward the gameplay camera.
+        Quaternion fixedRotation = introCamera.transform.rotation;
+        introCamera.transform.rotation = fixedRotation;
 
         float duration = Mathf.Max(0.1f, cameraReturnDuration);
         float elapsed = 0f;
@@ -181,11 +175,12 @@ public class MapIntroController : MonoBehaviour
             float t = Mathf.Clamp01(elapsed / duration);
             float smooth = t * t * (3f - 2f * t);
             introCamera.transform.position = Vector3.Lerp(startPosition, targetPosition, smooth);
-            introCamera.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, smooth);
+            introCamera.transform.rotation = fixedRotation;
             yield return null;
         }
 
-        introCamera.transform.SetPositionAndRotation(targetPosition, targetRotation);
+        introCamera.transform.position = targetPosition;
+        introCamera.transform.rotation = fixedRotation;
     }
 
     private Vector3 CalculateArc(Vector3 start, Vector3 end, float t)
