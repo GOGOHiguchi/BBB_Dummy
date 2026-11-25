@@ -175,7 +175,6 @@ public class MapIntroController : MonoBehaviour
 
         // Retreat toward the gameplay view behind the player and smoothly align to it.
         Quaternion startRotation = introCamera.transform.rotation;
-        introCamera.transform.rotation = fixedRotation;
 
         float duration = Mathf.Max(0.1f, cameraReturnDuration);
         float elapsed = 0f;
