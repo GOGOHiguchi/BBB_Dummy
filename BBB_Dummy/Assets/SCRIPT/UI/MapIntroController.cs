@@ -44,6 +44,13 @@ public class MapIntroController : MonoBehaviour
     private Coroutine playback;
     private bool finished;
 
+    // Gameplay camera pose expressed relative to the local player's facing direction.
+    private Transform returnPlayerTransform;
+    private Vector3 gameplayCameraLocalOffset;
+    private Quaternion gameplayCameraLocalRotation;
+    private Vector3 fallbackReturnPosition;
+    private Quaternion fallbackReturnRotation;
+
     private void Awake()
     {
         if (introCamera != null)
@@ -99,6 +106,10 @@ public class MapIntroController : MonoBehaviour
             FinishIntro();
             yield break;
         }
+
+        // Cache the gameplay camera's offset relative to the local player's facing direction.
+        // This lets the intro camera retreat behind the player without turning toward the player's front.
+        CacheGameplayReturnPose();
 
         // Ensure only the intro camera renders while the sequence is playing.
         if (gameplayCamera != null)
@@ -159,11 +170,11 @@ public class MapIntroController : MonoBehaviour
             yield break;
 
         Vector3 startPosition = introCamera.transform.position;
-        Vector3 targetPosition = gameplayCamera.transform.position;
+        Vector3 targetPosition = GetGameplayReturnPosition();
+        Quaternion targetRotation = GetGameplayReturnRotation();
 
-        // Keep the intro camera's final forward direction fixed during the retreat.
-        // Only its position moves; it must not rotate toward the gameplay camera.
-        Quaternion fixedRotation = introCamera.transform.rotation;
+        // Retreat toward the gameplay view behind the player and smoothly align to it.
+        Quaternion startRotation = introCamera.transform.rotation;
         introCamera.transform.rotation = fixedRotation;
 
         float duration = Mathf.Max(0.1f, cameraReturnDuration);
@@ -175,12 +186,51 @@ public class MapIntroController : MonoBehaviour
             float t = Mathf.Clamp01(elapsed / duration);
             float smooth = t * t * (3f - 2f * t);
             introCamera.transform.position = Vector3.Lerp(startPosition, targetPosition, smooth);
-            introCamera.transform.rotation = fixedRotation;
+            introCamera.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, smooth);
             yield return null;
         }
 
         introCamera.transform.position = targetPosition;
-        introCamera.transform.rotation = fixedRotation;
+        introCamera.transform.rotation = targetRotation;
+    }
+
+    private void CacheGameplayReturnPose()
+    {
+        if (gameplayCamera == null)
+            return;
+
+        fallbackReturnPosition = gameplayCamera.transform.position;
+        fallbackReturnRotation = gameplayCamera.transform.rotation;
+        returnPlayerTransform = PlayerMovement.Local != null ? PlayerMovement.Local.transform : null;
+
+        if (returnPlayerTransform == null)
+        {
+            Debug.LogWarning("[MapIntroController] Local player was not available when caching camera return pose. Using the gameplay camera's current pose.");
+            return;
+        }
+
+        gameplayCameraLocalOffset = Quaternion.Inverse(returnPlayerTransform.rotation) *
+                                  (gameplayCamera.transform.position - returnPlayerTransform.position);
+        gameplayCameraLocalRotation = Quaternion.Inverse(returnPlayerTransform.rotation) *
+                                    gameplayCamera.transform.rotation;
+    }
+
+
+    private Vector3 GetGameplayReturnPosition()
+    {
+        if (returnPlayerTransform == null)
+            return fallbackReturnPosition;
+
+        return returnPlayerTransform.position + returnPlayerTransform.rotation * gameplayCameraLocalOffset;
+    }
+
+
+    private Quaternion GetGameplayReturnRotation()
+    {
+        if (returnPlayerTransform == null)
+            return fallbackReturnRotation;
+
+        return returnPlayerTransform.rotation * gameplayCameraLocalRotation;
     }
 
     private Vector3 CalculateArc(Vector3 start, Vector3 end, float t)
