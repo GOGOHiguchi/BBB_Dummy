@@ -136,6 +136,62 @@ public class GameManager : NetworkBehaviour
     [Networked, Capacity(10)]
     private NetworkDictionary<PlayerRef, NetworkBool> IntroReadyPlayers { get; }
 
+    [Networked, Capacity(10)]
+    private NetworkDictionary<PlayerRef, NetworkBool> SpawnedPlayers { get; }
+
+    public bool AllPlayersSpawned
+    {
+        get
+        {
+            if (Runner == null || !Runner.IsRunning || SpawnedPlayers.Count == 0)
+                return false;
+            foreach (PlayerRef player in Runner.ActivePlayers)
+            {
+                if (!SpawnedPlayers.TryGet(player, out NetworkBool spawned) || !spawned)
+                    return false;
+            }
+            return true;
+        }
+    }
+
+    public void BeginSpawnTracking()
+    {
+        if (!HasStateAuthority || Runner == null || !Runner.IsRunning)
+            return;
+        SpawnedPlayers.Clear();
+        foreach (PlayerRef player in Runner.ActivePlayers)
+            SpawnedPlayers.Add(player, false);
+        Debug.Log($"[GameManager] Spawn追跡開始: {SpawnedPlayers.Count}人");
+    }
+
+    public void RegisterSpawnExpected(PlayerRef player)
+    {
+        if (!HasStateAuthority || !player.IsValid)
+            return;
+        if (!SpawnedPlayers.ContainsKey(player))
+            SpawnedPlayers.Add(player, false);
+    }
+
+    public void ReportPlayerSpawned(PlayerRef player)
+    {
+        if (!HasStateAuthority || !player.IsValid)
+            return;
+        if (!SpawnedPlayers.ContainsKey(player))
+            SpawnedPlayers.Add(player, false);
+        SpawnedPlayers.Set(player, true);
+        Debug.Log($"[GameManager] Spawn完了: {player}");
+    }
+
+    public void RemovePlayerFromSpawnTracking(PlayerRef player)
+    {
+        if (!HasStateAuthority)
+            return;
+        if (SpawnedPlayers.ContainsKey(player))
+            SpawnedPlayers.Remove(player);
+        if (IntroReadyPlayers.ContainsKey(player))
+            IntroReadyPlayers.Remove(player);
+    }
+
     public void InitializeHole()
     {
         if (!HasStateAuthority) return;

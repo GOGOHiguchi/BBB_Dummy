@@ -95,6 +95,8 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
         if (runner.IsServer)
         {
+            if (GameManager.Instance != null)
+                GameManager.Instance.RegisterSpawnExpected(player);
             SpawnPlayer(runner, player);
         }
     }
@@ -105,17 +107,17 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
         if (runner.IsServer)
         {
+            if (GameManager.Instance != null)
+                GameManager.Instance.BeginSpawnTracking();
+
             foreach (var player in runner.ActivePlayers)
             {
                 Debug.Log($"BasicSpawner: Spawn対象 = {player}");
                 SpawnPlayer(runner, player);
             }
 
-            // ★ ここから追加：GameManagerが存在していればホール開始の初期化を行う
             if (GameManager.Instance != null)
-            {
                 GameManager.Instance.InitializeHole();
-            }
         }
     }
 
@@ -213,6 +215,8 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             }
 
             _spawnCount++;
+            if (GameManager.Instance != null)
+                GameManager.Instance.ReportPlayerSpawned(player);
             Debug.Log($"BasicSpawner: Player {player} のSpawn・PlayerObject登録が完了しました。");
         }
         catch (Exception e)
@@ -310,6 +314,9 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         // ホスト（サーバー）側で退出したプレイヤーのオブジェクトを破棄する
         if (runner.IsServer)
         {
+            if (GameManager.Instance != null)
+                GameManager.Instance.RemovePlayerFromSpawnTracking(player);
+
             var playerObj = runner.GetPlayerObject(player);
             if (playerObj != null)
             {

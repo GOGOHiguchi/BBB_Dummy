@@ -1,112 +1,85 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// Local, camera-only map introduction for a map scene.
-/// This is intentionally independent of Fusion/game-state logic for Phase 1.
-/// Assign the gameplay camera, intro camera, and ordered camera points in the Inspector.
+/// Local camera-only map intro. The first route always reaches the goal.
+/// If player spawns are incomplete, the camera rewinds smoothly and repeats.
+/// Spawn completion during a repeated route transitions from the current camera pose.
 /// </summary>
 public class MapIntroController : MonoBehaviour
 {
     [Header("Cameras")]
     [SerializeField] private Camera introCamera;
     [SerializeField] private Camera gameplayCamera;
-
     [Header("Ordered Camera Route (Start -> ... -> Goal)")]
     [SerializeField] private List<Transform> cameraPoints = new List<Transform>();
-
     [Header("Motion")]
-    [Min(0.1f)]
-    [SerializeField] private float secondsPerSegment = 3f;
-    [Tooltip("Adds a gentle sideways arc between points. Set to 0 for straight interpolation.")]
+    [Min(0.1f)] [SerializeField] private float secondsPerSegment = 3f;
+    [Tooltip("Adds a gentle sideways arc between points. Set to 0 for straight interpolation")]
     [SerializeField] private float sidewaysArc = 2f;
-    [Tooltip("Adds a gentle height arc between points.")]
+    [Tooltip("Adds a gentle height arc between points")]
     [SerializeField] private float heightArc = 1f;
     [SerializeField] private bool usePointRotation = true;
-
+    [Min(0.1f)] [SerializeField] private float loopReturnDuration = 1.5f;
     [Header("Intro UI (optional)")]
     [SerializeField] private TextMeshProUGUI stageNameText;
     [SerializeField] private TextMeshProUGUI holeText;
-    [Tooltip("Optional background objects paired with the text. Keep the text references unchanged.")]
     [SerializeField] private GameObject stageNameBackground;
     [SerializeField] private GameObject holeBackground;
+    [Tooltip("Assign a CanvasGroup on a common parent of the text/background elements for fade animation.")]
+    [SerializeField] private CanvasGroup introInfoCanvasGroup;
     [SerializeField] private string stageName = "CITY RUSH";
-    [SerializeField] private int holeNumber = 1;
-    [Tooltip("イントロ全体の中央付近に表示するマップ情報の表示時間（秒）")]
-    [Min(0f)]
-    [SerializeField] private float introInfoDisplayDuration = 3f;
-
+    [SerializeField] private int fallbackHoleNumber = 1;
+    [Min(0f)] [SerializeField] private float introInfoDisplayDuration = 3f;
+    [Min(0f)] [SerializeField] private float introInfoFadeDuration = 0.5f;
     [Header("Playback")]
     [SerializeField] private bool playOnStart = true;
     [SerializeField] private bool returnToGameplayCameraOnFinish = true;
-    [Min(0.1f)]
-    [SerializeField] private float cameraReturnDuration = 1.2f;
+    [Min(0.1f)] [SerializeField] private float cameraReturnDuration = 1.2f;
 
     private Coroutine playback;
     private Coroutine introInfoPlayback;
     private bool finished;
+    private bool infoShown;
+    private int currentHoleNumber;
 
     private void Awake()
     {
-        if (introCamera != null)
-            introCamera.enabled = false;
-
-        if (stageNameText != null)
-        {
-            stageNameText.text = stageName;
-            stageNameText.gameObject.SetActive(false);
-        }
-
-        if (holeText != null)
-        {
-            holeText.text = $"HOLE {Mathf.Max(1, holeNumber):00}";
-            holeText.gameObject.SetActive(false);
-        }
-
-        if (stageNameBackground != null)
-            stageNameBackground.SetActive(false);
-        if (holeBackground != null)
-            holeBackground.SetActive(false);
+        if (introCamera != null) introCamera.enabled = false;
+        currentHoleNumber = Mathf.Max(1, fallbackHoleNumber);
+        UpdateIntroInfoText();
+        SetIntroInfoVisible(false);
     }
 
     private void Start()
     {
-        if (playOnStart)
-            PlayIntro();
+        if (playOnStart) PlayIntro();
     }
 
-    /// <summary>Starts or restarts the intro camera sequence.</summary>
     public void PlayIntro()
     {
-        if (playback != null)
-            StopCoroutine(playback);
-
+        if (playback != null) StopCoroutine(playback);
         finished = false;
+        infoShown = false;
         StopIntroInfoPlayback();
         playback = StartCoroutine(PlaySequence());
     }
 
-    /// <summary>Skips the remaining route and smoothly returns to the gameplay camera.</summary>
     public void SkipIntro()
     {
-        if (finished)
-            return;
-
-        if (playback != null)
-            StopCoroutine(playback);
-
+        if (finished) return;
+        if (playback != null) StopCoroutine(playback);
         StopIntroInfoPlayback();
         playback = StartCoroutine(SkipSequence());
     }
-
 
     private IEnumerator SkipSequence()
     {
         if (introCamera != null && introCamera.enabled && returnToGameplayCameraOnFinish)
             yield return ReturnToGameplayCamera();
-
         playback = null;
         FinishIntro();
     }
@@ -119,16 +92,12 @@ public class MapIntroController : MonoBehaviour
             FinishIntro();
             yield break;
         }
-
         if (cameraPoints == null || cameraPoints.Count < 2)
         {
             Debug.LogWarning("[MapIntroController] At least two camera points are required. Ending intro.");
             FinishIntro();
             yield break;
         }
-
-        // Validate the full route before changing camera states. Catmull-Rom uses
-        // neighboring points, so a null entry anywhere in the list can break playback.
         for (int i = 0; i < cameraPoints.Count; i++)
         {
             if (cameraPoints[i] == null)
@@ -139,72 +108,132 @@ public class MapIntroController : MonoBehaviour
             }
         }
 
-        // Ensure only the intro camera renders while the sequence is playing.
-        if (gameplayCamera != null)
-            gameplayCamera.enabled = false;
-
+        RefreshHoleNumber();
+        UpdateIntroInfoText();
+        if (gameplayCamera != null) gameplayCamera.enabled = false;
         introCamera.enabled = true;
-        // イントロ全体（カメラ移動＋カメラ復帰）の中央に合わせてマップ情報を表示。
-        float introDuration = (cameraPoints.Count - 1) * Mathf.Max(0.1f, secondsPerSegment)
-                            + (returnToGameplayCameraOnFinish ? Mathf.Max(0.1f, cameraReturnDuration) : 0f);
-        introInfoPlayback = StartCoroutine(ShowIntroInfoAtMidpoint(introDuration));
         introCamera.transform.SetPositionAndRotation(cameraPoints[0].position, cameraPoints[0].rotation);
 
-        for (int segment = 0; segment < cameraPoints.Count - 1; segment++)
+        int cycle = 0;
+        while (!finished)
         {
-            Transform from = cameraPoints[segment];
-            Transform to = cameraPoints[segment + 1];
-            if (from == null || to == null)
-                continue;
-
-            Transform previous = segment > 0 ? cameraPoints[segment - 1] : from;
-            Transform next = segment + 2 < cameraPoints.Count ? cameraPoints[segment + 2] : to;
-
-            float elapsed = 0f;
-            float duration = Mathf.Max(0.1f, secondsPerSegment);
-
-            while (elapsed < duration)
+            bool firstRoute = cycle == 0;
+            if (!firstRoute && IsEveryoneSpawned())
             {
-                elapsed += Time.deltaTime;
-                float t = Mathf.Clamp01(elapsed / duration);
-                // Smooth ease-in/ease-out so the camera does not abruptly start or stop.
-                float eased = t * t * (3f - 2f * t);
-
-                Vector3 position = CatmullRom(previous.position, from.position, to.position, next.position, eased);
-                position += CalculateArc(from.position, to.position, eased);
-
-                introCamera.transform.position = position;
-
-                if (usePointRotation)
-                    introCamera.transform.rotation = Quaternion.Slerp(from.rotation, to.rotation, eased);
-                else
-                    introCamera.transform.rotation = Quaternion.LookRotation(to.position - from.position, Vector3.up);
-
-                yield return null;
+                yield return ReturnToGameplayCamera();
+                break;
             }
 
-            introCamera.transform.SetPositionAndRotation(to.position, to.rotation);
+            if (firstRoute && !infoShown)
+            {
+                float routeDuration = (cameraPoints.Count - 1) * Mathf.Max(0.1f, secondsPerSegment);
+                introInfoPlayback = StartCoroutine(ShowIntroInfoAtMidpoint(routeDuration));
+            }
+
+            bool finishedDuringLoop = false;
+            for (int segment = 0; segment < cameraPoints.Count - 1; segment++)
+            {
+                Transform from = cameraPoints[segment];
+                Transform to = cameraPoints[segment + 1];
+                Transform previous = segment > 0 ? cameraPoints[segment - 1] : from;
+                Transform next = segment + 2 < cameraPoints.Count ? cameraPoints[segment + 2] : to;
+                float elapsed = 0f;
+                float duration = Mathf.Max(0.1f, secondsPerSegment);
+
+                while (elapsed < duration)
+                {
+                    // The first pass is never cut short. On repeat passes, stop when
+                    // the networked spawn-complete flag becomes true, at the current pose.
+                    if (!firstRoute && IsEveryoneSpawned())
+                    {
+                        finishedDuringLoop = true;
+                        break;
+                    }
+                    elapsed += Time.deltaTime;
+                    float t = Mathf.Clamp01(elapsed / duration);
+                    float eased = t * t * (3f - 2f * t);
+                    Vector3 position = CatmullRom(previous.position, from.position, to.position, next.position, eased);
+                    position += CalculateArc(from.position, to.position, eased);
+                    introCamera.transform.position = position;
+                    if (usePointRotation)
+                        introCamera.transform.rotation = Quaternion.Slerp(from.rotation, to.rotation, eased);
+                    else
+                        introCamera.transform.rotation = Quaternion.LookRotation(to.position - from.position, Vector3.up);
+                    yield return null;
+                }
+                if (finishedDuringLoop) break;
+                introCamera.transform.SetPositionAndRotation(to.position, to.rotation);
+            }
+
+            // The first pass always finishes its route. If spawn completion is reached,
+            // it then returns to the player camera. Otherwise, rewind and repeat.
+            if (firstRoute || finishedDuringLoop || IsEveryoneSpawned())
+            {
+                yield return ReturnToGameplayCamera();
+                break;
+            }
+            yield return ReturnCameraToRouteStart();
+            cycle++;
         }
 
-        yield return ReturnToGameplayCamera();
         playback = null;
         FinishIntro();
     }
 
-
-    private IEnumerator ShowIntroInfoAtMidpoint(float totalIntroDuration)
+    private bool IsEveryoneSpawned()
     {
-        float displayDuration = Mathf.Max(0f, introInfoDisplayDuration);
-        float delay = Mathf.Max(0f, (totalIntroDuration - displayDuration) * 0.5f);
-        if (delay > 0f)
-            yield return new WaitForSeconds(delay);
+        GameManager gm = GameManager.Instance;
+        if (gm == null || gm.Runner == null || !gm.Runner.IsRunning) return false;
+        try { return gm.AllPlayersSpawned; }
+        catch (InvalidOperationException) { return false; }
+    }
 
+    private void RefreshHoleNumber()
+    {
+        GameManager gm = GameManager.Instance;
+        if (gm == null || gm.Runner == null || !gm.Runner.IsRunning) return;
+        try { currentHoleNumber = Mathf.Max(1, gm.CurrentHole); }
+        catch (InvalidOperationException) { currentHoleNumber = Mathf.Max(1, fallbackHoleNumber); }
+    }
+
+    private void UpdateIntroInfoText()
+    {
+        if (stageNameText != null) stageNameText.text = stageName;
+        if (holeText != null) holeText.text = $"HOLE {currentHoleNumber:00}";
+        if (introInfoCanvasGroup != null) introInfoCanvasGroup.alpha = 0f;
+    }
+
+    private IEnumerator ShowIntroInfoAtMidpoint(float routeDuration)
+    {
+        float display = Mathf.Max(0f, introInfoDisplayDuration);
+        float fade = Mathf.Max(0f, introInfoFadeDuration);
+        float delay = Mathf.Max(0f, (routeDuration - display - fade * 2f) * 0.5f);
+        if (delay > 0f) yield return new WaitForSeconds(delay);
+        infoShown = true;
         SetIntroInfoVisible(true);
-        if (displayDuration > 0f)
-            yield return new WaitForSeconds(displayDuration);
-
+        yield return FadeIntroInfo(0f, 1f, fade);
+        if (display > 0f) yield return new WaitForSeconds(display);
+        yield return FadeIntroInfo(1f, 0f, fade);
         SetIntroInfoVisible(false);
         introInfoPlayback = null;
+    }
+
+    private IEnumerator FadeIntroInfo(float from, float to, float duration)
+    {
+        if (introInfoCanvasGroup == null || duration <= 0f)
+        {
+            if (introInfoCanvasGroup != null) introInfoCanvasGroup.alpha = to;
+            yield break;
+        }
+        float elapsed = 0f;
+        introInfoCanvasGroup.alpha = from;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            introInfoCanvasGroup.alpha = Mathf.Lerp(from, to, Mathf.Clamp01(elapsed / duration));
+            yield return null;
+        }
+        introInfoCanvasGroup.alpha = to;
     }
 
     private void StopIntroInfoPlayback()
@@ -219,38 +248,27 @@ public class MapIntroController : MonoBehaviour
 
     private void SetIntroInfoVisible(bool visible)
     {
-        if (stageNameText != null)
-            stageNameText.gameObject.SetActive(visible);
-        if (holeText != null)
-            holeText.gameObject.SetActive(visible);
-        if (stageNameBackground != null)
-            stageNameBackground.SetActive(visible);
-        if (holeBackground != null)
-            holeBackground.SetActive(visible);
+        if (stageNameText != null) stageNameText.gameObject.SetActive(visible);
+        if (holeText != null) holeText.gameObject.SetActive(visible);
+        if (stageNameBackground != null) stageNameBackground.SetActive(visible);
+        if (holeBackground != null) holeBackground.SetActive(visible);
+        if (introInfoCanvasGroup != null)
+        {
+            introInfoCanvasGroup.alpha = visible ? 1f : 0f;
+            introInfoCanvasGroup.interactable = false;
+            introInfoCanvasGroup.blocksRaycasts = false;
+        }
     }
 
-    private IEnumerator ReturnToGameplayCamera()
+    private IEnumerator ReturnCameraToRouteStart()
     {
-        if (!returnToGameplayCameraOnFinish || gameplayCamera == null || introCamera == null)
-            yield break;
-
+        if (introCamera == null || cameraPoints.Count == 0) yield break;
         Vector3 startPosition = introCamera.transform.position;
         Quaternion startRotation = introCamera.transform.rotation;
-
-        // Cinemachine may not have updated the disabled gameplay Camera during the intro.
-        // Enable it briefly so its Brain can refresh the player-facing camera pose.
-        gameplayCamera.enabled = true;
-        yield return null;
-
-        Vector3 targetPosition = gameplayCamera.transform.position;
-        Quaternion targetRotation = gameplayCamera.transform.rotation;
-
-        // Keep only the intro camera rendering during the blend.
-        gameplayCamera.enabled = false;
-
-        float duration = Mathf.Max(0.1f, cameraReturnDuration);
+        Vector3 targetPosition = cameraPoints[0].position;
+        Quaternion targetRotation = cameraPoints[0].rotation;
+        float duration = Mathf.Max(0.1f, loopReturnDuration);
         float elapsed = 0f;
-
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
@@ -260,7 +278,30 @@ public class MapIntroController : MonoBehaviour
             introCamera.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, smooth);
             yield return null;
         }
+        introCamera.transform.SetPositionAndRotation(targetPosition, targetRotation);
+    }
 
+    private IEnumerator ReturnToGameplayCamera()
+    {
+        if (!returnToGameplayCameraOnFinish || gameplayCamera == null || introCamera == null) yield break;
+        Vector3 startPosition = introCamera.transform.position;
+        Quaternion startRotation = introCamera.transform.rotation;
+        gameplayCamera.enabled = true;
+        yield return null;
+        Vector3 targetPosition = gameplayCamera.transform.position;
+        Quaternion targetRotation = gameplayCamera.transform.rotation;
+        gameplayCamera.enabled = false;
+        float duration = Mathf.Max(0.1f, cameraReturnDuration);
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            float smooth = t * t * (3f - 2f * t);
+            introCamera.transform.position = Vector3.Lerp(startPosition, targetPosition, smooth);
+            introCamera.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, smooth);
+            yield return null;
+        }
         introCamera.transform.SetPositionAndRotation(targetPosition, targetRotation);
     }
 
@@ -269,12 +310,8 @@ public class MapIntroController : MonoBehaviour
         float arcFactor = Mathf.Sin(t * Mathf.PI);
         Vector3 direction = end - start;
         Vector3 side = Vector3.Cross(direction.normalized, Vector3.up);
-
-        if (side.sqrMagnitude < 0.001f)
-            side = Vector3.right;
-        else
-            side.Normalize();
-
+        if (side.sqrMagnitude < 0.001f) side = Vector3.right;
+        else side.Normalize();
         return side * (sidewaysArc * arcFactor) + Vector3.up * (heightArc * arcFactor);
     }
 
@@ -289,34 +326,14 @@ public class MapIntroController : MonoBehaviour
 
     private void FinishIntro()
     {
-        if (finished)
-            return;
-
+        if (finished) return;
         finished = true;
         StopIntroInfoPlayback();
-
-        if (introCamera != null)
-            introCamera.enabled = false;
-
-        if (returnToGameplayCameraOnFinish && gameplayCamera != null)
-            gameplayCamera.enabled = true;
-
-        if (stageNameText != null)
-            stageNameText.gameObject.SetActive(false);
-
-        if (holeText != null)
-            holeText.gameObject.SetActive(false);
-        if (stageNameBackground != null)
-            stageNameBackground.SetActive(false);
-        if (holeBackground != null)
-            holeBackground.SetActive(false);
-
+        if (introCamera != null) introCamera.enabled = false;
+        if (returnToGameplayCameraOnFinish && gameplayCamera != null) gameplayCamera.enabled = true;
+        SetIntroInfoVisible(false);
         playback = null;
-
-        // カメラ復帰とイントロUI終了後に、ネットワーク上のゲーム開始準備完了を報告。
-        if (GameManager.Instance != null)
-            GameManager.Instance.ReportIntroFinished();
-
+        if (GameManager.Instance != null) GameManager.Instance.ReportIntroFinished();
         Debug.Log("[MapIntroController] Intro camera sequence finished.");
     }
 }
