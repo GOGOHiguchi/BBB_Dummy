@@ -160,8 +160,18 @@ public class MapIntroController : MonoBehaviour
 
         Vector3 startPosition = introCamera.transform.position;
         Quaternion startRotation = introCamera.transform.rotation;
+
+        // Cinemachine may not have updated the disabled gameplay Camera during the intro.
+        // Enable it briefly so its Brain can refresh the player-facing camera pose.
+        gameplayCamera.enabled = true;
+        yield return null;
+
         Vector3 targetPosition = gameplayCamera.transform.position;
         Quaternion targetRotation = gameplayCamera.transform.rotation;
+
+        // Keep only the intro camera rendering during the blend.
+        gameplayCamera.enabled = false;
+
         float duration = Mathf.Max(0.1f, cameraReturnDuration);
         float elapsed = 0f;
 
