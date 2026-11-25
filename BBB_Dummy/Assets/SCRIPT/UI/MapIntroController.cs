@@ -100,6 +100,18 @@ public class MapIntroController : MonoBehaviour
             yield break;
         }
 
+        // Validate the full route before changing camera states. Catmull-Rom uses
+        // neighboring points, so a null entry anywhere in the list can break playback.
+        for (int i = 0; i < cameraPoints.Count; i++)
+        {
+            if (cameraPoints[i] == null)
+            {
+                Debug.LogWarning($"[MapIntroController] Camera point at index {i} is missing. Ending intro.");
+                FinishIntro();
+                yield break;
+            }
+        }
+
         // Ensure only the intro camera renders while the sequence is playing.
         if (gameplayCamera != null)
             gameplayCamera.enabled = false;
@@ -210,14 +222,6 @@ public class MapIntroController : MonoBehaviour
                        (2f * p0 - 5f * p1 + 4f * p2 - p3) * t2 +
                        (-p0 + 3f * p1 - 3f * p2 + p3) * t3);
     }
-
-    // private int GetHoleNumber()
-    // {
-    //     if (GameManager.Instance != null && GameManager.Instance.Runner != null)
-    //         return Mathf.Max(1, GameManager.Instance.CurrentHole);
-
-    //     return Mathf.Max(1, fallbackHoleNumber);
-    // }
 
     private void FinishIntro()
     {
