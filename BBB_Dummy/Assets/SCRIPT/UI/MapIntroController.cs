@@ -170,27 +170,34 @@ public class MapIntroController : MonoBehaviour
             yield break;
 
         Vector3 startPosition = introCamera.transform.position;
-        Vector3 targetPosition = GetGameplayReturnPosition();
-        Quaternion targetRotation = GetGameplayReturnRotation();
-
-        // Retreat toward the gameplay view behind the player and smoothly align to it.
         Quaternion startRotation = introCamera.transform.rotation;
 
         float duration = Mathf.Max(0.1f, cameraReturnDuration);
         float elapsed = 0f;
 
+        // Treat the gameplay view behind the player as the final camera waypoint.
+        // Recalculate it during the transition so the camera follows the player's
+        // current facing direction instead of snapping to a stale pose.
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
-            float smooth = t * t * (3f - 2f * t);
+            float smooth = t * t * (3f - 2f);
+
+            Vector3 targetPosition = GetGameplayReturnPosition();
+            Quaternion targetRotation = GetGameplayReturnRotation();
+
             introCamera.transform.position = Vector3.Lerp(startPosition, targetPosition, smooth);
             introCamera.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, smooth);
             yield return null;
         }
 
-        introCamera.transform.position = targetPosition;
-        introCamera.transform.rotation = targetRotation;
+        // Match the gameplay camera to the final intro-camera pose before switching,
+        // reducing the one-frame visual jump when the gameplay camera is enabled.
+        Vector3 finalPosition = GetGameplayReturnPosition();
+        Quaternion finalRotation = GetGameplayReturnRotation();
+        introCamera.transform.SetPositionAndRotation(finalPosition, finalRotation);
+        gameplayCamera.transform.SetPositionAndRotation(finalPosition, finalRotation);
     }
 
     private void CacheGameplayReturnPose()
