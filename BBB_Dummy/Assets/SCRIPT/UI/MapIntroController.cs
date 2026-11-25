@@ -257,6 +257,11 @@ public class MapIntroController : MonoBehaviour
             holeBackground.SetActive(false);
 
         playback = null;
+
+        // カメラ復帰とイントロUI終了後に、ネットワーク上のゲーム開始準備完了を報告。
+        if (GameManager.Instance != null)
+            GameManager.Instance.ReportIntroFinished();
+
         Debug.Log("[MapIntroController] Intro camera sequence finished.");
     }
 }

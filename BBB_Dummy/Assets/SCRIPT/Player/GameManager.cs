@@ -130,19 +130,68 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    // 各シーンロード完了時にBasicSpawnerから呼ばれる
+    // 各シーンロード完了時にBasicSpawnerから呼ばれる。
+    // イントロ終了報告が全プレイヤーから届くまでWaitingを維持する。
+    [Networked, Capacity(10)]
+    private NetworkDictionary<PlayerRef, NetworkBool> IntroReadyPlayers { get; }
+
     public void InitializeHole()
     {
         if (!HasStateAuthority) return;
 
-        // カウントダウンから開始
+        CurrentState = GameState.Waiting;
+        StateTimer = TickTimer.None;
+        IsFirstHitClaimed = false;
+        IntroReadyPlayers.Clear();
+
+        foreach (PlayerRef player in Runner.ActivePlayers)
+            IntroReadyPlayers.Add(player, false);
+
+        Debug.Log($"第 {CurrentHole} ホール準備完了。イントロ終了待ち ({IntroReadyPlayers.Count}人)");
+    }
+
+    // MapIntroControllerから各プレイヤーがローカルカメラ復帰完了時に呼び出す。
+    public void ReportIntroFinished()
+    {
+        if (Runner == null || !Runner.IsRunning)
+            return;
+
+        RpcReportIntroFinished(Runner.LocalPlayer);
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    private void RpcReportIntroFinished(PlayerRef player)
+    {
+        if (!HasStateAuthority || CurrentState != GameState.Waiting)
+            return;
+
+        if (!Runner.ActivePlayers.Contains(player))
+            return;
+
+        if (!IntroReadyPlayers.ContainsKey(player))
+            IntroReadyPlayers.Add(player, false);
+
+        IntroReadyPlayers.Set(player, true);
+        Debug.Log($"[GameManager] Intro ready: {player}");
+
+        foreach (PlayerRef activePlayer in Runner.ActivePlayers)
+        {
+            if (!IntroReadyPlayers.TryGet(activePlayer, out NetworkBool ready) || !ready)
+                return;
+        }
+
+        StartCountdown();
+    }
+
+    private void StartCountdown()
+    {
+        if (!HasStateAuthority || CurrentState != GameState.Waiting)
+            return;
+
         CurrentState = GameState.Countdown;
-        
-        // カウントダウン時間を 4.2 秒に設定（UIの「GO!」が消えるアニメーション完了と同時にタイマー開始）
         StateTimer = TickTimer.CreateFromSeconds(Runner, countdownTime);
         IsFirstHitClaimed = false;
 
-        // プレイヤーの完了フラグ・現ホールスコアをリセット（累計スコアはそのまま）
         foreach (var kvp in PlayerDatas)
         {
             var data = kvp.Value;
@@ -150,8 +199,8 @@ public class GameManager : NetworkBehaviour
             data.CurrentHoleScore = 0;
             PlayerDatas.Set(kvp.Key, data);
         }
-        
-        Debug.Log($"第 {CurrentHole} ホール準備！ カウントダウン開始");
+
+        Debug.Log($"第 {CurrentHole} ホール開始カウントダウン！全員のカメラ復帰完了");
     }
 
     public override void FixedUpdateNetwork()
