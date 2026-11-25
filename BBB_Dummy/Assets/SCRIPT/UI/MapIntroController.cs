@@ -34,6 +34,9 @@ public class MapIntroController : MonoBehaviour
     [SerializeField] private GameObject holeBackground;
     [SerializeField] private string stageName = "CITY RUSH";
     [SerializeField] private int holeNumber = 1;
+    [Tooltip("イントロ全体の中央付近に表示するマップ情報の表示時間（秒）")]
+    [Min(0f)]
+    [SerializeField] private float introInfoDisplayDuration = 3f;
 
     [Header("Playback")]
     [SerializeField] private bool playOnStart = true;
@@ -42,6 +45,7 @@ public class MapIntroController : MonoBehaviour
     [SerializeField] private float cameraReturnDuration = 1.2f;
 
     private Coroutine playback;
+    private Coroutine introInfoPlayback;
     private bool finished;
 
     private void Awake()
@@ -50,10 +54,21 @@ public class MapIntroController : MonoBehaviour
             introCamera.enabled = false;
 
         if (stageNameText != null)
+        {
             stageNameText.text = stageName;
+            stageNameText.gameObject.SetActive(false);
+        }
 
         if (holeText != null)
+        {
             holeText.text = $"HOLE {Mathf.Max(1, holeNumber):00}";
+            holeText.gameObject.SetActive(false);
+        }
+
+        if (stageNameBackground != null)
+            stageNameBackground.SetActive(false);
+        if (holeBackground != null)
+            holeBackground.SetActive(false);
     }
 
     private void Start()
@@ -69,6 +84,7 @@ public class MapIntroController : MonoBehaviour
             StopCoroutine(playback);
 
         finished = false;
+        StopIntroInfoPlayback();
         playback = StartCoroutine(PlaySequence());
     }
 
@@ -81,6 +97,7 @@ public class MapIntroController : MonoBehaviour
         if (playback != null)
             StopCoroutine(playback);
 
+        StopIntroInfoPlayback();
         playback = StartCoroutine(SkipSequence());
     }
 
@@ -127,10 +144,10 @@ public class MapIntroController : MonoBehaviour
             gameplayCamera.enabled = false;
 
         introCamera.enabled = true;
-        if (stageNameText != null) stageNameText.gameObject.SetActive(true);
-        if (holeText != null) holeText.gameObject.SetActive(true);
-        if (stageNameBackground != null) stageNameBackground.SetActive(true);
-        if (holeBackground != null) holeBackground.SetActive(true);
+        // イントロ全体（カメラ移動＋カメラ復帰）の中央に合わせてマップ情報を表示。
+        float introDuration = (cameraPoints.Count - 1) * Mathf.Max(0.1f, secondsPerSegment)
+                            + (returnToGameplayCameraOnFinish ? Mathf.Max(0.1f, cameraReturnDuration) : 0f);
+        introInfoPlayback = StartCoroutine(ShowIntroInfoAtMidpoint(introDuration));
         introCamera.transform.SetPositionAndRotation(cameraPoints[0].position, cameraPoints[0].rotation);
 
         for (int segment = 0; segment < cameraPoints.Count - 1; segment++)
@@ -174,6 +191,43 @@ public class MapIntroController : MonoBehaviour
         FinishIntro();
     }
 
+
+    private IEnumerator ShowIntroInfoAtMidpoint(float totalIntroDuration)
+    {
+        float displayDuration = Mathf.Max(0f, introInfoDisplayDuration);
+        float delay = Mathf.Max(0f, (totalIntroDuration - displayDuration) * 0.5f);
+        if (delay > 0f)
+            yield return new WaitForSeconds(delay);
+
+        SetIntroInfoVisible(true);
+        if (displayDuration > 0f)
+            yield return new WaitForSeconds(displayDuration);
+
+        SetIntroInfoVisible(false);
+        introInfoPlayback = null;
+    }
+
+    private void StopIntroInfoPlayback()
+    {
+        if (introInfoPlayback != null)
+        {
+            StopCoroutine(introInfoPlayback);
+            introInfoPlayback = null;
+        }
+        SetIntroInfoVisible(false);
+    }
+
+    private void SetIntroInfoVisible(bool visible)
+    {
+        if (stageNameText != null)
+            stageNameText.gameObject.SetActive(visible);
+        if (holeText != null)
+            holeText.gameObject.SetActive(visible);
+        if (stageNameBackground != null)
+            stageNameBackground.SetActive(visible);
+        if (holeBackground != null)
+            holeBackground.SetActive(visible);
+    }
 
     private IEnumerator ReturnToGameplayCamera()
     {
@@ -239,6 +293,7 @@ public class MapIntroController : MonoBehaviour
             return;
 
         finished = true;
+        StopIntroInfoPlayback();
 
         if (introCamera != null)
             introCamera.enabled = false;
