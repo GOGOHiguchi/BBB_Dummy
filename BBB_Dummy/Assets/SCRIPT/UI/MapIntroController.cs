@@ -72,15 +72,25 @@ public class MapIntroController : MonoBehaviour
         playback = StartCoroutine(PlaySequence());
     }
 
-    /// <summary>Can be connected to a UI Skip button in a later phase.</summary>
+    /// <summary>Skips the remaining route and smoothly returns to the gameplay camera.</summary>
     public void SkipIntro()
     {
-        if (playback != null)
-        {
-            StopCoroutine(playback);
-            playback = null;
-        }
+        if (finished)
+            return;
 
+        if (playback != null)
+            StopCoroutine(playback);
+
+        playback = StartCoroutine(SkipSequence());
+    }
+
+
+    private IEnumerator SkipSequence()
+    {
+        if (introCamera != null && introCamera.enabled && returnToGameplayCameraOnFinish)
+            yield return ReturnToGameplayCamera();
+
+        playback = null;
         FinishIntro();
     }
 
