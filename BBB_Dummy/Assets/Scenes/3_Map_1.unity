@@ -22577,7 +22577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &554111201
 Transform:
   m_ObjectHideFlags: 0
@@ -22588,12 +22588,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1796653034}
   - {fileID: 16430351}
-  m_Father: {fileID: 704519733}
+  m_Father: {fileID: 7007974927150731597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &554512159
 GameObject:
@@ -28328,7 +28328,6 @@ RectTransform:
   - {fileID: 100405548}
   - {fileID: 2130678638}
   - {fileID: 1599589278}
-  - {fileID: 554111201}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -44530,7 +44529,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "1\u756A\u30DB\u30FC\u30EB"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d9c852b15dd337e42b53eba46ef28db6, type: 2}
   m_sharedMaterial: {fileID: 763424241404074547, guid: d9c852b15dd337e42b53eba46ef28db6, type: 2}
@@ -57201,7 +57200,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CITY RUSH
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4995422ffdb954b70a642f73eb1442ea, type: 2}
   m_sharedMaterial: {fileID: 2517202264660172603, guid: 4995422ffdb954b70a642f73eb1442ea, type: 2}
@@ -60155,7 +60154,7 @@ MonoBehaviour:
   cameraPoints:
   - {fileID: 1565390962}
   - {fileID: 1576201145}
-  secondsPerSegment: 3
+  secondsPerSegment: 8
   sidewaysArc: 2
   heightArc: 1
   usePointRotation: 1
@@ -60165,9 +60164,10 @@ MonoBehaviour:
   holeBackground: {fileID: 16430348}
   stageName: CITY RUSH
   holeNumber: 1
+  introInfoDisplayDuration: 3
   playOnStart: 1
   returnToGameplayCameraOnFinish: 1
-  cameraReturnDuration: 2
+  cameraReturnDuration: 2.5
 --- !u!4 &1377411602
 Transform:
   m_ObjectHideFlags: 0
@@ -98641,7 +98641,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
   m_UseReflectionProbes: 0
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 2
@@ -98658,6 +98658,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 554111201}
   - {fileID: 7007974925011715308}
   - {fileID: 454048099}
   m_Father: {fileID: 7007974925489716916}
