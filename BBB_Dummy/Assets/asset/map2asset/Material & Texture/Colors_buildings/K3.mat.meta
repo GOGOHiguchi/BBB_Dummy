@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 57ae178891e2d794c8653b77bb0ebcb3
+timeCreated: 1517355764
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100348
+  packageName: Simple City pack plain
+  packageVersion: 1.0
+  assetPath: Assets/Simple city plain/Material & Texture/Colors_buildings/K3.mat
+  uploadId: 229849

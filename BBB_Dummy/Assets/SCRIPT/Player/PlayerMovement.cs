@@ -65,32 +65,32 @@ public class PlayerMovement : NetworkBehaviour
     [InspectorName("ダッシュ")]
     [SerializeField] private AudioClip jumpBootSE;
     [InspectorName("ダッシュ音量")]
-    [Range(0f, 3f)] [SerializeField] private float jumpBootVolume = 1.0f;
+    [Range(0f, 10f)] [SerializeField] private float jumpBootVolume = 1.0f;
 
     [InspectorName("スピード")]
     [SerializeField] private AudioClip speedBoostSE;
     [InspectorName("スピード音量")]
-    [Range(0f, 3f)] [SerializeField] private float speedBoostVolume = 1.0f;
+    [Range(0f, 10f)] [SerializeField] private float speedBoostVolume = 1.0f;
 
     [InspectorName("オーラ")]
     [SerializeField] private AudioClip shieldSE;
     [InspectorName("オーラ音量")]
-    [Range(0f, 3f)] [SerializeField] private float shieldVolume = 1.0f;
+    [Range(0f, 10f)] [SerializeField] private float shieldVolume = 1.0f;
 
     [InspectorName("地雷")]
     [SerializeField] private AudioClip landminePlaceSE;
     [InspectorName("地雷音量")]
-    [Range(0f, 3f)] [SerializeField] private float landminePlaceVolume = 1.0f;
+    [Range(0f, 10f)] [SerializeField] private float landminePlaceVolume = 1.0f;
 
     [InspectorName("サテライト")]
     [SerializeField] private AudioClip satelliteReadySE;
     [InspectorName("サテライト音量")]
-    [Range(0f, 3f)] [SerializeField] private float satelliteReadyVolume = 1.0f;
+    [Range(0f, 10f)] [SerializeField] private float satelliteReadyVolume = 1.0f;
 
     [InspectorName("ロケラン")]
     [SerializeField] private AudioClip rocketLauncherSE;
     [InspectorName("ロケラン音量")]
-    [Range(0f, 3f)] [SerializeField] private float rocketLauncherVolume = 1.0f;
+    [Range(0f, 10f)] [SerializeField] private float rocketLauncherVolume = 1.0f;
 
     private AudioSource _shieldLoopAudioSource; // オーラSE専用3Dスピーカー（エフェクト消滅と同時に停止するため）
 
@@ -782,23 +782,7 @@ public class PlayerMovement : NetworkBehaviour
                     PrevJumpPressed = data.isJumpPressed;
                 }
 
-                bool isWaitingForIntro = GameManager.Instance != null &&
-                                         GameManager.Instance.CurrentState == GameManager.GameState.Waiting;
-
-                if (isWaitingForIntro && data.aimDirection.sqrMagnitude > 0)
-                {
-                    // イントロ・カウントダウン開始前は、移動入力に関係なくカメラの水平向きを維持する。
-                    Vector3 lookDir = new Vector3(data.aimDirection.x, 0, data.aimDirection.z).normalized;
-                    if (lookDir != Vector3.zero)
-                    {
-                        transform.forward = Vector3.Lerp(
-                            transform.forward,
-                            lookDir,
-                            Runner.DeltaTime * 15f
-                        );
-                    }
-                }
-                else if (IsAimingRocket && data.aimDirection.sqrMagnitude > 0)
+                if (IsAimingRocket && data.aimDirection.sqrMagnitude > 0)
                 {
                     Vector3 lookDir = new Vector3(data.aimDirection.x, 0, data.aimDirection.z).normalized;
                     if (lookDir != Vector3.zero)
@@ -842,7 +826,6 @@ public class PlayerMovement : NetworkBehaviour
 
                 if (data.aimDirection.sqrMagnitude > 0)
                 {
-                    // Waiting中もカメラの水平向きをキャラクターへ反映し、Countdown突入時の向きを保つ。
                     Vector3 lookDir = new Vector3(data.aimDirection.x, 0, data.aimDirection.z).normalized;
                     if (lookDir != Vector3.zero)
                     {
@@ -1443,8 +1426,9 @@ public class PlayerMovement : NetworkBehaviour
                 _shieldLoopAudioSource.loop = true;
                 _shieldLoopAudioSource.playOnAwake = false;
                 _shieldLoopAudioSource.spatialBlend = 1.0f; // 3D空間音響
-                _shieldLoopAudioSource.minDistance = 3f;
-                _shieldLoopAudioSource.maxDistance = 25f;
+                _shieldLoopAudioSource.rolloffMode = AudioRolloffMode.Linear;
+                _shieldLoopAudioSource.minDistance = 12f;
+                _shieldLoopAudioSource.maxDistance = 60f;
 
                 if (AudioManager.instance != null && AudioManager.instance.seAudioSource != null)
                 {
@@ -1453,6 +1437,11 @@ public class PlayerMovement : NetworkBehaviour
             }
 
             _shieldLoopAudioSource.spatialBlend = 1.0f;
+            _shieldLoopAudioSource.rolloffMode = AudioRolloffMode.Linear;
+            // 1倍を超える音量倍率を設定した際に減衰距離を広げて3Dでも遠くまで聞こえるようにする
+            float boost = Mathf.Max(1f, shieldVolume);
+            _shieldLoopAudioSource.minDistance = 12f * boost;
+            _shieldLoopAudioSource.maxDistance = 60f * boost;
             _shieldLoopAudioSource.volume = Mathf.Clamp01(shieldVolume);
 
             if (!_shieldLoopAudioSource.isPlaying)
@@ -1502,6 +1491,9 @@ public class PlayerMovement : NetworkBehaviour
             if (itemAudioSource != null && itemAudioSource.enabled)
             {
                 itemAudioSource.spatialBlend = 1.0f; // 3D音響
+                itemAudioSource.rolloffMode = AudioRolloffMode.Linear;
+                itemAudioSource.minDistance = 10f;
+                itemAudioSource.maxDistance = 50f;
                 if (AudioManager.instance != null && AudioManager.instance.seAudioSource != null)
                 {
                     itemAudioSource.outputAudioMixerGroup = AudioManager.instance.seAudioSource.outputAudioMixerGroup;

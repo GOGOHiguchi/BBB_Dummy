@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: d486afb48dfc07b4e9daae0a465e0f47
+timeCreated: 1517454195
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100348
+  packageName: Simple City pack plain
+  packageVersion: 1.0
+  assetPath: Assets/asset/Simple city plain/Prefabs/Street 3 Prefab.prefab
+  uploadId: 229849

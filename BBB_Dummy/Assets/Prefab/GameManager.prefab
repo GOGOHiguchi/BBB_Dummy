@@ -51,7 +51,7 @@ MonoBehaviour:
     RawValue: 0
   maxHoles: 3
   countdownTime: 4.2
-  holeTimeLimit: 150
+  holeTimeLimit: 300
   resultTime: 5
   holeSceneNames:
   - 3_Map_1

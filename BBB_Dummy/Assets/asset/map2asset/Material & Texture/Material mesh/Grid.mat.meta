@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 0a3d53047738ebb468e24f2ea92c940e
+timeCreated: 1517418589
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100348
+  packageName: Simple City pack plain
+  packageVersion: 1.0
+  assetPath: Assets/Simple city plain/Material & Texture/Material mesh/Grid.mat
+  uploadId: 229849

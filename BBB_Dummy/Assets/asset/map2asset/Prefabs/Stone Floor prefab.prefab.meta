@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: d6502c4bd3b775c41a44a52d99acb3d2
+timeCreated: 1518573917
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100348
+  packageName: Simple City pack plain
+  packageVersion: 1.0
+  assetPath: Assets/asset/Simple city plain/Prefabs/Stone Floor prefab.prefab
+  uploadId: 229849

@@ -127,7 +127,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6054767567467719232}
   serializedVersion: 5
-  m_Mass: 3
+  m_Mass: 2.2
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -233,7 +233,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13a44c9b13c8f1945b36ab77cba8042c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingBallImpact
+  finishKnockbackSpeed: 22
+  finishKnockbackUpSpeed: 8
+  finishKnockbackDuration: 2.5
   scoreCalculationDelay: 2.5
+  spectatorDelayAfterScore: 2
   wakeUpRadius: 2.5
   pinLayer:
     serializedVersion: 2
@@ -252,12 +256,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BowlingBall
   _Type: 0
-  speedMass: 3.5
-  powerMass: 4.1
-  curveMass: 3.8
-  speedMaxVelocity: 18
-  powerMaxVelocity: 16
-  curveMaxVelocity: 17
+  speedMass: 2.4
+  powerMass: 1.9
+  curveMass: 2.4
+  speedMaxVelocity: 58
+  powerMaxVelocity: 56
+  curveMaxVelocity: 57
   curveForce: 15
   speedPhysicMaterial: {fileID: 0}
   powerPhysicMaterial: {fileID: 0}

@@ -288,26 +288,26 @@ MonoBehaviour:
   jumpBootEffectOffsetY: 2
   itemAudioSource: {fileID: 5492635999955099451}
   jumpBootSE: {fileID: 8300000, guid: 2ddb13da678cbe448b9615bbb99012d3, type: 3}
-  jumpBootVolume: 3
+  jumpBootVolume: 4.7
   speedBoostSE: {fileID: 8300000, guid: 4e1ff8faed12a475eba9be0e46072269, type: 3}
   speedBoostVolume: 2.1
   shieldSE: {fileID: 8300000, guid: 35fbad8cdde724f11ba6481f1e64af71, type: 3}
-  shieldVolume: 3
+  shieldVolume: 10
   landminePlaceSE: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
-  landminePlaceVolume: 2.3
+  landminePlaceVolume: 3
   satelliteReadySE: {fileID: 8300000, guid: 5039414d94a6e4e70a5ab9e8833e992a, type: 3}
-  satelliteReadyVolume: 1.7
+  satelliteReadyVolume: 2.1
   rocketLauncherSE: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
-  rocketLauncherVolume: 2.8
+  rocketLauncherVolume: 5.5
   carStunDuration: 2
   ballPrefab:
     RawGuidValue: ac145adcb89f5cd4c97eae49726cb318
   holdPoint: {fileID: 4715774910493729305}
-  maxThrowForce: 90
-  chargeRate: 80
-  minThrowSpeed: 8.5
-  maxThrowSpeed: 15
-  pickupDistance: 4
+  maxThrowForce: 98
+  chargeRate: 98
+  minThrowSpeed: 8
+  maxThrowSpeed: 34
+  pickupDistance: 3
   rocketLauncherController: {fileID: 6483099450521151306}
   rocketLauncherObject: {fileID: 3624792366651533654}
   _IsAimingRocket:

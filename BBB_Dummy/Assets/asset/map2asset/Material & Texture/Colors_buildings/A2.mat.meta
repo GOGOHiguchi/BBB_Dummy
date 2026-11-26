@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: e40e6afc6b4d1b84f867865ac44a19ab
+timeCreated: 1517354877
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100348
+  packageName: Simple City pack plain
+  packageVersion: 1.0
+  assetPath: Assets/Simple city plain/Material & Texture/Colors_buildings/A2.mat
+  uploadId: 229849

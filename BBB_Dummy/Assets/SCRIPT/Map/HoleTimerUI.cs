@@ -41,7 +41,7 @@ public class HoleTimerUI : MonoBehaviour
             SetTextActive(true);
             if (timerText != null)
             {
-                timerText.text = "02:00"; // 初期時間を表示
+                timerText.text = "05:00"; // 初期時間を表示
                 timerText.color = Color.white;
             }
         }

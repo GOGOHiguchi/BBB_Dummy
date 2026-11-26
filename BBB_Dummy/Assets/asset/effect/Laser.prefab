@@ -159,6 +159,7 @@ GameObject:
   - component: {fileID: 4160363289380459506}
   - component: {fileID: 2144887407820872427}
   - component: {fileID: -570468236606712404}
+  - component: {fileID: 3656249413380569056}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -5084,7 +5085,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 825976e6ac380ab4496b22e5afcc916b, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -5169,6 +5170,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3656249413380569056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5636729874148023153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 817d0e94a9bca1d44ba94540e0c5db35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SatelliteLaserSound
+  laserClip: {fileID: 8300000, guid: 825976e6ac380ab4496b22e5afcc916b, type: 3}
+  volumeMultiplier: 7.5
 --- !u!1 &5855465012527349622
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: fe5d18bb307bfad469cc460982c7b594
+timeCreated: 1517418961
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100348
+  packageName: Simple City pack plain
+  packageVersion: 1.0
+  assetPath: Assets/asset/Simple city plain/Prefabs/Shop_B_prefab.prefab
+  uploadId: 229849

@@ -1,15 +1,16 @@
 fileFormatVersion: 2
-guid: b553f5d1ca1d4f04489d51b1022c2bd2
-timeCreated: 1510093863
+guid: 79f8bac4c75da6e43bd8288f7d84106c
+timeCreated: 1518573709
 licenseType: Store
 DefaultImporter:
+  externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 104909
-  packageName: Parking Garage - Complete
+  productId: 100348
+  packageName: Simple City pack plain
   packageVersion: 1.0
-  assetPath: Assets/Parkgarage/Scene/Parkgarage_demo.unity
-  uploadId: 371417
+  assetPath: Assets/Simple city plain/scene/Demo Scene.unity
+  uploadId: 229849

@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour
     {
         public SEType type;
         public AudioClip clip;
-        [Range(0f, 3f)] public float volume = 1.0f; // ★追加：0〜3倍の個別音量調整
+        [Range(0f, 10f)] public float volume = 1.0f; // 0〜10倍の個別音量調整
     }
 
     [Header("SE一覧")]

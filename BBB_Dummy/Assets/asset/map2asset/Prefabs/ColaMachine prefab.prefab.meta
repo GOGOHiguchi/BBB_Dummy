@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 56d88ea212dffc64d93e8b085a5254f0
+timeCreated: 1517461242
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100348
+  packageName: Simple City pack plain
+  packageVersion: 1.0
+  assetPath: Assets/asset/Simple city plain/Prefabs/ColaMachine prefab.prefab
+  uploadId: 229849

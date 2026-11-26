@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 3645989493310424b845a6869ccab41d
+timeCreated: 1517710304
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100348
+  packageName: Simple City pack plain
+  packageVersion: 1.0
+  assetPath: Assets/Simple city plain/Material & Texture/Day.mat
+  uploadId: 229849

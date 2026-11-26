@@ -8,7 +8,7 @@ public class BallController : MonoBehaviour
     private Rigidbody rb;
 
     [Header("ステータス設定")]
-    public float moveSpeed = 15f;
+    public float moveSpeed = 20f;
     public float curveForce = 5f; // カーブボール用の横力
 
     void Start()
@@ -24,7 +24,7 @@ public class BallController : MonoBehaviour
         {
             case BallType.Speed:
                 rb.mass = 0.5f;
-                rb.linearDamping = 0.05f; // 空気抵抗を減らしてスピードUP
+                rb.linearDamping = 0.04f; // 空気抵抗を減らしてスピードUP
                 break;
 
             case BallType.Power:

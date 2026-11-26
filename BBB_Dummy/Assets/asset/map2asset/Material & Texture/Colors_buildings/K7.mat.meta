@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: db6e80b26b2e01847a9a87e3a61df186
+timeCreated: 1517356592
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100348
+  packageName: Simple City pack plain
+  packageVersion: 1.0
+  assetPath: Assets/Simple city plain/Material & Texture/Colors_buildings/K7.mat
+  uploadId: 229849

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 9016e5b6db075a0439d50f8c0b3a615e
+timeCreated: 1517459868
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100348
+  packageName: Simple City pack plain
+  packageVersion: 1.0
+  assetPath: Assets/asset/Simple city plain/Prefabs/Big_trash_bin prefab.prefab
+  uploadId: 229849

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 255351b27b03d4240bb979b8d7573b82
+timeCreated: 1517461138
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100348
+  packageName: Simple City pack plain
+  packageVersion: 1.0
+  assetPath: Assets/Simple city plain/Material & Texture/Material mesh/ColaMachine.mat
+  uploadId: 229849
