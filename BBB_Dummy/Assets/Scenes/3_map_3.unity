@@ -148785,6 +148785,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1631563413572689726, guid: d3613837f58d3ef4fb7faaee5748651d, type: 3}
+      propertyPath: HorizontalAxis.Value
+      value: -180
+      objectReference: {fileID: 0}
     - target: {fileID: 3899199441447480640, guid: d3613837f58d3ef4fb7faaee5748651d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.1963
