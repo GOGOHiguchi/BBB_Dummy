@@ -325882,7 +325882,7 @@ MonoBehaviour:
   stageNameBackground: {fileID: 305816199}
   holeBackground: {fileID: 1537429385}
   introInfoCanvasGroup: {fileID: 1776551581}
-  stageName: CITY RUSH
+  stageName: URBAN TOWN
   fallbackHoleNumber: 1
   introInfoDisplayDuration: 3
   introInfoFadeDuration: 0.5
