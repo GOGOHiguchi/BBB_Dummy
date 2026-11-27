@@ -3,230 +3,98 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Lobby settings tabs generated at runtime to preserve the existing ManuPanel prefab.
-/// Course selection and hole count are local UI settings only; network/GameManager
-/// integration is intentionally left for the follow-up implementation.
-/// </summary>
 public class CourseSettingsTabs : MonoBehaviour
 {
-    private TMP_FontAsset font;
-    private GameObject coursePanel;
-    private Button battleTabButton;
-    private Button courseTabButton;
-    private readonly List<CourseEntry> entries = new List<CourseEntry>();
-    private TextMeshProUGUI holeCountText;
-    private Slider holeSlider;
-    private bool initialized;
+    static readonly string[] Biomes = { "草原", "海岸", "砂漠", "雪原", "都市" };
+    readonly List<CourseEntry> courses = new();
+    readonly List<Button> biomeButtons = new();
+    Button battleTab, courseTab, allButton;
+    GameObject battlePanel, coursePanel;
+    Transform courseList;
+    Slider holes;
+    TMP_Text holesLabel, biomeLabel;
+    string selectedBiome = Biomes[0];
+    bool initialized;
 
-    private class CourseEntry
-    {
-        public string SceneName;
-        public bool Enabled = true;
-        public Button Button;
-        public TextMeshProUGUI Label;
-    }
+    class CourseEntry { public string Name; public Button Button; public TMP_Text Label; public bool Enabled = true; }
 
     public void Initialize()
     {
         if (initialized) return;
         initialized = true;
-        var sourceText = GetComponentInChildren<TMP_Text>(true);
-        if (sourceText != null) font = sourceText.font;
-        CreateCoursePanel();
-        CreateTabs();
-        ShowBattleSettings();
-    }
-
-    private void CreateTabs()
-    {
-        var root = new GameObject("SettingsTabs", typeof(RectTransform));
-        root.transform.SetParent(transform, false);
-        var rect = root.GetComponent<RectTransform>();
-        rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 1f);
-        rect.pivot = new Vector2(0.5f, 1f);
-        rect.anchoredPosition = new Vector2(0f, -10f);
-        rect.sizeDelta = new Vector2(700f, 72f);
-        battleTabButton = CreateButton(root.transform, "対戦設定", new Color(0.32f, 0.62f, 0.38f), new Vector2(-170f, 0f), new Vector2(330f, 70f));
-        courseTabButton = CreateButton(root.transform, "コース設定", new Color(0.95f, 0.67f, 0.29f), new Vector2(170f, 0f), new Vector2(330f, 70f));
-        battleTabButton.onClick.AddListener(ShowBattleSettings);
-        courseTabButton.onClick.AddListener(ShowCourseSettings);
-    }
-
-    private void CreateCoursePanel()
-    {
-        coursePanel = new GameObject("CourseSettingsView", typeof(RectTransform), typeof(Image));
-        coursePanel.transform.SetParent(transform, false);
-        var rect = coursePanel.GetComponent<RectTransform>();
-        rect.anchorMin = Vector2.zero;
-        rect.anchorMax = Vector2.one;
-        rect.offsetMin = new Vector2(12f, 12f);
-        rect.offsetMax = new Vector2(-12f, -12f);
-        coursePanel.GetComponent<Image>().color = new Color(0.14f, 0.55f, 0.82f, 0.97f);
-
-        CreateText(coursePanel.transform, "コース設定", 38f, new Vector2(0f, -105f), new Vector2(720f, 72f), Color.white, true);
-        CreateText(coursePanel.transform, "バイオーム", 27f, new Vector2(0f, -185f), new Vector2(300f, 52f), Color.white, true);
-        CreateButton(coursePanel.transform, "全コース", new Color(0.2f, 0.72f, 0.86f), new Vector2(0f, -238f), new Vector2(260f, 56f));
-        CreateText(coursePanel.transform, "使用するコース（クリックで有効 / 除外）", 24f, new Vector2(0f, -300f), new Vector2(760f, 50f), Color.white, true);
-
-        var listRoot = new GameObject("CourseList", typeof(RectTransform), typeof(VerticalLayoutGroup));
-        listRoot.transform.SetParent(coursePanel.transform, false);
-        var listRect = listRoot.GetComponent<RectTransform>();
-        listRect.anchorMin = listRect.anchorMax = new Vector2(0.5f, 0.5f);
-        listRect.pivot = new Vector2(0.5f, 0.5f);
-        listRect.anchoredPosition = new Vector2(0f, -20f);
-        listRect.sizeDelta = new Vector2(690f, 310f);
-        var layout = listRoot.GetComponent<VerticalLayoutGroup>();
-        layout.spacing = 10f;
-        layout.childAlignment = TextAnchor.MiddleCenter;
-        layout.childControlWidth = layout.childControlHeight = true;
-        layout.childForceExpandWidth = true;
-        layout.childForceExpandHeight = false;
-
-        string[] sceneNames = { "3_Map_1", "3_Map_2", "3_Map_3" };
-        foreach (string scene in sceneNames)
+        battlePanel = Find("BattlePanel");
+        coursePanel = Find("CourseSettingsView");
+        courseList = Find("CourseList")?.transform;
+        holes = Find("HoleCountSlider")?.GetComponent<Slider>();
+        holesLabel = Find("Label_3 ホール")?.GetComponent<TMP_Text>();
+        biomeLabel = Find("Label_バイオーム")?.GetComponent<TMP_Text>();
+        battleTab = Find("Button_対戦設定")?.GetComponent<Button>();
+        courseTab = Find("Button_コース設定")?.GetComponent<Button>();
+        allButton = Find("Button_全コース")?.GetComponent<Button>();
+        if (battleTab) battleTab.onClick.AddListener(ShowBattle);
+        if (courseTab) courseTab.onClick.AddListener(ShowCourses);
+        if (allButton) allButton.onClick.AddListener(ToggleAll);
+        if (courseList)
+            foreach (Transform child in courseList)
+            {
+                var b = child.GetComponent<Button>();
+                if (!b) continue;
+                var e = new CourseEntry { Name = child.name.Replace("Button_", ""), Button = b, Label = child.GetComponentInChildren<TMP_Text>(true) };
+                b.onClick.AddListener(() => ToggleCourse(e));
+                courses.Add(e);
+                Refresh(e);
+            }
+        if (holes)
         {
-            var entry = new CourseEntry { SceneName = scene };
-            entry.Button = CreateButton(listRoot.transform, scene, new Color(0.23f, 0.74f, 0.42f), Vector2.zero, new Vector2(680f, 62f));
-            entry.Label = entry.Button.GetComponentInChildren<TextMeshProUGUI>();
-            entry.Button.onClick.AddListener(() => ToggleCourse(entry));
-            entries.Add(entry);
+            holes.wholeNumbers = true; holes.minValue = 1;
+            holes.maxValue = Mathf.Max(1, ActiveCount());
+            holes.value = Mathf.Clamp(holes.value, 1, holes.maxValue);
+            holes.onValueChanged.AddListener(v => { if (holesLabel) holesLabel.text = Mathf.RoundToInt(v) + " ホール"; });
+            if (holesLabel) holesLabel.text = Mathf.RoundToInt(holes.value) + " ホール";
         }
-
-        CreateText(coursePanel.transform, "プレイするホール数", 24f, new Vector2(0f, -355f), new Vector2(720f, 50f), Color.white, true);
-        var sliderObject = new GameObject("HoleCountSlider", typeof(RectTransform), typeof(Slider));
-        sliderObject.transform.SetParent(coursePanel.transform, false);
-        var sliderRect = sliderObject.GetComponent<RectTransform>();
-        sliderRect.anchorMin = sliderRect.anchorMax = new Vector2(0.5f, 0.5f);
-        sliderRect.pivot = new Vector2(0.5f, 0.5f);
-        sliderRect.anchoredPosition = new Vector2(0f, -405f);
-        sliderRect.sizeDelta = new Vector2(520f, 32f);
-        CreateSliderParts(sliderObject.transform);
-        holeSlider = sliderObject.GetComponent<Slider>();
-        holeSlider.minValue = 1;
-        holeSlider.maxValue = entries.Count;
-        holeSlider.wholeNumbers = true;
-        holeSlider.value = entries.Count;
-        holeSlider.onValueChanged.AddListener(UpdateHoleCount);
-        holeCountText = CreateText(coursePanel.transform, "3 ホール", 24f, new Vector2(0f, -450f), new Vector2(300f, 50f), Color.white, true);
-        coursePanel.SetActive(false);
+        CreateBiomeRow();
+        ShowBattle();
     }
 
-    private void CreateSliderParts(Transform sliderTransform)
-    {
-        var background = CreateRect(sliderTransform, "Background", new Color(0.1f, 0.28f, 0.45f), Vector2.zero, new Vector2(520f, 12f));
-        var fillArea = CreateRect(sliderTransform, "FillArea", Color.clear, Vector2.zero, new Vector2(520f, 12f));
-        var fill = CreateRect(fillArea.transform, "Fill", new Color(1f, 0.85f, 0.3f), Vector2.zero, Vector2.zero);
-        var fillRect = fill.GetComponent<RectTransform>();
-        fillRect.anchorMin = Vector2.zero; fillRect.anchorMax = Vector2.one;
-        fillRect.offsetMin = fillRect.offsetMax = Vector2.zero;
-        var handleArea = CreateRect(sliderTransform, "HandleArea", Color.clear, Vector2.zero, new Vector2(520f, 32f));
-        var handle = CreateRect(handleArea.transform, "Handle", Color.white, Vector2.zero, new Vector2(28f, 28f));
-        var handleRect = handle.GetComponent<RectTransform>();
-        handleRect.anchorMin = handleRect.anchorMax = new Vector2(0.5f, 0.5f);
-        var slider = sliderTransform.GetComponent<Slider>();
-        slider.targetGraphic = background.GetComponent<Image>();
-        slider.fillRect = fillRect;
-        slider.handleRect = handleRect;
-        slider.direction = Slider.Direction.LeftToRight;
-    }
+    GameObject Find(string n) { foreach (Transform t in GetComponentsInChildren<Transform>(true)) if (t.name == n) return t.gameObject; return null; }
 
-    private void ToggleCourse(CourseEntry entry)
+    void CreateBiomeRow()
     {
-        if (entry.Enabled && entries.FindAll(e => e.Enabled).Count <= 1)
+        if (!coursePanel) return;
+        var prior = coursePanel.transform.Find("RuntimeBiomeButtons");
+        if (prior) Destroy(prior.gameObject);
+        var row = new GameObject("RuntimeBiomeButtons", typeof(RectTransform), typeof(HorizontalLayoutGroup));
+        row.transform.SetParent(coursePanel.transform, false);
+        var r = row.GetComponent<RectTransform>();
+        r.anchorMin = r.anchorMax = new Vector2(.5f, 1f); r.pivot = new Vector2(.5f, 1f);
+        r.anchoredPosition = new Vector2(0, -115); r.sizeDelta = new Vector2(700, 58);
+        var layout = row.GetComponent<HorizontalLayoutGroup>();
+        layout.spacing = 8; layout.childAlignment = TextAnchor.MiddleCenter;
+        layout.childControlWidth = layout.childControlHeight = true; layout.childForceExpandWidth = layout.childForceExpandHeight = true;
+        foreach (string biome in Biomes)
         {
-            return; // Keep at least one course enabled.
+            var obj = new GameObject("Biome_" + biome, typeof(RectTransform), typeof(Image), typeof(Button));
+            obj.transform.SetParent(row.transform, false);
+            var image = obj.GetComponent<Image>(); var button = obj.GetComponent<Button>(); button.targetGraphic = image;
+            button.onClick.AddListener(() => SelectBiome(biome));
+            var txtObj = new GameObject("Text", typeof(RectTransform), typeof(TextMeshProUGUI));
+            txtObj.transform.SetParent(obj.transform, false);
+            var tr = txtObj.GetComponent<RectTransform>(); tr.anchorMin = Vector2.zero; tr.anchorMax = Vector2.one; tr.offsetMin = new Vector2(3,2); tr.offsetMax = new Vector2(-3,-2);
+            var txt = txtObj.GetComponent<TextMeshProUGUI>(); txt.text = biome; txt.fontSize = 20; txt.color = Color.black; txt.alignment = TextAlignmentOptions.Center; txt.raycastTarget = false;
+            biomeButtons.Add(button);
         }
-        entry.Enabled = !entry.Enabled;
-        RefreshCourse(entry);
-        int activeCount = entries.FindAll(e => e.Enabled).Count;
-        holeSlider.maxValue = Mathf.Max(1, activeCount);
-        holeSlider.value = Mathf.Clamp(holeSlider.value, 1f, holeSlider.maxValue);
-        UpdateHoleCount(holeSlider.value);
+        UpdateBiomeButtons();
+        if (biomeLabel) biomeLabel.text = "バイオーム：" + selectedBiome + "（コース割当未設定）";
     }
+    void SelectBiome(string b) { selectedBiome = b; UpdateBiomeButtons(); if (biomeLabel) biomeLabel.text = "バイオーム：" + b + "（コース割当未設定）"; }
+    void UpdateBiomeButtons() { for (int i=0;i<biomeButtons.Count;i++) if (biomeButtons[i] && biomeButtons[i].GetComponent<Image>()) biomeButtons[i].GetComponent<Image>().color = Biomes[i]==selectedBiome ? new Color(.88f,.72f,.36f) : new Color(.72f,.76f,.70f); }
 
-    private void RefreshCourse(CourseEntry entry)
-    {
-        if (entry.Label != null) entry.Label.text = entry.SceneName + (entry.Enabled ? "  ✓ 使用" : "  × 除外");
-        var image = entry.Button.GetComponent<Image>();
-        if (image != null) image.color = entry.Enabled ? new Color(0.23f, 0.74f, 0.42f) : new Color(0.45f, 0.46f, 0.49f);
-    }
-
-    private void UpdateHoleCount(float value)
-    {
-        if (holeCountText != null) holeCountText.text = Mathf.RoundToInt(value) + " ホール";
-    }
-
-    private void ShowBattleSettings()
-    {
-        if (coursePanel != null) coursePanel.SetActive(false);
-        SetTabVisual(battleTabButton, new Color(0.32f, 0.62f, 0.38f), true);
-        SetTabVisual(courseTabButton, new Color(0.95f, 0.67f, 0.29f), false);
-    }
-
-
-    private void ShowCourseSettings()
-    {
-        coursePanel.SetActive(true);
-        SetTabVisual(battleTabButton, new Color(0.32f, 0.62f, 0.38f), false);
-        SetTabVisual(courseTabButton, new Color(0.95f, 0.67f, 0.29f), true);
-        foreach (var entry in entries) RefreshCourse(entry);
-    }
-
-
-    private void SetTabVisual(Button button, Color baseColor, bool selected)
-    {
-        if (button == null) return;
-        var image = button.GetComponent<Image>();
-        if (image != null) image.color = selected ? Color.Lerp(baseColor, Color.white, 0.28f) : baseColor;
-    }
-
-    private Button CreateButton(Transform parent, string label, Color color, Vector2 position, Vector2 size)
-    {
-        var obj = CreateRect(parent, "Button_" + label, color, position, size);
-        var button = obj.AddComponent<Button>();
-        button.targetGraphic = obj.GetComponent<Image>();
-        var colors = button.colors;
-        colors.highlightedColor = Color.Lerp(color, Color.white, 0.15f);
-        colors.pressedColor = Color.Lerp(color, Color.black, 0.12f);
-        button.colors = colors;
-        var text = CreateText(obj.transform, label, 26f, Vector2.zero, size, Color.black, true);
-        text.rectTransform.anchorMin = Vector2.zero;
-        text.rectTransform.anchorMax = Vector2.one;
-        text.rectTransform.offsetMin = text.rectTransform.offsetMax = Vector2.zero;
-        return button;
-    }
-
-    private TextMeshProUGUI CreateText(Transform parent, string value, float size, Vector2 position, Vector2 dimensions, Color color, bool bold)
-    {
-        var obj = new GameObject("Label_" + value, typeof(RectTransform), typeof(TextMeshProUGUI));
-        obj.transform.SetParent(parent, false);
-        var rect = obj.GetComponent<RectTransform>();
-        rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0.5f);
-        rect.pivot = new Vector2(0.5f, 0.5f);
-        rect.anchoredPosition = position;
-        rect.sizeDelta = dimensions;
-        var text = obj.GetComponent<TextMeshProUGUI>();
-        text.text = value;
-        text.font = font;
-        text.fontSize = size;
-        text.color = color;
-        text.alignment = TextAlignmentOptions.Center;
-        text.raycastTarget = false;
-        if (bold) text.fontStyle = FontStyles.Bold;
-        return text;
-    }
-
-    private GameObject CreateRect(Transform parent, string name, Color color, Vector2 position, Vector2 size)
-    {
-        var obj = new GameObject(name, typeof(RectTransform), typeof(Image));
-        obj.transform.SetParent(parent, false);
-        var rect = obj.GetComponent<RectTransform>();
-        rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0.5f);
-        rect.pivot = new Vector2(0.5f, 0.5f);
-        rect.anchoredPosition = position;
-        rect.sizeDelta = size;
-        obj.GetComponent<Image>().color = color;
-        return obj;
-    }
+    void ToggleCourse(CourseEntry e) { if (e.Enabled && ActiveCount()<=1) return; e.Enabled=!e.Enabled; Refresh(e); UpdateLimit(); }
+    void ToggleAll() { bool turnOn= courses.Exists(e=>!e.Enabled); foreach (var e in courses) { e.Enabled=turnOn; Refresh(e); } UpdateLimit(); }
+    int ActiveCount() => courses.FindAll(e=>e.Enabled).Count;
+    void UpdateLimit() { if (!holes) return; holes.maxValue=Mathf.Max(1,ActiveCount()); holes.value=Mathf.Clamp(holes.value,holes.minValue,holes.maxValue); if (holesLabel) holesLabel.text=Mathf.RoundToInt(holes.value)+" ホール"; }
+    void Refresh(CourseEntry e) { if(e.Label) e.Label.text=e.Name+(e.Enabled?"  ✓ 使用":"  × 除外"); var img=e.Button?e.Button.GetComponent<Image>():null; if(img) img.color=e.Enabled?new Color(.23f,.74f,.42f):new Color(.45f,.46f,.49f); }
+    void ShowBattle() { if(battlePanel) battlePanel.SetActive(true); if(coursePanel) coursePanel.SetActive(false); TabColor(battleTab,new Color(.32f,.62f,.38f),true); TabColor(courseTab,new Color(.95f,.67f,.29f),false); }
+    void ShowCourses() { if(battlePanel) battlePanel.SetActive(false); if(coursePanel) coursePanel.SetActive(true); TabColor(battleTab,new Color(.32f,.62f,.38f),false); TabColor(courseTab,new Color(.95f,.67f,.29f),true); foreach(var e in courses) Refresh(e); }
+    void TabColor(Button b, Color c, bool selected) { if(!b) return; var i=b.GetComponent<Image>(); if(i) i.color=selected?Color.Lerp(c,Color.white,.28f):c; }
 }
