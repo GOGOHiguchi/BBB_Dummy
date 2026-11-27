@@ -12,6 +12,8 @@ public class CourseSettingsTabs : MonoBehaviour
 {
     private TMP_FontAsset font;
     private GameObject coursePanel;
+    private Button battleTabButton;
+    private Button courseTabButton;
     private readonly List<CourseEntry> entries = new List<CourseEntry>();
     private TextMeshProUGUI holeCountText;
     private Slider holeSlider;
@@ -45,10 +47,10 @@ public class CourseSettingsTabs : MonoBehaviour
         rect.pivot = new Vector2(0.5f, 1f);
         rect.anchoredPosition = new Vector2(0f, -10f);
         rect.sizeDelta = new Vector2(700f, 72f);
-        var battle = CreateButton(root.transform, "対戦設定", new Color(0.32f, 0.62f, 0.38f), new Vector2(-170f, 0f), new Vector2(330f, 70f));
-        var course = CreateButton(root.transform, "コース設定", new Color(0.95f, 0.67f, 0.29f), new Vector2(170f, 0f), new Vector2(330f, 70f));
-        battle.onClick.AddListener(ShowBattleSettings);
-        course.onClick.AddListener(ShowCourseSettings);
+        battleTabButton = CreateButton(root.transform, "対戦設定", new Color(0.32f, 0.62f, 0.38f), new Vector2(-170f, 0f), new Vector2(330f, 70f));
+        courseTabButton = CreateButton(root.transform, "コース設定", new Color(0.95f, 0.67f, 0.29f), new Vector2(170f, 0f), new Vector2(330f, 70f));
+        battleTabButton.onClick.AddListener(ShowBattleSettings);
+        courseTabButton.onClick.AddListener(ShowCourseSettings);
     }
 
     private void CreateCoursePanel()
@@ -131,6 +133,10 @@ public class CourseSettingsTabs : MonoBehaviour
 
     private void ToggleCourse(CourseEntry entry)
     {
+        if (entry.Enabled && entries.FindAll(e => e.Enabled).Count <= 1)
+        {
+            return; // Keep at least one course enabled.
+        }
         entry.Enabled = !entry.Enabled;
         RefreshCourse(entry);
         int activeCount = entries.FindAll(e => e.Enabled).Count;
@@ -154,12 +160,25 @@ public class CourseSettingsTabs : MonoBehaviour
     private void ShowBattleSettings()
     {
         if (coursePanel != null) coursePanel.SetActive(false);
+        SetTabVisual(battleTabButton, new Color(0.32f, 0.62f, 0.38f), true);
+        SetTabVisual(courseTabButton, new Color(0.95f, 0.67f, 0.29f), false);
     }
+
 
     private void ShowCourseSettings()
     {
         coursePanel.SetActive(true);
+        SetTabVisual(battleTabButton, new Color(0.32f, 0.62f, 0.38f), false);
+        SetTabVisual(courseTabButton, new Color(0.95f, 0.67f, 0.29f), true);
         foreach (var entry in entries) RefreshCourse(entry);
+    }
+
+
+    private void SetTabVisual(Button button, Color baseColor, bool selected)
+    {
+        if (button == null) return;
+        var image = button.GetComponent<Image>();
+        if (image != null) image.color = selected ? Color.Lerp(baseColor, Color.white, 0.28f) : baseColor;
     }
 
     private Button CreateButton(Transform parent, string label, Color color, Vector2 position, Vector2 size)
