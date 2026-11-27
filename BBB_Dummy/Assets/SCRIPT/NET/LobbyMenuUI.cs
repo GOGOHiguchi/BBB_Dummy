@@ -35,6 +35,7 @@ public class LobbyMenuUI : NetworkBehaviour
     [SerializeField] private Transform sPListPlayerContent;    // プレイヤーを並べる親
     [SerializeField] private Transform sPListSpectatorContent; // 観客を並べる親
 
+    private CourseSettingsTabs courseSettingsTabs;
     private bool isMenuOpen = false;
     private string currentJoinCode = "";
 
@@ -42,6 +43,8 @@ public class LobbyMenuUI : NetworkBehaviour
     {
         menuPanel.SetActive(false);
         battleSettingsPanel.SetActive(false);
+        courseSettingsTabs = FindFirstObjectByType<CourseSettingsTabs>();
+        if (courseSettingsTabs != null) courseSettingsTabs.SetTabButtonsVisible(false);
 
         SetupButtons();
         UpdatePlayerLists();
@@ -73,6 +76,7 @@ public class LobbyMenuUI : NetworkBehaviour
             // メニュー画面が開いている場合 -> メニューを閉じる
             isMenuOpen = false;
             menuPanel.SetActive(false);
+            if (courseSettingsTabs != null) courseSettingsTabs.SetTabButtonsVisible(false);
         }
         else
         {
@@ -102,12 +106,14 @@ public class LobbyMenuUI : NetworkBehaviour
             isMenuOpen = false;
             menuPanel.SetActive(false);
             battleSettingsPanel.SetActive(false); // 念のためこちらも閉じる
+            if (courseSettingsTabs != null) courseSettingsTabs.SetTabButtonsVisible(false);
         });
         
         battleSettingsButton.onClick.AddListener(() =>
         {
             // 【修正ポイント】menuPanel は親なので閉じない。上に重ねるだけ。
             battleSettingsPanel.SetActive(true);
+            if (courseSettingsTabs != null) courseSettingsTabs.SetTabButtonsVisible(true);
             LoadCurrentSessionSettings();
         });
 

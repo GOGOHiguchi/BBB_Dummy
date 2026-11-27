@@ -38,8 +38,6 @@ public class CourseSettingsTabs : MonoBehaviour
     private static readonly string[] Biomes = { "草原", "海岸", "砂漠", "雪原", "都市" };
     private static readonly Color EnabledColor = new(.28f, .62f, .38f);
     private static readonly Color ExcludedColor = new(.56f, .57f, .58f);
-    private static readonly Color SelectedColor = new(.88f, .72f, .36f);
-    private static readonly Color NormalBiomeColor = new(.72f, .76f, .70f);
     private readonly HashSet<CourseItem> excluded = new();
     private int selectedBiomeIndex;
     private bool initialized;
@@ -55,6 +53,7 @@ public class CourseSettingsTabs : MonoBehaviour
         if (enableAllCoursesButton) enableAllCoursesButton.onClick.AddListener(EnableAll);
         if (holeCountSlider) holeCountSlider.onValueChanged.AddListener(UpdateHoleLabel);
         BindBiomeButtons();
+        SetTabButtonsVisible(false);
         SetupCourses();
         SetupHoleSlider();
         ShowBattle();
@@ -68,7 +67,6 @@ public class CourseSettingsTabs : MonoBehaviour
             int index = i;
             if (biomeButtons[i]) biomeButtons[i].onClick.AddListener(() => SelectBiome(index));
         }
-        RefreshBiomeButtons();
         if (biomeLabel) biomeLabel.text = "バイオーム：" + Biomes[selectedBiomeIndex];
     }
 
@@ -76,19 +74,9 @@ public class CourseSettingsTabs : MonoBehaviour
     {
         if (index < 0 || index >= Biomes.Length) return;
         selectedBiomeIndex = index;
-        RefreshBiomeButtons();
         if (biomeLabel) biomeLabel.text = "バイオーム：" + Biomes[index];
     }
 
-    private void RefreshBiomeButtons()
-    {
-        for (int i = 0; i < biomeButtons.Length && i < Biomes.Length; i++)
-        {
-            if (!biomeButtons[i]) continue;
-            var image = biomeButtons[i].GetComponent<Image>();
-            if (image) image.color = i == selectedBiomeIndex ? SelectedColor : NormalBiomeColor;
-        }
-    }
 
     private void SetupCourses()
     {
@@ -180,30 +168,26 @@ public class CourseSettingsTabs : MonoBehaviour
 
     private void UpdateHoleLabel(float value)
     {
-        if (holeCountLabel) holeCountLabel.text = Mathf.RoundToInt(value) + " ホール";
+        if (holeCountLabel) holeCountLabel.text = Mathf.RoundToInt(value) + "/" + Mathf.Max(1, ActiveCount());
     }
 
     private void ShowBattle()
     {
         if (battleSettingsPanel) battleSettingsPanel.SetActive(true);
         if (courseSettingsPanel) courseSettingsPanel.SetActive(false);
-        SetTabColor(battleTabButton, new Color(.32f, .62f, .38f), true);
-        SetTabColor(courseTabButton, new Color(.95f, .67f, .29f), false);
     }
 
     private void ShowCourses()
     {
         if (battleSettingsPanel) battleSettingsPanel.SetActive(false);
         if (courseSettingsPanel) courseSettingsPanel.SetActive(true);
-        SetTabColor(battleTabButton, new Color(.32f, .62f, .38f), false);
-        SetTabColor(courseTabButton, new Color(.95f, .67f, .29f), true);
     }
 
-    private void SetTabColor(Button button, Color baseColor, bool selected)
+
+    public void SetTabButtonsVisible(bool visible)
     {
-        if (!button) return;
-        var image = button.GetComponent<Image>();
-        if (image) image.color = selected ? Color.Lerp(baseColor, Color.white, .28f) : baseColor;
+        if (battleTabButton) battleTabButton.gameObject.SetActive(visible);
+        if (courseTabButton) courseTabButton.gameObject.SetActive(visible);
     }
 
     private void ValidateReferences()
