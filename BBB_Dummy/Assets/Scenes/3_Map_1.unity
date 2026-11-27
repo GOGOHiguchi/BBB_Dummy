@@ -89316,6 +89316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapIntroController
   introCamera: {fileID: 480849381}
   gameplayCamera: {fileID: 618352449}
+  cameraRoutes: []
   cameraPoints:
   - {fileID: 2017138823}
   - {fileID: 699769578}
@@ -89323,13 +89324,14 @@ MonoBehaviour:
   sidewaysArc: 2
   heightArc: 1
   usePointRotation: 1
+  routeTransitionDuration: 1
   loopReturnDuration: 1.5
   stageNameText: {fileID: 614377532}
   holeText: {fileID: 169650140}
   stageNameBackground: {fileID: 1190717312}
   holeBackground: {fileID: 2027127977}
   introInfoCanvasGroup: {fileID: 1734031835}
-  stageName: DISUSED FACTORY
+  stageName: "\u5EC3\u5DE5\u5834"
   fallbackHoleNumber: 1
   introInfoDisplayDuration: 3
   introInfoFadeDuration: 0.5
@@ -102758,17 +102760,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DISUSED FACTORY
+  m_text: "\u5EC3\u5DE5\u5834"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4995422ffdb954b70a642f73eb1442ea, type: 2}
-  m_sharedMaterial: {fileID: 2517202264660172603, guid: 4995422ffdb954b70a642f73eb1442ea, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 661343c443f07a148bc26398afde4ec3, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 33c2dc6b060a2d146b7d71f759cc4e25, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255444
-  m_fontColor: {r: 0.33104926, g: 1, b: 0, a: 1}
+    rgba: 4278229309
+  m_fontColor: {r: 0.24061908, g: 0.5999999, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -102791,7 +102793,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
