@@ -44,6 +44,7 @@ public class LobbyMenuUI : NetworkBehaviour
         battleSettingsPanel.SetActive(false);
 
         SetupButtons();
+        SetupSettingsTabs();
         UpdatePlayerLists();
     }
 
@@ -59,6 +60,15 @@ public class LobbyMenuUI : NetworkBehaviour
             UpdatePlayerLists();
         }
     }
+
+    private void SetupSettingsTabs()
+    {
+        if (battleSettingsPanel == null) return;
+        var tabs = battleSettingsPanel.GetComponent<CourseSettingsTabs>();
+        if (tabs == null) tabs = battleSettingsPanel.AddComponent<CourseSettingsTabs>();
+        tabs.Initialize();
+    }
+
 
     private void HandleEscapeKey()
     {
